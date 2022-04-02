@@ -1,4 +1,3 @@
-import { ParseIntPipe } from '@nestjs/common';
 import { Transform } from 'class-transformer';
 import { IsEmail, IsInt, IsNotEmpty, IsString } from 'class-validator';
 

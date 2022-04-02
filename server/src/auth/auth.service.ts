@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable, Session } from '@nestjs/common';
-import { SignupDTO, SigninDTO } from 'src/dto';
+import { SignupDTO, SigninDTO } from '../auth/dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
