@@ -4,7 +4,7 @@ import { UserGuard } from './guards/user.guards';
 import { UserService } from './user.service';
 
 @Controller('users')
-export class userController {
+export class UserController {
   constructor(private userService: UserService) {}
   @UseGuards(UserGuard)
   @Get('me')
