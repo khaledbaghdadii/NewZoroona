@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Session } from '@nestjs/common';
 import { AuthDto } from 'src/dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as argon from 'argon2';
@@ -6,7 +6,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 @Injectable({})
 export class AuthService {
   constructor(private prisma: PrismaService) {}
-  async signup(dto: AuthDto) {
+  async signup(dto: AuthDto, @Session() session: Record<string, any>) {
     //generated the password hash
     const hash = await argon.hash(dto.password);
 
@@ -21,6 +21,11 @@ export class AuthService {
         },
       });
       delete user.hash;
+
+      //add session cookie
+      session.userId = user.id;
+      session.email = user.email;
+
       //return the user
       return user;
     } catch (error) {
