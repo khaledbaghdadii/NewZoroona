@@ -8,8 +8,14 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl ="postgres://ydvvohurwaodhv:458c7e12692e19b0aef4fe1583cc627d6bfb1645f414ee595814cea641abeba4@ec2-54-157-79-121.compute-1.amazonaws.com:5432/d21j4n8k6iqlnf"
 }
 
+model RoleType{
+id Int @id @default(autoincrement())
+description String
+User User[]
+}
 
 model User{
 id Int @id @default(autoincrement())
@@ -17,8 +23,11 @@ createdAt DateTime @default(now())
 updatedAt DateTime @updatedAt
 email String @unique
 hash String
-firstName String
-lastName String
+name String
+phoneNumber String
+gender String
+roleTypeId Int 
+RoleType RoleType @relation(fields: [roleTypeId], references: [id])
 @@map("users")
 }
 
