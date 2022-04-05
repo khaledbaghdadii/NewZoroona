@@ -1,17 +1,14 @@
 import {
+  Body,
   HttpException,
   HttpStatus,
   Injectable,
-  ParseIntPipe,
-  Query,
   Req,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { IsInt } from 'class-validator';
 
 import { PrismaService } from '../prisma/prisma.service';
-class UserIdQuery {
-  @IsInt()
+interface DeleteUserBody {
   userId: number;
 }
 
@@ -36,5 +33,17 @@ export class UserService {
       return new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     return user;
+  }
+  async deleteUser(userId: number): Promise<string | HttpException> {
+    try {
+      await this.prisma.user.delete({
+        where: {
+          id: userId,
+        },
+      });
+    } catch (error) {
+      return new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    return 'Deleted successfully';
   }
 }

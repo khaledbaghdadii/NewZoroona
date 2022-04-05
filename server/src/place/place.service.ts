@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class PlaceService {
   constructor(private prisma: PrismaService) {}
   async getPlace(@Req() req) {
-    const place = await this.prisma.place;
-    return place;
+    // const place = await this.prisma.place;
+    return 'place';
   }
 }
