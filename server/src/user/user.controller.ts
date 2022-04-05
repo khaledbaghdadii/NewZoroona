@@ -9,6 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorators';
+import { UpdateDTO } from './dto';
 import { RolesGuard } from './guards/role.guards';
 import { UserGuard } from './guards/user.guards';
 
@@ -32,5 +33,10 @@ export class userController {
   @Roles('admin')
   deleteUser(@Body('userId', ParseIntPipe) userId: number) {
     return this.userService.deleteUser(userId);
+  }
+  @UseGuards(UserGuard)
+  @Post('update/me')
+  updateMe(@Body() dto: UpdateDTO, @Req() req) {
+    return this.userService.updateMe(dto, req);
   }
 }

@@ -7,6 +7,7 @@ export class PlaceService {
   constructor(private prisma: PrismaService) {}
   async getPlace(@Req() req) {
     // const place = await this.prisma.place;
-    return 'place';
+    const id = req.place.id;
+    return id;
   }
 }
