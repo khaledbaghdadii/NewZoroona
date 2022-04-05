@@ -8,7 +8,7 @@ import {
 import { User } from '@prisma/client';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { UpdateDTO } from './dto';
+import { UpdateCurrentDTO, UpdateDTO } from './dto';
 
 @Injectable({})
 export class UserService {
@@ -45,7 +45,7 @@ export class UserService {
     return 'Deleted successfully';
   }
   async updateMe(
-    @Body() dto: UpdateDTO,
+    @Body() dto: UpdateCurrentDTO,
     @Req() req,
   ): Promise<User | HttpException> {
     const userId = req.session.userId;
@@ -61,5 +61,24 @@ export class UserService {
       },
     });
     return user;
+  }
+  async updateUser(@Body() dto: UpdateDTO): Promise<User | HttpException> {
+    const userId = dto.userId;
+    try {
+      const user = await this.prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          email: dto.email,
+          gender: dto.gender,
+          name: dto.name,
+          phoneNumber: dto.phoneNumber,
+        },
+      });
+      return user;
+    } catch (err) {
+      return new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
   }
 }
