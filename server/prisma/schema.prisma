@@ -17,6 +17,18 @@ description String
 User User[]
 }
 
+model Category{
+id Int @id @default(autoincrement())
+description String
+Place Place[]
+}
+
+model Orientation{
+id Int @id @default(autoincrement())
+description String
+Place Place[]
+}
+
 model User{
 id Int @id @default(autoincrement())
 createdAt DateTime @default(now())
@@ -28,6 +40,29 @@ phoneNumber String
 gender String
 roleTypeId Int 
 RoleType RoleType @relation(fields: [roleTypeId], references: [id])
+Place Place[]
 @@map("users")
 }
 
+model Place{
+id Int @id @default(autoincrement())
+name String
+city String
+district String
+address String
+location String?
+phoneNumber String?
+email String?
+website String?
+sector String
+categoryId Int
+orientationId Int
+managerId Int?
+hasReservation Boolean
+description String
+image String
+Category Category @relation(fields: [categoryId], references: [id])
+Manager User? @relation(fields: [managerId], references: [id])
+Orientation Orientation @relation(fields: [orientationId], references: [id])
+@@map("places")
+}
