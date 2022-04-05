@@ -26,7 +26,7 @@ export class UserController {
   @UseGuards(UserGuard)
   @Get('user')
   getSpecificUser(@Query('userId', ParseIntPipe) userId: number) {
-    return this.userService.getSpecifcUser(userId);
+    return this.userService.getSpecificUser(userId);
   }
   @UseGuards(UserGuard)
   @Post('delete/me')

@@ -48,10 +48,6 @@ export class AddDTO {
   @IsString()
   @IsNotEmpty()
   city: string;
-  @IsNotEmpty()
-  @IsInt()
-  @Transform(({ value }) => parseInt(value))
-  placeId: number;
   @IsString()
   @IsNotEmpty()
   district: string;

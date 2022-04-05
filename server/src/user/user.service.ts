@@ -21,7 +21,7 @@ export class UserService {
     });
     return user;
   }
-  async getSpecifcUser(userId: number): Promise<User | HttpException> {
+  async getSpecificUser(userId: number): Promise<User | HttpException> {
     const user = await this.prisma.user.findUnique({
       where: {
         id: userId,

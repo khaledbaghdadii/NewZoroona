@@ -85,7 +85,7 @@ export class PlaceService {
       });
       return place;
     } catch (err) {
-      return new HttpException('Place not found', HttpStatus.NOT_FOUND);
+      return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
     }
   }
 }
