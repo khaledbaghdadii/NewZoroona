@@ -44,6 +44,18 @@ export class UserService {
     }
     return 'Deleted successfully';
   }
+  async deleteMe(@Req() req): Promise<string | HttpException> {
+    try {
+      await this.prisma.user.delete({
+        where: {
+          id: req.session.userId,
+        },
+      });
+    } catch (error) {
+      return new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    return 'Deleted successfully';
+  }
   async updateMe(
     @Body() dto: UpdateCurrentDTO,
     @Req() req,

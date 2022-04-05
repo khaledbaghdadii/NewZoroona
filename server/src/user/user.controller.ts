@@ -28,6 +28,12 @@ export class userController {
   getSpecificUser(@Query('userId', ParseIntPipe) userId: number) {
     return this.userService.getSpecifcUser(userId);
   }
+  @UseGuards(UserGuard)
+  @Post('delete/me')
+  deleteMe(@Req() req) {
+    return this.userService.deleteMe(req);
+  }
+
   @UseGuards(RolesGuard)
   @Post('delete')
   @Roles('admin')
