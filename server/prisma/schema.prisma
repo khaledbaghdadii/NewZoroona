@@ -41,6 +41,7 @@ gender String
 roleTypeId Int 
 RoleType RoleType @relation(fields: [roleTypeId], references: [id])
 Place Place[]
+Review Review[]
 @@map("users")
 }
 
@@ -64,5 +65,17 @@ image String
 Category Category @relation(fields: [categoryId], references: [id])
 Manager User? @relation(fields: [managerId], references: [id])
 Orientation Orientation @relation(fields: [orientationId], references: [id])
+Review Review[]
 @@map("places")
+}
+
+model Review{
+id Int @id @default(autoincrement())
+feedback String
+rating Int
+placeId Int
+userId Int
+Place Place @relation(fields: [placeId], references: [id])
+User User @relation(fields: [userId], references: [id])
+@@map("reviews")
 }
