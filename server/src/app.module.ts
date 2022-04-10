@@ -4,6 +4,8 @@ import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { PlaceModule } from './place/place.module';
+import { ReviewModule } from './review/review.module';
+
 
 @Module({
   imports: [
@@ -12,6 +14,7 @@ import { PlaceModule } from './place/place.module';
     UserModule,
     PrismaModule,
     PlaceModule,
+    ReviewModule
   ],
   controllers: [],
   providers: [],
