@@ -2,7 +2,7 @@ import {Body, Controller, Get, ParseIntPipe, Post, Query, Req, UseGuards} from '
 import { UpdateDTO, AddDTO } from './dto';
 import { PlaceService } from './place.service';
 import {Roles} from "../auth/decorators/roles.decorators";
-import {RolesGuard} from "../user/guards/role.guards";
+import {RolesGuard} from "../place/guards/local.guard";
 
 @Controller('places')
 export class PlaceController {
@@ -19,8 +19,7 @@ export class PlaceController {
   }
   @UseGuards(RolesGuard)
   @Post('update')
-  @Roles('admin')
-  @Roles('manager')
+  @Roles('admin', 'manager')
   updatePlace(@Body() dto: UpdateDTO) {
     return this.placeService.updatePlace(dto);
   }
@@ -30,4 +29,6 @@ export class PlaceController {
   addPlace(@Body() dto: AddDTO) {
     return this.placeService.addPlace(dto);
   }
+
+  //add getPlaces with different filters
 }

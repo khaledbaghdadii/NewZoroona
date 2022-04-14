@@ -12,16 +12,15 @@ export class RolesGuard implements CanActivate {
     }
     const request = context.switchToHttp().getRequest();
     const session = request.session;
-    console.log(roles);
     return matchRoles(roles, session.roleTypeId);
   }
 }
 
-function matchRoles(role, sessionRoleTypeId): boolean {
+function matchRoles(roles, sessionRoleTypeId): boolean {
   let sessionRole = '';
   if (sessionRoleTypeId === 1) sessionRole = 'admin';
   else if (sessionRoleTypeId == 2) sessionRole = 'manager';
   else if (sessionRoleTypeId == 3) sessionRole = 'user';
-  if (role != sessionRole) return false;
+  if (roles.indexOf(sessionRole) == -1) return false;
   return true;
 }
