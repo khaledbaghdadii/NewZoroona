@@ -42,6 +42,7 @@ roleTypeId Int
 RoleType RoleType @relation(fields: [roleTypeId], references: [id])
 Place Place[]
 Review Review[]
+Report Report[]
 @@map("users")
 }
 
@@ -77,5 +78,15 @@ placeId Int
 userId Int
 Place Place @relation(fields: [placeId], references: [id])
 User User @relation(fields: [userId], references: [id])
+Report Report[]
 @@map("reviews")
+}
+
+
+model Report{
+  id Int @id @default(autoincrement())
+  reporterId Int
+  reviewId Int
+  Reporter User @relation(fields: [reporterId],references: [id])
+  Review Review @relation(fields: [reviewId],references: [id])
 }
