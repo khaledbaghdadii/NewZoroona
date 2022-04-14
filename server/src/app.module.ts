@@ -5,7 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { PlaceModule } from './place/place.module';
 import { ReviewModule } from './review/review.module';
-
+import { ReportModule } from './report/report.module';
 
 @Module({
   imports: [
@@ -14,7 +14,8 @@ import { ReviewModule } from './review/review.module';
     UserModule,
     PrismaModule,
     PlaceModule,
-    ReviewModule
+    ReviewModule,
+    ReportModule,
   ],
   controllers: [],
   providers: [],

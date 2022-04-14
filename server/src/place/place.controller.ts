@@ -1,8 +1,17 @@
-import {Body, Controller, Get, ParseIntPipe, Post, Query, Req, UseGuards} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  ParseIntPipe,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { UpdateDTO, AddDTO } from './dto';
 import { PlaceService } from './place.service';
-import {Roles} from "../auth/decorators/roles.decorators";
-import {RolesGuard} from "../place/guards/local.guard";
+import { Roles } from '../auth/decorators/roles.decorators';
+import { RolesGuard } from '../place/guards/local.guard';
 
 @Controller('places')
 export class PlaceController {
