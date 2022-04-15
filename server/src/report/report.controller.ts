@@ -4,6 +4,7 @@ import {
   Get,
   ParseIntPipe,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorators';
@@ -22,6 +23,13 @@ export class ReportController {
   @Roles('admin')
   @Post('/delete')
   deleteReport(@Body('reportId', ParseIntPipe) reportId: number) {
-    return this.reportService.getReports();
+    return this.reportService.deleteReport(reportId);
+  }
+
+  @UseGuards(RolesGuard)
+  @Roles('admin')
+  @Get('/review')
+  getReportsForReview(@Query('reviewId', ParseIntPipe) reviewId: number) {
+    return this.reportService.getReportsForReview(reviewId);
   }
 }
