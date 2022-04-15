@@ -13,6 +13,20 @@ export class ReportService {
       return new HttpException('an error occured', HttpStatus.NOT_FOUND);
     }
   }
+  async getReportsForReview(
+    reviewId: number,
+  ): Promise<Report[] | HttpException> {
+    try {
+      const reports = await this.prisma.report.findMany({
+        where: {
+          reviewId: reviewId,
+        },
+      });
+      return reports;
+    } catch (e) {
+      return new HttpException('an error occured', HttpStatus.NOT_FOUND);
+    }
+  }
   async deleteReport(reportId: number): Promise<boolean | HttpException> {
     try {
       await this.prisma.report.delete({
