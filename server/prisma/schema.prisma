@@ -82,11 +82,11 @@ Report Report[]
 @@map("reviews")
 }
 
-
 model Report{
   id Int @id @default(autoincrement())
   reporterId Int
   reviewId Int
   Reporter User @relation(fields: [reporterId],references: [id])
   Review Review @relation(fields: [reviewId],references: [id])
+  @@map("reports")
 }

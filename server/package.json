@@ -7,6 +7,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "prisma:dev:deploy": "prisma migrate deploy",
+    "prisma:generate": "npx prisma generate",
+    "prisma:prisma-studio": "npx prisma studio",
+    "primsa:dev:migrate": "npx prisma migrate dev",
     "db:dev:up": "docker compose up zoroona-db -d",
     "db:dev:rm": "docker compose rm zoroona-db -s -f -v",
     "db:dev:restart": "yarn prisma:dev:deploy",
