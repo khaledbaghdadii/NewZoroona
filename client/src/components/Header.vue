@@ -4,7 +4,7 @@
       <div class="container">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Homepage' }">
           <img src="@/assets/images/zoroona-icon.png" alt="Zoroona Logo" class="me-2" />
-          <div id="LogoName" class="pt-2">ZOROONA</div>
+          <div id="LogoName">ZOROONA</div>
         </router-link>
         <button
           class="navbar-toggler"

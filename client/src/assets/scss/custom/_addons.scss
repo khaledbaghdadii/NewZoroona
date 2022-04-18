@@ -40,7 +40,11 @@
 }
 
 // font-colors 
+.text-white {
+    color: white !important;
+}
+
 //apply to all buttons
 .btn:focus {
-    box-shadow: none;
+    box-shadow: none !important;
 }

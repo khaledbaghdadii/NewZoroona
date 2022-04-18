@@ -18,7 +18,7 @@
 .navbar-brand {
     #LogoName {
         font-family: Spartan;
-        // padding-top: 50px;
+        padding-top: 0.7rem;
         color: $primary;
         font-size: 21px;
         font-weight: 700;
@@ -47,13 +47,51 @@
         left: 0;
         right: 0;
         margin: auto;
-        background-color: #d4a373;
+        background-color: $primary;
         width: 0%;
         content: "";
         height: 2px;
         transition: all 0.5s;
     }
     &:hover::after {
-        width: 80%;
+        width: 100%;
     }
+}
+
+//Homepage
+.section-intro-landing {
+    margin-top: 150px;
+    min-height: calc(100vh - 150px);
+}
+
+#HomepageCoverPhoto {
+    width: 600px;
+}
+
+#SignUp {
+    width: 200px;
+    &:hover {
+        border: none;
+        background-color: $secondary;
+    }
+}
+
+.badge-background-color {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: white;
+    padding: 7px;
+    border-radius: 8px;
+}
+
+.post-img {
+    height: 300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+}
+
+#location {
+    width: 25px;
 }
