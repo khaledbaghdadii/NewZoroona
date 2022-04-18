@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PlaceModule } from './place/place.module';
 import { ReviewModule } from './review/review.module';
 import { ReportModule } from './report/report.module';
+import {RecommenderModule} from "./recommender/recommender.module";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ReportModule } from './report/report.module';
     PlaceModule,
     ReviewModule,
     ReportModule,
+    RecommenderModule
   ],
   controllers: [],
   providers: [],
