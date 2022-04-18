@@ -43,6 +43,7 @@ RoleType RoleType @relation(fields: [roleTypeId], references: [id])
 Place Place[]
 Review Review[]
 Report Report[]
+Reservation Reservation[]
 @@map("users")
 }
 
@@ -67,6 +68,8 @@ Category Category @relation(fields: [categoryId], references: [id])
 Manager User? @relation(fields: [managerId], references: [id])
 Orientation Orientation @relation(fields: [orientationId], references: [id])
 Review Review[]
+Reservation Reservation[]
+Package Package[]
 @@map("places")
 }
 
@@ -90,3 +93,29 @@ model Report{
   Review Review @relation(fields: [reviewId],references: [id])
   @@map("reports")
 }
+
+model Reservation{
+  id Int @id @default(autoincrement())
+  placeId Int
+  userId Int
+  numberofpeople Int
+  startDate DateTime
+  endDate DateTime
+  cost Float
+  User User @relation(fields: [userId],references: [id])
+  Place Place @relation(fields: [placeId],references: [id])
+  packages Package[]
+  @@map("reservations")
+}
+
+model Package{
+  id Int @id @default(autoincrement())
+  placeId Int
+  description String
+  name String
+  cost Float
+  Place Place @relation(fields: [placeId],references: [id])
+  reservations Reservation[]
+  @@map("packages")
+}
+
