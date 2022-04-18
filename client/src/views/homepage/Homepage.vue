@@ -1,7 +1,6 @@
 <template>
 <div>
-  <h1>Zoroona</h1>
-  <p>Hi</p>
+
 </div>
 
   

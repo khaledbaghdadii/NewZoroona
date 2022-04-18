@@ -6,9 +6,54 @@
 // This file is included last, so you have access
 // to all Bootstrap and Dashmix functions/mixins/styles etc
 // --------------------------------------------------
-
 // If you have many custom styles, you can create and import additional files
 // For example you can create _component1.scss and include it as follows:
 // @import 'component1';
-
 @import "./component/fonts";
+//Header
+.navbar-container {
+    background-color: #FFF5ED;
+}
+
+.navbar-brand {
+    #LogoName {
+        font-family: Spartan;
+        // padding-top: 50px;
+        color: $primary;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 22px;
+    }
+    img {
+        width: 40px;
+    }
+}
+
+.nav-item {
+    position: relative;
+    .nav-link {
+        color: black !important;
+        font-weight: 500;
+        font-size: 16px;
+        opacity: 80%;
+        &:hover {
+            color: black !important;
+            opacity: 100%;
+        }
+    }
+    &::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background-color: #d4a373;
+        width: 0%;
+        content: "";
+        height: 2px;
+        transition: all 0.5s;
+    }
+    &:hover::after {
+        width: 80%;
+    }
+}

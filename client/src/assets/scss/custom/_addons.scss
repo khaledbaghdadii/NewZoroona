@@ -1,1 +1,46 @@
 // bootstrap-like classes
+//apply to all
+* {
+    font-family: Lora;
+    font-weight: 400;
+}
+
+// font-sizes
+.fs-10 {
+    font-size: 10px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+.fs-36 {
+    font-size: 36px;
+}
+
+// font-weights
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+// font-colors 
+//apply to all buttons
+.btn:focus {
+    box-shadow: none;
+}
