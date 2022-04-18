@@ -7,6 +7,7 @@ import { PlaceModule } from './place/place.module';
 import { ReviewModule } from './review/review.module';
 import { ReportModule } from './report/report.module';
 import {RecommenderModule} from "./recommender/recommender.module";
+import {PackageModule} from "./package/package.module";
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import {RecommenderModule} from "./recommender/recommender.module";
     PlaceModule,
     ReviewModule,
     ReportModule,
-    RecommenderModule
+    RecommenderModule,
+    PackageModule
   ],
   controllers: [],
   providers: [],
