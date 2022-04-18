@@ -48,3 +48,11 @@
 .btn:focus {
     box-shadow: none !important;
 }
+
+.btn-primary {
+    border: none;
+    &:hover {
+        color: white !important;
+        background-color: $secondary;
+    }
+}

@@ -64,14 +64,15 @@
     min-height: calc(100vh - 150px);
 }
 
-#HomepageCoverPhoto {
-    width: 600px;
+.HomepageCoverPhoto {
+    width: 500px;
 }
 
-#SignUp {
-    width: 200px;
+.homepage-btn {
+    border: none;
+    width: 300px;
     &:hover {
-        border: none;
+        // border: none;
         background-color: $secondary;
     }
 }
@@ -94,4 +95,8 @@
 
 #location {
     width: 25px;
+}
+
+#discover {
+    width: 300px;
 }

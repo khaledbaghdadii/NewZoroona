@@ -1,1 +1,8 @@
 // responsive
+@media (max-width: $sm-breakpoint) {}
+
+@media (max-width: $md-breakpoint) {
+    .HomepageCoverPhoto {
+        width: 400px;
+    }
+}

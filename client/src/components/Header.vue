@@ -36,7 +36,7 @@
               </router-link>
             </li>
           </ul>
-          <div class="d-flex">
+          <div class="d-flex mt-2">
             <button class="btn btn-outline-secondary me-2">Log In</button>
             <button class="btn btn-primary">Sign Up</button>
           </div>
