@@ -12,16 +12,18 @@ const base = {
                 title: 'HOMEPAGE',
                 rule: 'isPublic'
             }
-        }
-        // {
-        //   path: '/login',
-        //   name: 'Login',
-        //   component: () => import('@/views/login/Login'),
-        //   meta: {
-        //     title: 'LOGIN',
-        //     rule: 'isPublic'
-        //   }
-        // }, {
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: () =>
+                import ('@/views/login/Login'),
+            meta: {
+                title: 'LOGIN',
+                rule: 'isPublic'
+            }
+        },
+        //{
         //   path: '/register',
         //   name: 'Register',
         //   component: () => import('@/views/register/Register'),
