@@ -13,15 +13,16 @@ const base = {
                 rule: 'isPublic'
             }
         },
-        //{
-        //   path: '/register',
-        //   name: 'Register',
-        //   component: () => import('@/views/register/Register'),
-        //   meta: {
-        //     title: 'REGISTER',
-        //     rule: 'isPublic'
-        //   }
-        // }
+        {
+            path: '/signup',
+            name: 'Signup',
+            component: () =>
+                import ('@/views/signup/Signup'),
+            meta: {
+                title: 'SIGNUP',
+                rule: 'isPublic'
+            }
+        },
         // {
         //   path: '/forgot-password',
         //   name: 'ForgotPassword',

@@ -68,7 +68,7 @@
 }
 
 .HomepageCoverPhoto {
-    width: 500px;
+    width: 700px;
 }
 
 .homepage-btn {
@@ -125,26 +125,9 @@ footer {
 }
 
 //login & signup
-.login-section {
-    padding: 7em 0;
+.login-wrapper {
     background-color: #FFF5ED;
-}
-
-.signup-section {
-    padding: 3em 0;
-}
-
-.fc-primary {
-    color: $primary;
-}
-
-.fc-secondary {
-    color: $secondary;
-    ;
-}
-
-.fw-600 {
-    font-weight: 600;
+    height: 100vh;
 }
 
 .wrap {
@@ -180,32 +163,19 @@ footer {
 
 .form-group .label {
     font-size: 12px;
-    color: $primary;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
 }
 
-.form-group a {
-    color: $secondary;
-}
-
-#condLabel,
-#rememberLabel {
-    color: $secondary;
-}
-
 .form-control:focus {
-    color: $primary;
     background-color: #fff;
-    border-color: $primary;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
 }
 
 .select {
-    color: $primary;
     outline: 0;
     height: 38px;
     border-radius: 5px;
@@ -213,7 +183,6 @@ footer {
 }
 
 .select:focus {
-    border-color: $primary;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
 }
@@ -251,17 +220,18 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
-    &:after {
-        content: "\f0c8";
-        font-family: "FontAwesome";
-        position: absolute;
-        color: rgba(0, 0, 0, 0.1);
-        font-size: 20px;
-        margin-top: -4px;
-        -webkit-transition: 0.3s;
-        -o-transition: 0.3s;
-        transition: 0.3s;
-    }
+}
+
+.checkmark:after {
+    content: "\f0c8";
+    font-family: "FontAwesome";
+    position: absolute;
+    color: rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    margin-top: -4px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
 }
 
 .checkbox-primary input:checked~.checkmark:after {

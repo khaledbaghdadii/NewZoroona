@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="position-fixed top-0 w-100 navbar-container py-3">
+  <div class="login-wrapper">
+    <div class="navbar-container py-3">
       <nav class="navbar navbar-expand-md bg-dark navbar-light">
-        <div class="container">
+        <div class="container d-flex justify-content-center">
           <router-link class="navbar-brand d-flex" :to="{ name: 'Homepage' }">
             <img
               src="@/assets/images/zoroona-icon.png"
@@ -14,7 +14,7 @@
         </div>
       </nav>
     </div>
-    <section class="login-section">
+    <section class="my-5">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-12 col-lg-10">
@@ -29,17 +29,17 @@
               <div class="login-wrap p-4 p-md-5">
                 <div class="d-flex">
                   <div class="w-100">
-                    <h3 class="mb-4">Log In</h3>
+                    <h3 class="mb-4 fw-700">Log In</h3>
                   </div>
                 </div>
                 <form action="#" class="">
                   <div class="form-group mb-3">
-                    <label class="label" for="name">Full Name</label>
+                    <label class="label" for="email">Email</label>
                     <input
-                      name="name"
-                      type="text"
+                      name="email"
+                      type="email"
                       class="form-control"
-                      placeholder="Full Name"
+                      placeholder="Email"
                       required
                     />
                   </div>
@@ -78,7 +78,7 @@
                 </form>
                 <p class="text-center fc-secondary">
                   Not a member?
-                  <a class="fw-600" data-toggle="tab" href="sign-up.html"
+                  <a class="fw-600" 
                     >Sign Up</a
                   >
                 </p>

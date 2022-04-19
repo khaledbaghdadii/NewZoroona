@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-promise-queue@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/promise-queue/-/promise-queue-2.2.5.tgz#2f6f5f7c0f6d08109e967659c79b88a9ed5e93b4"
-  integrity sha1-L29ffA9tCBCelnZZx5uIqe1ek7Q=
+"promise-queue@^2.2.5":
+  "integrity" "sha1-L29ffA9tCBCelnZZx5uIqe1ek7Q="
+  "resolved" "https://registry.npmjs.org/promise-queue/-/promise-queue-2.2.5.tgz"
+  "version" "2.2.5"
 
-redis-server@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/redis-server/-/redis-server-1.2.2.tgz#d0415b549ee06256248bf728b407ddf19999818a"
-  integrity sha512-pOaSIeSMVFkEFIuaMtpQ3TOr3uI4sUmEHm4ofGks5vTPRseHUszxyIlC70IFjUR9qSeH8o/ARZEM8dqcJmgGJw==
+"redis-server@^1.2.2":
+  "integrity" "sha512-pOaSIeSMVFkEFIuaMtpQ3TOr3uI4sUmEHm4ofGks5vTPRseHUszxyIlC70IFjUR9qSeH8o/ARZEM8dqcJmgGJw=="
+  "resolved" "https://registry.npmjs.org/redis-server/-/redis-server-1.2.2.tgz"
+  "version" "1.2.2"
   dependencies:
-    promise-queue "^2.2.5"
+    "promise-queue" "^2.2.5"
