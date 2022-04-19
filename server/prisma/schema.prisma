@@ -8,8 +8,26 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl ="postgres://ydvvohurwaodhv:458c7e12692e19b0aef4fe1583cc627d6bfb1645f414ee595814cea641abeba4@ec2-54-157-79-121.compute-1.amazonaws.com:5432/d21j4n8k6iqlnf"
 }
 
+model RoleType{
+id Int @id @default(autoincrement())
+description String
+User User[]
+}
+
+model Category{
+id Int @id @default(autoincrement())
+description String
+Place Place[]
+}
+
+model Orientation{
+id Int @id @default(autoincrement())
+description String
+Place Place[]
+}
 
 model User{
 id Int @id @default(autoincrement())
@@ -17,8 +35,87 @@ createdAt DateTime @default(now())
 updatedAt DateTime @updatedAt
 email String @unique
 hash String
-firstName String
-lastName String
+name String
+phoneNumber String
+gender String
+roleTypeId Int 
+RoleType RoleType @relation(fields: [roleTypeId], references: [id])
+Place Place[]
+Review Review[]
+Report Report[]
+Reservation Reservation[]
 @@map("users")
+}
+
+model Place{
+id Int @id @default(autoincrement())
+name String
+city String
+district String
+address String
+location String?
+phoneNumber String?
+email String?
+website String?
+sector String
+categoryId Int
+orientationId Int
+managerId Int?
+hasReservation Boolean
+description String
+image String
+Category Category @relation(fields: [categoryId], references: [id])
+Manager User? @relation(fields: [managerId], references: [id])
+Orientation Orientation @relation(fields: [orientationId], references: [id])
+Review Review[]
+Reservation Reservation[]
+Package Package[]
+@@map("places")
+}
+
+model Review{
+id Int @id @default(autoincrement())
+feedback String
+rating Int
+placeId Int
+userId Int
+Place Place @relation(fields: [placeId], references: [id])
+User User @relation(fields: [userId], references: [id])
+Report Report[]
+@@map("reviews")
+}
+
+model Report{
+  id Int @id @default(autoincrement())
+  reporterId Int
+  reviewId Int
+  Reporter User @relation(fields: [reporterId],references: [id])
+  Review Review @relation(fields: [reviewId],references: [id])
+  @@map("reports")
+}
+
+model Reservation{
+  id Int @id @default(autoincrement())
+  placeId Int
+  userId Int
+  numberofpeople Int
+  startDate DateTime
+  endDate DateTime
+  cost Float
+  User User @relation(fields: [userId],references: [id])
+  Place Place @relation(fields: [placeId],references: [id])
+  packages Package[]
+  @@map("reservations")
+}
+
+model Package{
+  id Int @id @default(autoincrement())
+  placeId Int
+  description String
+  name String
+  cost Float
+  Place Place @relation(fields: [placeId],references: [id])
+  reservations Reservation[]
+  @@map("packages")
 }
 

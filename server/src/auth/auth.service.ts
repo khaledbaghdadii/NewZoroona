@@ -1,12 +1,12 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
-import { AuthDto } from 'src/dto';
+import { ForbiddenException, Injectable, Session } from '@nestjs/common';
+import { SignupDTO, SigninDTO } from '../auth/dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 @Injectable({})
 export class AuthService {
   constructor(private prisma: PrismaService) {}
-  async signup(dto: AuthDto) {
+  async signup(dto: SignupDTO, @Session() session: Record<string, any>) {
     //generated the password hash
     const hash = await argon.hash(dto.password);
 
@@ -16,11 +16,19 @@ export class AuthService {
         data: {
           email: dto.email,
           hash: hash,
-          firstName: '',
-          lastName: '',
+          gender: dto.gender,
+          name: dto.name,
+          phoneNumber: dto.phoneNumber,
+          roleTypeId: dto.roleTypeId,
         },
       });
       delete user.hash;
+
+      //add session cookie
+      session.userId = user.id;
+      session.name = user.name;
+      session.roleTypeId = user.roleTypeId;
+
       //return the user
       return user;
     } catch (error) {
@@ -32,7 +40,7 @@ export class AuthService {
       throw error;
     }
   }
-  async signin(dto: AuthDto) {
+  async signin(dto: SigninDTO, @Session() session: Record<string, any>) {
     //find the user by email
     const user = await this.prisma.user.findUnique({
       where: {
@@ -49,6 +57,10 @@ export class AuthService {
       throw new ForbiddenException('Email and password do not match');
     //delete hash from returned user
     delete user.hash;
+    //save session cookie
+    session.userId = user.id;
+    session.name = user.name;
+    session.roleTypeId = user.roleTypeId;
     //send back the user
     return user;
   }
