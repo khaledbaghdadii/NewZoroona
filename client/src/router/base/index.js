@@ -1,19 +1,9 @@
 const base = {
     path: '',
     component: () =>
-        import ('@/layouts/main-layout/MainLayout'),
+        import ('@/layouts/full-layout/FullLayout'),
     redirect: { name: 'Homepage' },
     children: [{
-            path: '/',
-            name: 'Homepage',
-            component: () =>
-                import ('@/views/homepage/Homepage'),
-            meta: {
-                title: 'HOMEPAGE',
-                rule: 'isPublic'
-            }
-        },
-        {
             path: '/login',
             name: 'Login',
             component: () =>
