@@ -61,7 +61,7 @@
 //Homepage
 .section-intro-landing {
     margin-top: 150px;
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 170px);
 }
 
 .HomepageCoverPhoto {
@@ -99,4 +99,24 @@
 
 #discover {
     width: 300px;
+}
+
+//footer
+footer {
+    p {
+        color: #E5E5E5;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+
+.footer-section-1 {
+    background-color: #212529;
+}
+
+.footer-section-2 {
+    background-color: #343a40;
+    p {
+        font-size: 14px;
+    }
 }

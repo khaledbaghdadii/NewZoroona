@@ -3,7 +3,11 @@
     <nav class="navbar navbar-expand-md bg-dark navbar-light">
       <div class="container">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Homepage' }">
-          <img src="@/assets/images/zoroona-icon.png" alt="Zoroona Logo" class="me-2" />
+          <img
+            src="@/assets/images/zoroona-icon.png"
+            alt="Zoroona Logo"
+            class="me-2"
+          />
           <div id="LogoName">ZOROONA</div>
         </router-link>
         <button
@@ -28,6 +32,11 @@
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'Homepage' }"
                 >About</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'Homepage' }"
+                >Explore</router-link
               >
             </li>
             <li class="nav-item">

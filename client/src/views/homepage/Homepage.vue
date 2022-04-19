@@ -10,9 +10,11 @@
         </h1>
         <h5 class="pt-3">
           Zorooona is the place, where you can <br />
-          discover all Lebanon's places! So, are <br>you  ready to get started?
+          discover all Lebanon's places! So, are <br />you ready to get started?
         </h5>
-        <button class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn">
+        <button
+          class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn"
+        >
           Let's Explore!
         </button>
       </div>
@@ -21,7 +23,7 @@
       </div>
     </section>
 
-    <section class="section-featured-places pb-5 mt-4">
+    <section class="section-featured-places pb-5">
       <div class="container">
         <h1 class="pt-3 pb-4 fw-700">Discover Some of Our Featured Places!</h1>
         <div class="row">
@@ -30,7 +32,9 @@
               class="post-img"
               :style="{
                 'background-image':
-                  'url(' + require('@/assets/images/baaqline-waterfall.jpg') + ')',
+                  'url(' +
+                  require('@/assets/images/baaqline-waterfall.jpg') +
+                  ')',
               }"
             >
               <div class="text-end">
@@ -38,7 +42,9 @@
               </div>
             </div>
             <div class="d-flex flex-column">
-              <h4 class="fw-700 pt-3">Enjoy the beauty of Lebanon's waterfalls</h4>
+              <h4 class="fw-700 pt-3">
+                Enjoy the beauty of Lebanon's waterfalls
+              </h4>
               <div class="d-flex">
                 <img
                   src="@/assets/images/location.svg"
@@ -119,21 +125,33 @@
           </div>
         </div>
         <div class="text-center mt-5">
-        <button class="btn btn-primary px-3 py-3 text-white fs-18" id="discover">Discover All Places!</button>
+          <button
+            class="btn btn-primary px-3 py-3 text-white fs-18"
+            id="discover"
+          >
+            Discover All Places!
+          </button>
         </div>
       </div>
     </section>
 
-    <section class="d-flex flex-column flex-md-row justify-content-between  container  my-5 pt-5">
-      <img src="@/assets/images/manager.svg" class="HomepageCoverPhoto"> 
+    <section
+      class="d-flex flex-column flex-md-row justify-content-between container my-5 py-5"
+    >
+      <img src="@/assets/images/manager.svg" class="HomepageCoverPhoto" />
       <div>
-      <h1 class="fw-700 mt-5 pt-3">Do You Have a Place?</h1>
-      <h5 class="pt-3">If you have a place in Lebanon, and you are <br> aiming to cooperate with Zoroona, click on <br>the button below!</h5>
-      <button class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn">Become a Manager!</button>
+        <h1 class="fw-700 mt-5 pt-3">Do You Have a Place?</h1>
+        <h5 class="pt-3">
+          If you have a place in Lebanon, and you are <br />
+          aiming to cooperate with Zoroona, click on <br />the button below!
+        </h5>
+        <button
+          class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn"
+        >
+          Become a Manager!
+        </button>
       </div>
-
     </section>
-
   </div>
 </template>
 
