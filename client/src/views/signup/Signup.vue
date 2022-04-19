@@ -80,7 +80,7 @@
                     <div class="input-group date" id="datepicker">
                       <input
                         name="dateofbirth"
-                        type="text"
+                        type="date"
                         class="form-control"
                         id="date"
                         placeholder="MM/DD/YYYY"
