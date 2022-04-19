@@ -1,3 +1,24 @@
-//
 // fonts scss
-//
+@font-face {
+    font-family: Lora;
+    font-weight: 400;
+    src: url(../fonts/Lora/Lora-Regular.ttf);
+}
+
+@font-face {
+    font-family: Lora;
+    font-weight: 700;
+    src: url(../fonts/Lora/Lora-Bold.ttf);
+}
+
+@font-face {
+    font-family: Spartan;
+    font-weight: 700;
+    src: url(../fonts/Spartan/Spartan-Bold.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 700;
+    src: url(../fonts/Roboto/Roboto-Bold.ttf);
+}

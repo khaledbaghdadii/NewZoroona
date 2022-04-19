@@ -6,8 +6,8 @@
 // The file is included before any other variable file,
 // so you can override them because they all use !default
 // --------------------------------------------------
-
 // For example, changing the primary color
-$primary: #991F1F;
-$secondary: #6E7581;
-$success: #49C555;
+$primary: rgb(243, 122, 52);
+$secondary: #424174;
+$md-breakpoint: 761px;
+$sm-breakpoint: 576px;

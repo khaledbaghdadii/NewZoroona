@@ -6,9 +6,273 @@
 // This file is included last, so you have access
 // to all Bootstrap and Dashmix functions/mixins/styles etc
 // --------------------------------------------------
-
 // If you have many custom styles, you can create and import additional files
 // For example you can create _component1.scss and include it as follows:
 // @import 'component1';
-
 @import "./component/fonts";
+//Header
+.navbar-container {
+    background-color: #FFF5ED;
+    z-index: 1;
+}
+
+.navbar-brand {
+    #LogoName {
+        font-family: Spartan;
+        padding-top: 0.7rem;
+        color: $primary;
+        ;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 22px;
+    }
+    img {
+        width: 40px;
+    }
+}
+
+.nav-item {
+    position: relative;
+    .nav-link {
+        color: black !important;
+        font-weight: 500;
+        font-size: 16px;
+        opacity: 80%;
+        &:hover {
+            color: black !important;
+            opacity: 100%;
+        }
+    }
+    &::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background-color: $primary;
+        ;
+        width: 0%;
+        content: "";
+        height: 2px;
+        transition: all 0.5s;
+    }
+    &:hover::after {
+        width: 100%;
+    }
+}
+
+//Homepage
+.section-intro-landing {
+    margin-top: 150px;
+    min-height: calc(100vh - 170px);
+}
+
+.HomepageCoverPhoto {
+    width: 500px;
+}
+
+.homepage-btn {
+    border: none;
+    width: 300px;
+    &:hover {
+        // border: none;
+        background-color: $secondary;
+    }
+}
+
+.badge-background-color {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: white;
+    padding: 7px;
+    border-radius: 8px;
+}
+
+.post-img {
+    height: 300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+}
+
+#location {
+    width: 25px;
+}
+
+#discover {
+    width: 300px;
+}
+
+//footer
+footer {
+    p {
+        color: #E5E5E5;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+
+.footer-section-1 {
+    background-color: #212529;
+}
+
+.footer-section-2 {
+    background-color: #343a40;
+    p {
+        font-size: 14px;
+    }
+}
+
+//login & signup
+.login-section {
+    padding: 7em 0;
+    background-color: #FFF5ED;
+}
+
+.signup-section {
+    padding: 3em 0;
+}
+
+.fc-primary {
+    color: $primary;
+}
+
+.fc-secondary {
+    color: $secondary;
+    ;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.wrap {
+    width: 100%;
+    // overflow: hidden;
+    background: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+}
+
+.login-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.login-wrap {
+    position: relative;
+    background: #fff;
+}
+
+.login-img,
+.login-wrap {
+    width: 50%;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-group .label {
+    font-size: 12px;
+    color: $primary;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.form-group a {
+    color: $secondary;
+}
+
+#condLabel,
+#rememberLabel {
+    color: $secondary;
+}
+
+.form-control:focus {
+    color: $primary;
+    background-color: #fff;
+    border-color: $primary;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
+}
+
+.select {
+    color: $primary;
+    outline: 0;
+    height: 38px;
+    border-radius: 5px;
+    border-color: #d3d9de;
+}
+
+.select:focus {
+    border-color: $primary;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
+}
+
+.checkbox-wrap {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.checkbox-wrap input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-wrap input:checked~.checkmark:after {
+    display: block;
+    content: "\f14a";
+    font-family: "FontAwesome";
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-primary {
+    color: $primary;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    &:after {
+        content: "\f0c8";
+        font-family: "FontAwesome";
+        position: absolute;
+        color: rgba(0, 0, 0, 0.1);
+        font-size: 20px;
+        margin-top: -4px;
+        -webkit-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s;
+    }
+}
+
+.checkbox-primary input:checked~.checkmark:after {
+    color: $primary;
+}
+
+option {
+    color: white;
+    background-color: $secondary;
+}
+
+.input-group-append {
+    cursor: pointer;
+}
