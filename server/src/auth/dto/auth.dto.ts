@@ -21,6 +21,8 @@ export class SignupDTO {
   @IsNotEmpty()
   @Transform(({ value }) => parseInt(value))
   roleTypeId: number;
+  @Transform(({ value }) => new Date(value))
+  dateOfBirth: Date;
 }
 
 export class SigninDTO {
