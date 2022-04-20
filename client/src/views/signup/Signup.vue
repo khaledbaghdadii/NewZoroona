@@ -107,7 +107,7 @@
                       />
                     </div>
                     <div>
-                      <input name="roletypeid" type="hidden" value="3" />
+                      <input name="roleTypeId" type="hidden" value="3" />
                     </div>
                   </div>
                   <div class="form-group d-flex">
@@ -156,24 +156,27 @@ export default {
   data() {
     return {
       signupForm: {
-        email: "",
-        password: "",
-        gender: "",
-        DOB: "",
-        phoneNumber: "",
+        email: "carla@gmail.com",
+        password: "123",
+        gender: "female",
+        // DOB: "",
+        phoneNumber: "656456",
+        name: "carla",
+        roleTypeId: 3,
       },
     };
   },
   methods: {
     signup() {
+      const self = this
       console.log("I'm trying to add user")
-      AccountService.addUser(this.signupForm)
+      AccountService.addUser(self.signupForm)
         .then(function () {
           console.log("User Added!");
         })
         .catch((error) => {
           this.errorMessage = error.message;
-          console.error("There was an error!", error);
+          console.log("There was an error!", error);
         });
     },
   },
