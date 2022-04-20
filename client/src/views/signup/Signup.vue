@@ -32,11 +32,25 @@
                     <h3 class="mb-4 fw-700">Sign Up</h3>
                   </div>
                 </div>
-                <form action="#" class="">
+                <form v-on:submit.prevent="signup">
+                  <div class="form-group mb-3">
+                    <label class="label" for="name">Full Name</label>
+                    <input
+                      name="name"
+                      id="name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Full Name"
+                      v-model="signupForm.name"
+                      required
+                    />
+                  </div>
+
                   <div class="form-group mb-3">
                     <label class="label" for="name">Email</label>
                     <input
                       name="email"
+                      id="email"
                       type="email"
                       class="form-control"
                       placeholder="Email"
@@ -65,16 +79,17 @@
 
                       <select
                         name="gender"
+                        id="gender"
                         class="select w-100 position-relative"
                         required
                         v-model="signupForm.gender"
                       >
-                        <option disabled="disabled" selected="selected">
+                        <option disabled value="">
                           -- Gender --
                         </option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
                     <div class="col-sm-6 col-12 mb-3">
@@ -83,12 +98,12 @@
                       >
                       <div class="input-group date" id="datepicker">
                         <input
-                          name="dateofbirth"
+                          name="dateOfBirth"
                           type="date"
                           class="form-control"
-                          id="date"
+                          id="dateOfBirth"
                           placeholder="MM/DD/YYYY"
-                          v-model="signupForm.DOB"
+                          v-model="signupForm.dateOfBirth"
                           required
                         />
                       </div>
@@ -98,7 +113,8 @@
                         >Phone Number</label
                       >
                       <input
-                        name="phonenumber"
+                        name="phoneNumber"
+                        id="phoneNumber"
                         type="tel"
                         class="form-control"
                         placeholder="Phone Number"
@@ -107,7 +123,7 @@
                       />
                     </div>
                     <div>
-                      <input name="roleTypeId" type="hidden" value="3" />
+                      <input name="roleTypeId" id="roleTypeId" type="hidden" value="3" />
                     </div>
                   </div>
                   <div class="form-group d-flex">
@@ -126,7 +142,7 @@
                     <button
                       type="submit"
                       class="form-control btn btn-primary rounded submit px-3 text-white"
-                      @click="signup()"
+                     
                     >
                       Sign Up
                     </button>
@@ -156,20 +172,20 @@ export default {
   data() {
     return {
       signupForm: {
-        email: "carla@gmail.com",
-        password: "123",
-        gender: "female",
-        // DOB: "",
-        phoneNumber: "656456",
-        name: "carla",
+        email: "",
+        password: "",
+        gender: "",
+        dateOfBirth: "",
+        phoneNumber: "",
+        name: "",
         roleTypeId: 3,
       },
     };
   },
   methods: {
     signup() {
-      const self = this
-      console.log("I'm trying to add user")
+      const self = this;
+      console.log("I'm trying to add user");
       AccountService.addUser(self.signupForm)
         .then(function () {
           console.log("User Added!");
