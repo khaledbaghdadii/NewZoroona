@@ -57,7 +57,6 @@ export class RecommenderService {
     const recommendedPlacesIds = scores.map((p) => {
       return p.id;
     });
-    console.log(scores);
 
     const recommendedPlaces = await this.prisma.place.findMany({
       where: {
