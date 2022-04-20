@@ -20,7 +20,7 @@
           <div class="col-md-12 col-lg-10">
             <div class="wrap d-md-flex">
               <div
-                class="login-img"
+                class="login-img me-2 mt-3"
                 :style="{
                   'background-image':
                     'url(' + require('@/assets/images/login.svg') + ')',
@@ -56,7 +56,7 @@
                   <div class="form-group">
                     <button
                       type="submit"
-                      class="form-control btn btn-primary rounded submit px-3 text-white"
+                      class="form-control btn btn-primary rounded submit px-3 py-2 text-white"
                     >
                       Log In
                     </button>

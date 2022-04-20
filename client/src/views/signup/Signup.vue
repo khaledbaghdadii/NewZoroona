@@ -1,4 +1,4 @@
-<template class="login-wrapper">
+<template>
   <div class="login-wrapper">
     <div class="py-3">
       <nav class="navbar navbar-expand-md bg-dark navbar-light">
@@ -14,13 +14,18 @@
         </div>
       </nav>
     </div>
-    <section>
+    <div v-if="showLoader" class="d-flex align-items-center justify-content-center" :style="{height: 'calc(100vh - 200px)'}">
+      <div class="spinner-border text-primary" role="status" :style="{width: '3rem', height: '3rem'}">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <section v-else>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-12 col-lg-10">
             <div class="wrap d-md-flex">
               <div
-                class="login-img"
+                class="login-img ms-5"
                 :style="{
                   'background-image':
                     'url(' + require('@/assets/images/signup.svg') + ')',
@@ -32,7 +37,7 @@
                     <h3 class="mb-4 fw-700">Sign Up</h3>
                   </div>
                 </div>
-                <form v-on:submit.prevent="signup">
+                <form v-on:submit.prevent="signup()">
                   <div class="form-group mb-3">
                     <label class="label" for="name">Full Name</label>
                     <input
@@ -84,9 +89,7 @@
                         required
                         v-model="signupForm.gender"
                       >
-                        <option disabled value="">
-                          -- Gender --
-                        </option>
+                        <option disabled value="">-- Gender --</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
@@ -123,7 +126,12 @@
                       />
                     </div>
                     <div>
-                      <input name="roleTypeId" id="roleTypeId" type="hidden" value="3" />
+                      <input
+                        name="roleTypeId"
+                        id="roleTypeId"
+                        type="hidden"
+                        value="3"
+                      />
                     </div>
                   </div>
                   <div class="form-group d-flex">
@@ -141,8 +149,7 @@
                   <div class="form-group">
                     <button
                       type="submit"
-                      class="form-control btn btn-primary rounded submit px-3 text-white"
-                     
+                      class="form-control btn btn-primary rounded submit px-3 py-2 text-white"
                     >
                       Sign Up
                     </button>
@@ -171,6 +178,7 @@ export default {
   name: "Signup",
   data() {
     return {
+      showLoader: "",
       signupForm: {
         email: "",
         password: "",
@@ -184,11 +192,13 @@ export default {
   },
   methods: {
     signup() {
-      const self = this;
-      console.log("I'm trying to add user");
+      const self = this
+      this.showLoader = true;
       AccountService.addUser(self.signupForm)
         .then(function () {
           console.log("User Added!");
+          self.$router.push("/homepage");
+          self.showLoader = false;
         })
         .catch((error) => {
           this.errorMessage = error.message;
