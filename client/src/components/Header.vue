@@ -54,7 +54,7 @@
             <button class="btn btn-outline-secondary me-2" @click="goToLogin()">
               Log In
             </button>
-            <button class="btn btn-primary text-white">Sign Up</button>
+            <button class="btn btn-primary text-white" @click="goToSignUp()">Sign Up</button>
           </div>
         </div>
       </div>
@@ -69,6 +69,17 @@ export default {
     goToLogin() {
       this.$router.push("/login");
     },
+    goToSignUp(){
+      this.$router.push("/signup");
+    }
   },
 };
+window.addEventListener('scroll',()=>{
+  const nav = document.querySelector('.navbar-container');
+  if(window.pageYOffset>0){
+    nav.classList.add("add-shadow");
+  }else{
+    nav.classList.remove("add-shadow");
+  }
+});
 </script>

@@ -14,7 +14,7 @@
         </div>
       </nav>
     </div>
-    <section class="my-5">
+    <section class="mt-3">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-12 col-lg-10">
@@ -29,8 +29,7 @@
               <div class="login-wrap p-4 p-md-5">
                 <div class="d-flex">
                   <div class="w-100">
-                    <h3 class="mb-4 fw-700">Log In
-                    </h3>
+                    <h3 class="mb-4 fw-700">Log In</h3>
                   </div>
                 </div>
                 <form action="#" class="">
@@ -63,26 +62,26 @@
                     </button>
                   </div>
                   <div class="form-group d-flex">
-                    <div class="w-100 text-left">
-                      <label
-                        class="checkbox-wrap checkbox-primary mb-0"
-                        id="rememberLabel"
-                        >Remember Me
-                        <input type="checkbox" id="rememberCheckbox" />
-                        <span class="checkmark"></span>
+                    <div class="form-check mb-3 text-left w-100">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="remember"
+                        />
+                        Remember Me
                       </label>
                     </div>
+
                     <div class="w-100 text-end">
                       <a href="#">Forgot Password</a>
                     </div>
                   </div>
                 </form>
-                <p class="text-center fc-secondary">
-                  Not a member?
-                  <a class="fw-600" 
-                    >Sign Up</a
-                  >
-                </p>
+                <div class="d-flex justify-content-center">
+                  <div>Not a member?</div>
+                  <div><router-link class="ps-2 fw-700" :to="{ name: 'Signup' }">Sign Up</router-link></div>
+                </div>
               </div>
             </div>
           </div>
@@ -93,6 +92,6 @@
 </template>
 <script>
 export default {
-  name: "login",
+  name: "Login",
 };
 </script>

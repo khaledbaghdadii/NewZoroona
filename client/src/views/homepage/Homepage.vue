@@ -14,6 +14,7 @@
         </h5>
         <button
           class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn"
+          @click="goToSignUp()"
         >
           Let's Explore!
         </button>
@@ -158,5 +159,10 @@
 <script>
 export default {
   name: "homepage",
+  methods:{
+        goToSignUp(){
+      this.$router.push("/signup");
+    }
+  }
 };
 </script>
