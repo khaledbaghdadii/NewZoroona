@@ -2,6 +2,19 @@
 # yarn lockfile v1
 
 
+"@prisma/engines@3.13.0-10.f738c2de40b0514b47c5cdbf75f8bb06929df254":
+  "integrity" "sha512-0sqxKRpEeXWSBdTbCT/MdghFoY/bqvdAOZIQB/W0YhvhnCxR4ma/g6eWeIDReOezFGaCWa5IxvPVipRvuwkGlA=="
+  "resolved" "https://registry.npmjs.org/@prisma/engines/-/engines-3.13.0-10.f738c2de40b0514b47c5cdbf75f8bb06929df254.tgz"
+  "version" "3.13.0-10.f738c2de40b0514b47c5cdbf75f8bb06929df254"
+
+"prisma@^3.13.0-dev.27":
+  "integrity" "sha512-drSHfZW6J809rU4bgsJaHRJx2jFgiELWYj2XBsWnmhKYkDx0VEDMVsVLySQFlHBmNSl12Agt6n5JzyWSLVpKFw=="
+  "resolved" "https://registry.npmjs.org/prisma/-/prisma-3.13.0-dev.27.tgz"
+  "version" "3.13.0-dev.27"
+  dependencies:
+    "@prisma/engines" "3.13.0-10.f738c2de40b0514b47c5cdbf75f8bb06929df254"
+    "ts-pattern" "^4.0.1"
+
 "promise-queue@^2.2.5":
   "integrity" "sha1-L29ffA9tCBCelnZZx5uIqe1ek7Q="
   "resolved" "https://registry.npmjs.org/promise-queue/-/promise-queue-2.2.5.tgz"
@@ -13,3 +26,8 @@
   "version" "1.2.2"
   dependencies:
     "promise-queue" "^2.2.5"
+
+"ts-pattern@^4.0.1":
+  "integrity" "sha512-eHqR/7A6fcw05vCOfnL6RwgGJbVi9G/YHTdYdjYmElhDdJ1SMn7pWs+6+YuxygaFwQS/g+cIDlu+UD8IVpur1A=="
+  "resolved" "https://registry.npmjs.org/ts-pattern/-/ts-pattern-4.0.2.tgz"
+  "version" "4.0.2"

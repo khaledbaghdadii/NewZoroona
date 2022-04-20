@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "redis-server": "^1.2.2"
+  },
+  "devDependencies": {
+    "prisma": "^3.13.0-dev.27"
   }
 }
