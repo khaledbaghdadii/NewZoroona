@@ -36,9 +36,14 @@
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'Homepage' }"
-                >Explore</router-link
+                >Discover</router-link
               >
             </li>
+            <!-- <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'Homepage' }"
+                >Become a Manager
+              </router-link>
+            </li> -->
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'Homepage' }"
                 >Contact Us
@@ -46,8 +51,10 @@
             </li>
           </ul>
           <div class="d-flex mt-2">
-            <button class="btn btn-outline-secondary me-2">Log In</button>
-            <button class="btn btn-primary">Sign Up</button>
+            <button class="btn btn-outline-secondary me-2" @click="goToLogin()">
+              Log In
+            </button>
+            <button class="btn btn-primary text-white" @click="goToSignUp()">Sign Up</button>
           </div>
         </div>
       </div>
@@ -58,5 +65,21 @@
 <script>
 export default {
   name: "Header",
+  methods: {
+    goToLogin() {
+      this.$router.push("/login");
+    },
+    goToSignUp(){
+      this.$router.push("/signup");
+    }
+  },
 };
+window.addEventListener('scroll',()=>{
+  const nav = document.querySelector('.navbar-container');
+  if(window.pageYOffset>0){
+    nav.classList.add("add-shadow");
+  }else{
+    nav.classList.remove("add-shadow");
+  }
+});
 </script>

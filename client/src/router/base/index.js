@@ -1,19 +1,9 @@
 const base = {
     path: '',
     component: () =>
-        import ('@/layouts/main-layout/MainLayout'),
+        import ('@/layouts/full-layout/FullLayout'),
     redirect: { name: 'Homepage' },
     children: [{
-            path: '/',
-            name: 'Homepage',
-            component: () =>
-                import ('@/views/homepage/Homepage'),
-            meta: {
-                title: 'HOMEPAGE',
-                rule: 'isPublic'
-            }
-        },
-        {
             path: '/login',
             name: 'Login',
             component: () =>
@@ -23,15 +13,16 @@ const base = {
                 rule: 'isPublic'
             }
         },
-        //{
-        //   path: '/register',
-        //   name: 'Register',
-        //   component: () => import('@/views/register/Register'),
-        //   meta: {
-        //     title: 'REGISTER',
-        //     rule: 'isPublic'
-        //   }
-        // }
+        {
+            path: '/signup',
+            name: 'Signup',
+            component: () =>
+                import ('@/views/signup/Signup'),
+            meta: {
+                title: 'SIGNUP',
+                rule: 'isPublic'
+            }
+        },
         // {
         //   path: '/forgot-password',
         //   name: 'ForgotPassword',

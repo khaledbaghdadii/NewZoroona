@@ -57,8 +57,12 @@
         transition: all 0.5s;
     }
     &:hover::after {
-        width: 100%;
+        width: 80%;
     }
+}
+
+.add-shadow {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px
 }
 
 //Homepage
@@ -68,14 +72,13 @@
 }
 
 .HomepageCoverPhoto {
-    width: 500px;
+    width: 700px;
 }
 
 .homepage-btn {
     border: none;
     width: 300px;
     &:hover {
-        // border: none;
         background-color: $secondary;
     }
 }
@@ -125,31 +128,15 @@ footer {
 }
 
 //login & signup
-.login-section {
-    padding: 7em 0;
+.login-wrapper {
     background-color: #FFF5ED;
-}
-
-.signup-section {
-    padding: 3em 0;
-}
-
-.fc-primary {
-    color: $primary;
-}
-
-.fc-secondary {
-    color: $secondary;
-    ;
-}
-
-.fw-600 {
-    font-weight: 600;
+    min-height: 100vh;
 }
 
 .wrap {
     width: 100%;
-    // overflow: hidden;
+    margin-bottom: 50px;
+    height: fit-content;
     background: #fff;
     border-radius: 5px;
     -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
@@ -161,118 +148,44 @@ footer {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    width: 50%;
 }
 
 .login-wrap {
     position: relative;
     background: #fff;
-}
-
-.login-img,
-.login-wrap {
     width: 50%;
 }
 
 .form-group {
     position: relative;
     margin-bottom: 1rem;
-}
-
-.form-group .label {
-    font-size: 12px;
-    color: $primary;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-}
-
-.form-group a {
-    color: $secondary;
-}
-
-#condLabel,
-#rememberLabel {
-    color: $secondary;
+    .label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
 }
 
 .form-control:focus {
-    color: $primary;
     background-color: #fff;
-    border-color: $primary;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
 }
 
 .select {
-    color: $primary;
     outline: 0;
-    height: 38px;
+    height: 40px;
     border-radius: 5px;
     border-color: #d3d9de;
-}
-
-.select:focus {
-    border-color: $primary;
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
-    box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
-}
-
-.checkbox-wrap {
-    display: block;
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.checkbox-wrap input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.checkbox-wrap input:checked~.checkmark:after {
-    display: block;
-    content: "\f14a";
-    font-family: "FontAwesome";
-    color: rgba(0, 0, 0, 0.2);
-}
-
-.checkbox-primary {
-    color: $primary;
-}
-
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    &:after {
-        content: "\f0c8";
-        font-family: "FontAwesome";
-        position: absolute;
-        color: rgba(0, 0, 0, 0.1);
-        font-size: 20px;
-        margin-top: -4px;
-        -webkit-transition: 0.3s;
-        -o-transition: 0.3s;
-        transition: 0.3s;
+    &:focus {
+        -webkit-box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(4, 24, 77, 0.25);
     }
-}
-
-.checkbox-primary input:checked~.checkmark:after {
-    color: $primary;
-}
-
-option {
-    color: white;
-    background-color: $secondary;
-}
-
-.input-group-append {
-    cursor: pointer;
+    option {
+        color: white;
+        background-color: $secondary;
+    }
 }

@@ -6,3 +6,13 @@
         width: 400px;
     }
 }
+
+@media (max-width: 1000px) {
+    .login-img {
+        display: none;
+        width: 0px;
+    }
+    .login-wrap {
+        width: 100%;
+    }
+}

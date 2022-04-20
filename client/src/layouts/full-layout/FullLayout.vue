@@ -7,11 +7,14 @@
       <!-- END Page Content -->
     </main>
     <!-- END Main Container -->
+
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'full-layout'
-}
+  name: "full-layout",
+
+};
 </script>
