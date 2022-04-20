@@ -40,6 +40,7 @@
                       type="email"
                       class="form-control"
                       placeholder="Email"
+                      v-model="signupForm.email"
                       required
                     />
                   </div>
@@ -52,6 +53,7 @@
                       type="password"
                       class="form-control"
                       placeholder="Password"
+                      v-model="signupForm.password"
                       required
                     />
                   </div>
@@ -65,11 +67,12 @@
                         name="gender"
                         class="select w-100 position-relative"
                         required
+                        v-model="signupForm.gender"
                       >
                         <option disabled="disabled" selected="selected">
                           -- Gender --
                         </option>
-                        <option id="opp">Male</option>
+                        <option>Male</option>
                         <option>Female</option>
                         <option>Other</option>
                       </select>
@@ -85,11 +88,12 @@
                           class="form-control"
                           id="date"
                           placeholder="MM/DD/YYYY"
+                          v-model="signupForm.DOB"
                           required
                         />
                       </div>
                     </div>
-                    <div class="form-group my-3">
+                    <div class="form-group mb-3">
                       <label class="label" for="phonenumber"
                         >Phone Number</label
                       >
@@ -98,11 +102,12 @@
                         type="tel"
                         class="form-control"
                         placeholder="Phone Number"
+                        v-model="signupForm.phoneNumber"
                         required
                       />
                     </div>
                     <div>
-                      <input name="roletypid" type="hidden" value="2" />
+                      <input name="roletypeid" type="hidden" value="3" />
                     </div>
                   </div>
                   <div class="form-group d-flex">
@@ -121,6 +126,7 @@
                     <button
                       type="submit"
                       class="form-control btn btn-primary rounded submit px-3 text-white"
+                      @click="signup()"
                     >
                       Sign Up
                     </button>
@@ -144,7 +150,32 @@
 </template>
 
 <script>
+import AccountService from "@/services/AccountService.js";
 export default {
   name: "Signup",
+  data() {
+    return {
+      signupForm: {
+        email: "",
+        password: "",
+        gender: "",
+        DOB: "",
+        phoneNumber: "",
+      },
+    };
+  },
+  methods: {
+    signup() {
+      console.log("I'm trying to add user")
+      AccountService.addUser(this.signupForm)
+        .then(function () {
+          console.log("User Added!");
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
+          console.error("There was an error!", error);
+        });
+    },
+  },
 };
 </script>
