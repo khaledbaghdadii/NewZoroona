@@ -8,7 +8,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  shadowDatabaseUrl ="postgres://ydvvohurwaodhv:458c7e12692e19b0aef4fe1583cc627d6bfb1645f414ee595814cea641abeba4@ec2-54-157-79-121.compute-1.amazonaws.com:5432/d21j4n8k6iqlnf"
+  shadowDatabaseUrl ="postgres://ydvvohurwaodhv:458c7e12692e19b0aef4fe1583cc627d6bfb1645f414ee595814cea641abeba4@ec2-54-157-79-121.compute-1.amazonaws.com:5432/d21j4n8k6iqlnf?connect_timeout=100&pool_timeout=30&socket_timeout=100"
 }
 
 model RoleType{
@@ -37,6 +37,7 @@ email String @unique
 hash String
 name String
 phoneNumber String
+dateOfBirth DateTime?
 gender String
 roleTypeId Int 
 RoleType RoleType @relation(fields: [roleTypeId], references: [id])
@@ -62,6 +63,7 @@ categoryId Int
 orientationId Int
 managerId Int?
 hasReservation Boolean
+isFeatured Boolean?
 description String
 image String
 Category Category @relation(fields: [categoryId], references: [id])
