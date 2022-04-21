@@ -13,6 +13,7 @@ export class RolesGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const session = request.session;
     console.log(roles);
+    console.log(session);
     return matchRoles(roles, session.roleTypeId);
   }
 }
