@@ -20,6 +20,7 @@ export class AuthService {
           name: dto.name,
           phoneNumber: dto.phoneNumber,
           roleTypeId: dto.roleTypeId,
+          dateOfBirth: dto.dateOfBirth,
         },
       });
       delete user.hash;
