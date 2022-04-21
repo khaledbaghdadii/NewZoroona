@@ -11,13 +11,14 @@ export class AuthController {
     @Body(SignupValidationPipe) dto: SignupDTO,
     @Session() session: Record<string, any>,
   ) {
-    console.log({
-      dto,
-    });
     return this.authService.signup(dto, session);
   }
   @Post('signin')
   signin(@Body() dto: SigninDTO, @Session() session: Record<string, any>) {
     return this.authService.signin(dto, session);
+  }
+  @Post('logout')
+  logout(@Session() session: Record<string, any>) {
+    return this.authService.logout(session);
   }
 }
