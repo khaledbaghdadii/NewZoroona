@@ -54,10 +54,7 @@ export class PlaceController {
                     @Query('hasReservation',ParseIntPipe) hasReservation: number) {
 
     category= category.map(Number);
-    console.log(category);
     orientation= orientation.map(Number);
-    console.log(orientation);
-    console.log(hasReservation);
     return this.placeService.getPlacesByFilter(orientation,category,district,hasReservation);
   }
 }
