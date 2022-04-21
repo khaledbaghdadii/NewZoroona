@@ -152,8 +152,9 @@
                           class="form-check-input"
                           type="checkbox"
                           name="remember"
+                          required
                         />
-                        I agree to the terms and conditions
+                        I agree to the <router-link :to="{ name: 'TermsAndConditions' }" class="text-primary"><strong>Terms and conditions</strong></router-link>
                       </label>
                     </div>
                   </div>

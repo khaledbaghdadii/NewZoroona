@@ -56,3 +56,18 @@
         background-color: $secondary;
     }
 }
+
+//cursor pointer
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.header-dropdown {
+    // -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.header-dropdown-menu {
+    // -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}

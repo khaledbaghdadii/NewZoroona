@@ -50,9 +50,18 @@
               </router-link>
             </li>
           </ul>
-          <div v-if="$store.state.user.name">
-            <div>
+          <div class="d-flex" v-if="$store.state.user.name">
+            <div class="me-2">
               Welcome, <span class="text-primary fw-500"><strong>{{ $store.state.user.name }}!</strong></span>
+            </div>
+            <div class="dropdown header-dropdown">
+              <span class="fa fa-caret-down fa-lg cursor-pointer dropdown-toggle text-primary" data-bs-toggle="dropdown"></span>
+              <ul class="dropdown-menu header-dropdown-menu">
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Log Out</a></li>
+              </ul>
             </div>
           </div>
           <div class="d-flex mt-2" v-else>
