@@ -38,6 +38,11 @@ export class PlaceController {
   addPlace(@Body() dto: AddDTO) {
     return this.placeService.addPlace(dto);
   }
-
+  @UseGuards(RolesGuard)
+  @Post('feature')
+  @Roles('admin')
+  featurePlace(@Body('placeId', ParseIntPipe) placeId: number) {
+    return this.placeService.featurePlace(placeId);
+  }
   //add getPlaces with different filters
 }

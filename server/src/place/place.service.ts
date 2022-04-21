@@ -82,4 +82,19 @@ export class PlaceService {
       return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
     }
   }
+  async featurePlace(placeId: number): Promise<Place | HttpException> {
+    try {
+      const place = await this.prisma.place.update({
+        where: {
+          id: placeId,
+        },
+        data: {
+          isFeatured: true
+        },
+      });
+      return place;
+    } catch (err) {
+      return new HttpException('Error Featuring Place', HttpStatus.BAD_REQUEST);
+    }
+  }
 }
