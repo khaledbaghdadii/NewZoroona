@@ -1,7 +1,7 @@
 import {
   Body,
   Controller,
-  Get,
+  Get, ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query,
@@ -41,8 +41,8 @@ export class PlaceController {
   @UseGuards(RolesGuard)
   @Post('feature')
   @Roles('admin')
-  featurePlace(@Body('placeId', ParseIntPipe) placeId: number) {
-    return this.placeService.featurePlace(placeId);
+  featurePlace(@Body('placeId', ParseIntPipe) placeId: number, @Body('feature',ParseBoolPipe) feature: boolean) {
+    return this.placeService.featurePlace(placeId,feature);
   }
   //add getPlaces with different filters
 }
