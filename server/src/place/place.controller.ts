@@ -5,7 +5,6 @@ import {
   ParseIntPipe,
   Post,
   Query,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { UpdateDTO, AddDTO } from './dto';
@@ -19,6 +18,10 @@ export class PlaceController {
   @Get('place')
   getPlace(@Query('placeId', ParseIntPipe) placeId: number) {
     return this.placeService.getPlace(placeId);
+  }
+  @Get('search')
+  searchPlaceByTitle(@Query('text') text: string) {
+    return this.placeService.searchPlaceByTitle(text);
   }
   @UseGuards(RolesGuard)
   @Post('delete')

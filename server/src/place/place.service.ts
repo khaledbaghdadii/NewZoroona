@@ -18,6 +18,22 @@ export class PlaceService {
     }
     return place;
   }
+  async searchPlaceByTitle(text: string): Promise<Place[]> {
+    try {
+      const places = await this.prisma.place.findMany({
+        where: {
+          name: {
+            contains: text,
+            mode: 'insensitive',
+          },
+        },
+        take: 9,
+      });
+      return places;
+    } catch (e) {
+      return [];
+    }
+  }
   async deletePlace(placeId: number) {
     try {
       await this.prisma.place.delete({

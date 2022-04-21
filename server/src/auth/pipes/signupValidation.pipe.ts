@@ -32,4 +32,3 @@ export class SignupValidationPipe implements PipeTransform {
     return /[!@#$%\^&*)?{},<>~`"'/\\\]\](+=_-]/.test(str);
   }
 }
-//?,\\/\]\[><~`'"
