@@ -29,6 +29,7 @@ export class AuthService {
       session.userId = user.id;
       session.name = user.name;
       session.roleTypeId = user.roleTypeId;
+      session.key_name = user.id;
 
       //return the user
       return user;
@@ -59,10 +60,24 @@ export class AuthService {
     //delete hash from returned user
     delete user.hash;
     //save session cookie
+    session.key = user.id;
+    session.key_name = user.id;
     session.userId = user.id;
     session.name = user.name;
     session.roleTypeId = user.roleTypeId;
+
     //send back the user
     return user;
+  }
+  async logout(@Session() session: Record<string, any>) {
+    if (session.userId) {
+      session.destroy((e) => {
+        if (e) {
+          console.log(e);
+        }
+      });
+      return 'Logged out successfully';
+    }
+    return "You're not logged in";
   }
 }
