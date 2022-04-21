@@ -14,18 +14,29 @@
         </div>
       </nav>
     </div>
-    <div v-if="showLoader" class="d-flex align-items-center justify-content-center" :style="{height: 'calc(100vh - 200px)'}">
-      <div class="spinner-border text-primary" role="status" :style="{width: '3rem', height: '3rem'}">
+    <div
+      v-if="showLoader"
+      class="d-flex align-items-center justify-content-center"
+      :style="{ height: 'calc(100vh - 180px)' }"
+    >
+      <!-- <div class="spinner-border text-primary" role="status" :style="{width: '3rem', height: '3rem'}">
         <span class="visually-hidden">Loading...</span>
-      </div>
+      </div> -->
+      <img
+        class="spin"
+        src="@/assets/images/spinner.png"
+        alt="spinner"
+        :height='80'
+        :width='80'
+      />
     </div>
     <section v-else>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-12 col-lg-10">
-            <div class="wrap d-md-flex">
+            <div class="wrap d-md-flex ps-5">
               <div
-                class="login-img ms-5"
+                class="login-img"
                 :style="{
                   'background-image':
                     'url(' + require('@/assets/images/signup.svg') + ')',
@@ -192,10 +203,11 @@ export default {
   },
   methods: {
     signup() {
-      const self = this
+      const self = this;
       this.showLoader = true;
       AccountService.addUser(self.signupForm)
-        .then(function () {
+        .then(function (res) {
+          self.$store.dispatch("setUser", res.data)
           console.log("User Added!");
           self.$router.push("/homepage");
           self.showLoader = false;
@@ -208,3 +220,4 @@ export default {
   },
 };
 </script>
+

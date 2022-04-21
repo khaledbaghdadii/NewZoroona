@@ -3,7 +3,7 @@
         <h1 class="fw-700 text-center">Are you READY to start EXPLORING?</h1>
         <h2 class="fw-700">Featured Places</h2>
         <!-- Carousel -->
-        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel" class="carousel slide mb-3" data-bs-ride="carousel">
 
         <!-- Indicators/dots -->
         <div class="carousel-indicators">
