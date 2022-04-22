@@ -6,7 +6,11 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 @Injectable({})
 export class AuthService {
   constructor(private prisma: PrismaService) {}
-  async signup(dto: SignupDTO, @Session() session: Record<string, any>) {
+  async signup(
+    dto: SignupDTO,
+    @Session() session: Record<string, any>,
+    isManager: boolean,
+  ) {
     //generated the password hash
     const hash = await argon.hash(dto.password);
 
@@ -19,17 +23,18 @@ export class AuthService {
           gender: dto.gender,
           name: dto.name,
           phoneNumber: dto.phoneNumber,
-          roleTypeId: dto.roleTypeId,
+          roleTypeId: isManager ? 2 : 3,
           dateOfBirth: dto.dateOfBirth,
         },
       });
       delete user.hash;
-
-      //add session cookie
-      session.userId = user.id;
-      session.name = user.name;
-      session.roleTypeId = user.roleTypeId;
-      session.key_name = user.id;
+      if (!isManager) {
+        //add session cookie
+        session.userId = user.id;
+        session.name = user.name;
+        session.roleTypeId = user.roleTypeId;
+        session.key_name = user.id;
+      }
 
       //return the user
       return user;
