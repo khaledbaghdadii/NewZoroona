@@ -18,6 +18,17 @@ export class PlaceService {
     }
     return place;
   }
+  async getFeaturedPlaces(): Promise<Place[] | HttpException> {
+    const places = await this.prisma.place.findMany({
+      where: {
+        isFeatured:true,
+      },
+    });
+    if (!places) {
+      return new HttpException('Featured Places not found', HttpStatus.NOT_FOUND);
+    }
+    return places;
+  }
   async searchPlaceByTitle(text: string): Promise<Place[]> {
     try {
       const places = await this.prisma.place.findMany({
@@ -178,4 +189,5 @@ export class PlaceService {
       return new HttpException('Error Featuring Place', HttpStatus.BAD_REQUEST);
     }
   }
+
 }

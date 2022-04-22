@@ -19,6 +19,10 @@ export class PlaceController {
   getPlace(@Query('placeId', ParseIntPipe) placeId: number) {
     return this.placeService.getPlace(placeId);
   }
+  @Get('featured')
+  getFeaturedPlaces() {
+    return this.placeService.getFeaturedPlaces();
+  }
   @Get('search')
   searchPlaceByTitle(@Query('text') text: string) {
     return this.placeService.searchPlaceByTitle(text);
