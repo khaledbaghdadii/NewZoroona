@@ -39,12 +39,14 @@ name String
 phoneNumber String
 dateOfBirth DateTime?
 gender String
-roleTypeId Int 
+roleTypeId Int
+valid Boolean @default(false)
 RoleType RoleType @relation(fields: [roleTypeId], references: [id])
 Place Place[]
 Review Review[]
 Report Report[]
 Reservation Reservation[]
+Request Request[]
 @@map("users")
 }
 
@@ -66,12 +68,14 @@ hasReservation Boolean
 isFeatured Boolean?
 description String
 image String
+valid Boolean @default(false)
 Category Category @relation(fields: [categoryId], references: [id])
 Manager User? @relation(fields: [managerId], references: [id])
 Orientation Orientation @relation(fields: [orientationId], references: [id])
 Review Review[]
 Reservation Reservation[]
 Package Package[]
+Request Request[]
 @@map("places")
 }
 
@@ -81,9 +85,11 @@ feedback String
 rating Int
 placeId Int
 userId Int
+valid Boolean @default(false)
 Place Place @relation(fields: [placeId], references: [id])
 User User @relation(fields: [userId], references: [id])
 Report Report[]
+Request Request[]
 @@map("reviews")
 }
 
@@ -121,3 +127,25 @@ model Package{
   @@map("packages")
 }
 
+model RequestType{
+id Int @id @default(autoincrement())
+description String
+Request Request[]
+@@map("requesttypes")
+}
+
+model Request{
+id Int @id @default(autoincrement())
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+requestTypeId Int
+managerId Int?
+reviewId Int?
+placeId Int?
+processed Boolean
+RequestType RequestType @relation(fields: [requestTypeId],references: [id])
+User User? @relation(fields: [managerId],references: [id])
+Review Review? @relation(fields: [reviewId],references: [id])
+Place Place? @relation(fields: [placeId],references: [id])
+@@map("requests")
+}
