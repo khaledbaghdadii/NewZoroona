@@ -35,7 +35,7 @@
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'Homepage' }"
+              <router-link class="nav-link" :to="{ name: 'Placespage' }"
                 >Discover</router-link
               >
             </li>
@@ -50,11 +50,27 @@
               </router-link>
             </li>
           </ul>
-          <div class="d-flex mt-2">
+          <div class="d-flex" v-if="$store.state.user.name">
+            <div class="me-2">
+              Welcome, <span class="text-primary fw-500"><strong>{{ $store.state.user.name }}!</strong></span>
+            </div>
+            <div class="dropdown header-dropdown">
+              <span class="fa fa-caret-down fa-lg cursor-pointer dropdown-toggle text-primary" data-bs-toggle="dropdown"></span>
+              <ul class="dropdown-menu header-dropdown-menu">
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Log Out</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="d-flex mt-2" v-else>
             <button class="btn btn-outline-secondary me-2" @click="goToLogin()">
               Log In
             </button>
-            <button class="btn btn-primary text-white" @click="goToSignUp()">Sign Up</button>
+            <button class="btn btn-primary text-white" @click="goToSignUp()">
+              Sign Up
+            </button>
           </div>
         </div>
       </div>
@@ -69,16 +85,16 @@ export default {
     goToLogin() {
       this.$router.push("/login");
     },
-    goToSignUp(){
+    goToSignUp() {
       this.$router.push("/signup");
-    }
+    },
   },
 };
-window.addEventListener('scroll',()=>{
-  const nav = document.querySelector('.navbar-container');
-  if(window.pageYOffset>0){
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector(".navbar-container");
+  if (window.pageYOffset > 0) {
     nav.classList.add("add-shadow");
-  }else{
+  } else {
     nav.classList.remove("add-shadow");
   }
 });

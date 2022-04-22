@@ -13,6 +13,16 @@ const internal = {
                 rule: 'isPublic'
             }
         },
+        {
+            path: '/placespage',
+            name: 'Placespage',
+            component: () =>
+                import ('@/views/placespage/Placespage'),
+            meta: {
+                title: 'PLACESPAGE',
+                rule: 'isPublic'
+            }
+        }
 
     ]
 }
