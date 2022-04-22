@@ -214,6 +214,7 @@ export default {
           self.showLoader = false;
         })
         .catch((error) => {
+          self.showLoader = false;
           this.errorMessage = error.message;
           console.log("There was an error!", error);
         });

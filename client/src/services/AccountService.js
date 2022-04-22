@@ -5,5 +5,8 @@ export default {
     },
     loginUser(payload) {
         return Endpoint().post(`http://localhost:3333/auth/signin`, payload)
+    },
+    logoutUser() {
+        return Endpoint().post(`http://localhost:3333/auth/logout`)
     }
 }
