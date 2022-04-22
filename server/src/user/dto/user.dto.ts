@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import { IsEmail, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { stringify } from 'querystring';
 
 export class UpdateCurrentDTO {
   @IsEmail()
@@ -32,4 +33,12 @@ export class UpdateDTO {
   @IsInt()
   @Transform(({ value }) => parseInt(value))
   userId: number;
+}
+export class ChangePasswordDTO {
+  @IsString()
+  @IsNotEmpty()
+  oldPassword: string;
+  @IsString()
+  @IsNotEmpty()
+  newPassword: string;
 }

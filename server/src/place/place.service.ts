@@ -21,11 +21,14 @@ export class PlaceService {
   async getFeaturedPlaces(): Promise<Place[] | HttpException> {
     const places = await this.prisma.place.findMany({
       where: {
-        isFeatured:true,
+        isFeatured: true,
       },
     });
     if (!places) {
-      return new HttpException('Featured Places not found', HttpStatus.NOT_FOUND);
+      return new HttpException(
+        'Featured Places not found',
+        HttpStatus.NOT_FOUND,
+      );
     }
     return places;
   }
@@ -45,43 +48,54 @@ export class PlaceService {
       return [];
     }
   }
-  async getPlacesByFilter(orientation:number[],category:number[],district: string[],hasReservation: number): Promise<Place[]> {
+  async getPlacesByFilter(
+    orientation: number[],
+    category: number[],
+    district: string[],
+    hasReservation: number,
+  ): Promise<Place[]> {
     try {
-      let orientationList=await this.prisma.orientation.findMany();
-      let orientationIds  =orientationList.map(o=>{return o.id});
-      let categoryList=await this.prisma.category.findMany();
-      let categoryIds  =categoryList.map(c=>{return c.id});
-      let districtList=await this.prisma.place.findMany();
-      let districtNames =districtList.map(d=>{return d.district});
-      let places=[];
-      if(hasReservation==2){
-      places = await this.prisma.place.findMany({
-        where:{
-          orientationId: {
-            in: orientation.length!=0?orientation:orientationIds
-          },
-          categoryId: {
-            in: category.length!=0?category:categoryIds
-          },
-          district: {
-            in: district.length!=0?district:districtNames
-          }
-        },
-        take: 9,
+      const orientationList = await this.prisma.orientation.findMany();
+      const orientationIds = orientationList.map((o) => {
+        return o.id;
       });
-      }else{
+      const categoryList = await this.prisma.category.findMany();
+      const categoryIds = categoryList.map((c) => {
+        return c.id;
+      });
+      const districtList = await this.prisma.place.findMany();
+      const districtNames = districtList.map((d) => {
+        return d.district;
+      });
+      let places = [];
+      if (hasReservation == 2) {
         places = await this.prisma.place.findMany({
-          where:{
+          where: {
             orientationId: {
-              in: orientation.length!=0?orientation:orientationIds
+              in: orientation.length != 0 ? orientation : orientationIds,
             },
             categoryId: {
-              in: category.length!=0?category:categoryIds
+              in: category.length != 0 ? category : categoryIds,
             },
             district: {
-              in: district.length!=0?district:districtNames
+              in: district.length != 0 ? district : districtNames,
             },
-            hasReservation: hasReservation != 0
+          },
+          take: 9,
+        });
+      } else {
+        places = await this.prisma.place.findMany({
+          where: {
+            orientationId: {
+              in: orientation.length != 0 ? orientation : orientationIds,
+            },
+            categoryId: {
+              in: category.length != 0 ? category : categoryIds,
+            },
+            district: {
+              in: district.length != 0 ? district : districtNames,
+            },
+            hasReservation: hasReservation != 0,
           },
           take: 9,
         });
@@ -155,31 +169,34 @@ export class PlaceService {
       return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
     }
   }
-  async featurePlace(placeId: number, feature:boolean): Promise<Place | HttpException> {
+  async featurePlace(
+    placeId: number,
+    feature: boolean,
+  ): Promise<Place | HttpException> {
     try {
-      if(feature){
+      if (feature) {
         const places = await this.prisma.place.findMany({
-          where:{
-            isFeatured: true
-          }
+          where: {
+            isFeatured: true,
+          },
         });
-        if (places.length<5){
+        if (places.length < 5) {
           const place = await this.prisma.place.update({
             where: {
               id: placeId,
             },
             data: {
-              isFeatured: feature
+              isFeatured: feature,
             },
           });
-       }
-      }else{
+        }
+      } else {
         const place = await this.prisma.place.update({
           where: {
             id: placeId,
           },
           data: {
-            isFeatured: feature
+            isFeatured: feature,
           },
         });
       }
@@ -189,5 +206,4 @@ export class PlaceService {
       return new HttpException('Error Featuring Place', HttpStatus.BAD_REQUEST);
     }
   }
-
 }
