@@ -9,6 +9,7 @@ export class UserGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const session = request.session;
     if (!session.userId) return false;
+
     return true;
   }
 }

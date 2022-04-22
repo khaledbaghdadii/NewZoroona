@@ -83,4 +83,8 @@ export class AddDTO {
   @IsNotEmpty()
   @Transform(({ value }) => Boolean(value))
   hasReservation: boolean;
+  @IsBoolean()
+  @IsNotEmpty()
+  @Transform(({ value }) => Boolean(value))
+  fromRequest: boolean;
 }

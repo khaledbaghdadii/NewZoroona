@@ -11,7 +11,7 @@ async function bootstrap() {
   let redis = new Redis();
   app.use(
     session({
-      name: 'some value',
+      name: 'user cookie',
       store: new RedisStore({ client: redis, disableTTL: true }),
       saveUninitialized: false,
       secret: 'djkljksjdklajk',

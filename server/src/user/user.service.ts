@@ -1,5 +1,6 @@
 import {
   Body,
+  ForbiddenException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -8,8 +9,8 @@ import {
 import { User } from '@prisma/client';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { UpdateCurrentDTO, UpdateDTO } from './dto';
-
+import { ChangePasswordDTO, UpdateCurrentDTO, UpdateDTO } from './dto';
+import * as argon from 'argon2';
 @Injectable({})
 export class UserService {
   constructor(private prisma: PrismaService) {}
@@ -91,6 +92,34 @@ export class UserService {
       return user;
     } catch (err) {
       return new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+  }
+  async changePassword(dto: ChangePasswordDTO, session: Record<string, any>) {
+    const oldPassword = dto.oldPassword;
+    const userID = session.userId;
+    const hash = await argon.hash(dto.newPassword);
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: {
+          id: userID,
+        },
+      });
+      const pwMatches = await argon.verify(user.hash, oldPassword);
+      //if password not correct throw exception
+      if (!pwMatches)
+        return new ForbiddenException('Current password is incorrect');
+      this.prisma.user.update({
+        where: {
+          id: userID,
+        },
+        data: {
+          hash,
+        },
+      });
+      delete user.hash;
+      return user;
+    } catch (e) {
+      console.log(e);
     }
   }
 }

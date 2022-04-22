@@ -6,7 +6,11 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 @Injectable({})
 export class AuthService {
   constructor(private prisma: PrismaService) {}
-  async signup(dto: SignupDTO, @Session() session: Record<string, any>) {
+  async signup(
+    dto: SignupDTO,
+    @Session() session: Record<string, any>,
+    isManager: boolean,
+  ) {
     //generated the password hash
     const hash = await argon.hash(dto.password);
 
@@ -19,16 +23,19 @@ export class AuthService {
           gender: dto.gender,
           name: dto.name,
           phoneNumber: dto.phoneNumber,
-          roleTypeId: dto.roleTypeId,
+          roleTypeId: isManager ? 2 : 3,
           dateOfBirth: dto.dateOfBirth,
+          valid: !dto.fromRequest
         },
       });
       delete user.hash;
-
-      //add session cookie
-      session.userId = user.id;
-      session.name = user.name;
-      session.roleTypeId = user.roleTypeId;
+      if (!isManager) {
+        //add session cookie
+        session.userId = user.id;
+        session.name = user.name;
+        session.roleTypeId = user.roleTypeId;
+        session.key_name = user.id;
+      }
 
       //return the user
       return user;
@@ -53,16 +60,30 @@ export class AuthService {
       throw new ForbiddenException('No account exists with that email');
     //compare password
     const pwMatches = await argon.verify(user.hash, dto.password);
-    //if passwird not correct throw exception
+    //if password not correct throw exception
     if (!pwMatches)
       throw new ForbiddenException('Email and password do not match');
     //delete hash from returned user
     delete user.hash;
     //save session cookie
+    session.key = user.id;
+    session.key_name = user.id;
     session.userId = user.id;
     session.name = user.name;
     session.roleTypeId = user.roleTypeId;
+
     //send back the user
     return user;
+  }
+  async logout(@Session() session: Record<string, any>) {
+    if (session.userId) {
+      session.destroy((e) => {
+        if (e) {
+          console.log(e);
+        }
+      });
+      return 'Logged out successfully';
+    }
+    return "You're not logged in";
   }
 }

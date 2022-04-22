@@ -18,6 +18,93 @@ export class PlaceService {
     }
     return place;
   }
+  async getFeaturedPlaces(): Promise<Place[] | HttpException> {
+    const places = await this.prisma.place.findMany({
+      where: {
+        isFeatured: true,
+      },
+    });
+    if (!places) {
+      return new HttpException(
+        'Featured Places not found',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return places;
+  }
+  async searchPlaceByTitle(text: string): Promise<Place[]> {
+    try {
+      const places = await this.prisma.place.findMany({
+        where: {
+          name: {
+            contains: text,
+            mode: 'insensitive',
+          },
+        },
+        take: 9,
+      });
+      return places;
+    } catch (e) {
+      return [];
+    }
+  }
+  async getPlacesByFilter(
+    orientation: number[],
+    category: number[],
+    district: string[],
+    hasReservation: number,
+  ): Promise<Place[]> {
+    try {
+      const orientationList = await this.prisma.orientation.findMany();
+      const orientationIds = orientationList.map((o) => {
+        return o.id;
+      });
+      const categoryList = await this.prisma.category.findMany();
+      const categoryIds = categoryList.map((c) => {
+        return c.id;
+      });
+      const districtList = await this.prisma.place.findMany();
+      const districtNames = districtList.map((d) => {
+        return d.district;
+      });
+      let places = [];
+      if (hasReservation == 2) {
+        places = await this.prisma.place.findMany({
+          where: {
+            orientationId: {
+              in: orientation.length != 0 ? orientation : orientationIds,
+            },
+            categoryId: {
+              in: category.length != 0 ? category : categoryIds,
+            },
+            district: {
+              in: district.length != 0 ? district : districtNames,
+            },
+          },
+          take: 9,
+        });
+      } else {
+        places = await this.prisma.place.findMany({
+          where: {
+            orientationId: {
+              in: orientation.length != 0 ? orientation : orientationIds,
+            },
+            categoryId: {
+              in: category.length != 0 ? category : categoryIds,
+            },
+            district: {
+              in: district.length != 0 ? district : districtNames,
+            },
+            hasReservation: hasReservation != 0,
+          },
+          take: 9,
+        });
+      }
+      return places;
+    } catch (e) {
+      return [];
+    }
+  }
   async deletePlace(placeId: number) {
     try {
       await this.prisma.place.delete({
@@ -75,11 +162,49 @@ export class PlaceService {
           managerId: dto.managerId,
           hasReservation: dto.hasReservation,
           orientationId: dto.orientationId,
+          valid:!dto.fromRequest
         },
       });
       return place;
     } catch (err) {
       return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
+    }
+  }
+  async featurePlace(
+    placeId: number,
+    feature: boolean,
+  ): Promise<Place | HttpException> {
+    try {
+      if (feature) {
+        const places = await this.prisma.place.findMany({
+          where: {
+            isFeatured: true,
+          },
+        });
+        if (places.length < 5) {
+          const place = await this.prisma.place.update({
+            where: {
+              id: placeId,
+            },
+            data: {
+              isFeatured: feature,
+            },
+          });
+        }
+      } else {
+        const place = await this.prisma.place.update({
+          where: {
+            id: placeId,
+          },
+          data: {
+            isFeatured: feature,
+          },
+        });
+      }
+
+      return;
+    } catch (err) {
+      return new HttpException('Error Featuring Place', HttpStatus.BAD_REQUEST);
     }
   }
 }

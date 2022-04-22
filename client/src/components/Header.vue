@@ -1,5 +1,5 @@
 <template>
-  <div class="position-fixed top-0 w-100 navbar-container py-3">
+  <div class="position-fixed top-0 w-100 navbar-container py-2">
     <nav class="navbar navbar-expand-md bg-dark navbar-light">
       <div class="container">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Homepage' }">
@@ -52,15 +52,25 @@
           </ul>
           <div class="d-flex" v-if="$store.state.user.name">
             <div class="me-2">
-              Welcome, <span class="text-primary fw-500"><strong>{{ $store.state.user.name }}!</strong></span>
+              Welcome,
+              <span class="text-primary fw-500"
+                ><strong>{{ $store.state.user.name }}!</strong></span
+              >
             </div>
             <div class="dropdown header-dropdown">
-              <span class="fa fa-caret-down fa-lg cursor-pointer dropdown-toggle text-primary" data-bs-toggle="dropdown"></span>
+              <span
+                class="fa fa-caret-down fa-lg cursor-pointer dropdown-toggle text-primary"
+                data-bs-toggle="dropdown"
+              ></span>
               <ul class="dropdown-menu header-dropdown-menu">
                 <li><a class="dropdown-item" href="#">My Profile</a></li>
                 <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <span class="dropdown-item" @click="logOut()"
+                    >Log Out</span
+                  >
+                </li>
               </ul>
             </div>
           </div>
@@ -79,6 +89,7 @@
 </template>
 
 <script>
+import AccountService from "@/services/AccountService.js";
 export default {
   name: "Header",
   methods: {
@@ -87,6 +98,19 @@ export default {
     },
     goToSignUp() {
       this.$router.push("/signup");
+    },
+    logOut() {
+      const self = this
+      AccountService.logoutUser()
+        .then(function () {
+          self.$store.dispatch("resetState");
+          console.log("User logged Out!");
+          self.$router.push("/homepage");
+        })
+        .catch((error) => {
+          self.errorMessage = error.message;
+          console.log("There was an error!", error);
+        });
     },
   },
 };

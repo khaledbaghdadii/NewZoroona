@@ -43,12 +43,12 @@ export class ReviewService {
                     placeId: dto.placeId,
                     feedback: dto.feedback,
                     rating: dto.rating,
-                    userId: dto.userId
+                    userId: dto.userId,
+                    valid: true
                 },
             });
             return review;
         } catch (err) {
-            console.log("Hi")
             return new HttpException('Error Adding Review', HttpStatus.BAD_REQUEST);
         }
     }

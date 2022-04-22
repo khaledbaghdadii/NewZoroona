@@ -2,10 +2,11 @@ import {
   Body,
   Controller,
   Get,
+  ParseArrayPipe,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { UpdateDTO, AddDTO } from './dto';
@@ -19,6 +20,14 @@ export class PlaceController {
   @Get('place')
   getPlace(@Query('placeId', ParseIntPipe) placeId: number) {
     return this.placeService.getPlace(placeId);
+  }
+  @Get('featured')
+  getFeaturedPlaces() {
+    return this.placeService.getFeaturedPlaces();
+  }
+  @Get('search')
+  searchPlaceByTitle(@Query('text') text: string) {
+    return this.placeService.searchPlaceByTitle(text);
   }
   @UseGuards(RolesGuard)
   @Post('delete')
@@ -38,6 +47,29 @@ export class PlaceController {
   addPlace(@Body() dto: AddDTO) {
     return this.placeService.addPlace(dto);
   }
-
-  //add getPlaces with different filters
+  @UseGuards(RolesGuard)
+  @Post('feature')
+  @Roles('admin')
+  featurePlace(
+    @Body('placeId', ParseIntPipe) placeId: number,
+    @Body('feature', ParseBoolPipe) feature: boolean,
+  ) {
+    return this.placeService.featurePlace(placeId, feature);
+  }
+  @Get('filter')
+  getPlaceByFilters(
+    @Query('orientation', ParseArrayPipe) orientation: number[],
+    @Query('category', ParseArrayPipe) category: number[],
+    @Query('district', ParseArrayPipe) district: string[],
+    @Query('hasReservation', ParseIntPipe) hasReservation: number,
+  ) {
+    category = category.map(Number);
+    orientation = orientation.map(Number);
+    return this.placeService.getPlacesByFilter(
+      orientation,
+      category,
+      district,
+      hasReservation,
+    );
+  }
 }
