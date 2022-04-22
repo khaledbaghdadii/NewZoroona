@@ -218,4 +218,10 @@ export class PlaceService {
       return new HttpException('Error Featuring Place', HttpStatus.BAD_REQUEST);
     }
   }
+  async getAllDistricts() {
+    const districts = await this.prisma.place.groupBy({
+      by: ['district'],
+    });
+    return districts;
+  }
 }

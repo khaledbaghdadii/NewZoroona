@@ -11,6 +11,7 @@ import { PackageModule } from './package/package.module';
 import { ReservationModule } from './reservation/reservation.module';
 import { RequestModule } from './request/request.module';
 import { CategoryModule } from './category/category.module';
+import { OrientationModule } from './orientation/orientation.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CategoryModule } from './category/category.module';
     ReservationModule,
     RequestModule,
     CategoryModule,
+    OrientationModule,
   ],
   controllers: [],
   providers: [],

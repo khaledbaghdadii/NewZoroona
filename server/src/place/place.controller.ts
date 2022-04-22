@@ -64,4 +64,8 @@ export class PlaceController {
       dto.maxPrice,
     );
   }
+  @Get('districts')
+  getAllDistricts() {
+    return this.placeService.getAllDistricts();
+  }
 }
