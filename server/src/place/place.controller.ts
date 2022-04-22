@@ -55,4 +55,8 @@ export class PlaceController {
   getPlaceByFilters(@Body() dto: FilterDTO) {
     return this.placeService.getPlacesByFilter( dto);
   }
+  @Get('district')
+  getDistricts() {
+    return this.placeService.getAllDistricts();
+  }
 }
