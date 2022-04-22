@@ -1,13 +1,22 @@
 import { Transform } from 'class-transformer';
-import {IsBoolean, IsEmail, IsInt, IsNotEmpty, IsString} from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class UpdateDTO {
   @IsEmail()
+  @IsOptional()
   email: string;
   @IsString()
   @IsNotEmpty()
   name: string;
   @IsString()
+  @IsOptional()
   phoneNumber: string;
   @IsString()
   @IsNotEmpty()
@@ -23,8 +32,10 @@ export class UpdateDTO {
   @IsNotEmpty()
   address: string;
   @IsString()
+  @IsOptional()
   location: string;
   @IsString()
+  @IsOptional()
   website: string;
   @IsString()
   @IsNotEmpty()
@@ -35,15 +46,21 @@ export class UpdateDTO {
   @IsString()
   @IsNotEmpty()
   image: string;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  averagePricePerPerson: number;
 }
 
 export class AddDTO {
   @IsEmail()
+  @IsOptional()
   email: string;
   @IsString()
   @IsNotEmpty()
   name: string;
   @IsString()
+  @IsOptional()
   phoneNumber: string;
   @IsString()
   @IsNotEmpty()
@@ -55,8 +72,10 @@ export class AddDTO {
   @IsNotEmpty()
   address: string;
   @IsString()
+  @IsOptional()
   location: string;
   @IsString()
+  @IsOptional()
   website: string;
   @IsString()
   @IsNotEmpty()
@@ -75,7 +94,7 @@ export class AddDTO {
   @IsInt()
   @Transform(({ value }) => parseInt(value))
   orientationId: number;
-  @IsNotEmpty()
+  @IsOptional()
   @IsInt()
   @Transform(({ value }) => parseInt(value))
   managerId: number;
@@ -87,4 +106,8 @@ export class AddDTO {
   @IsNotEmpty()
   @Transform(({ value }) => Boolean(value))
   fromRequest: boolean;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  averagePricePerPerson: number;
 }
