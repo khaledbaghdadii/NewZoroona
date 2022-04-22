@@ -9,7 +9,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { UpdateDTO, AddDTO } from './dto';
+import {UpdateDTO, AddDTO, FeatureDTO, FilterDTO} from './dto';
 import { PlaceService } from './place.service';
 import { Roles } from '../auth/decorators/roles.decorators';
 import { RolesGuard } from '../place/guards/local.guard';
@@ -50,26 +50,11 @@ export class PlaceController {
   @UseGuards(RolesGuard)
   @Post('feature')
   @Roles('admin')
-  featurePlace(
-    @Body('placeId', ParseIntPipe) placeId: number,
-    @Body('feature', ParseBoolPipe) feature: boolean,
-  ) {
-    return this.placeService.featurePlace(placeId, feature);
+  featurePlace(@Body() dto: FeatureDTO) {
+    return this.placeService.featurePlace(dto.placeId, dto.feature);
   }
   @Get('filter')
-  getPlaceByFilters(
-    @Query('orientation', ParseArrayPipe) orientation: number[],
-    @Query('category', ParseArrayPipe) category: number[],
-    @Query('district', ParseArrayPipe) district: string[],
-    @Query('hasReservation', ParseIntPipe) hasReservation: number,
-  ) {
-    category = category.map(Number);
-    orientation = orientation.map(Number);
-    return this.placeService.getPlacesByFilter(
-      orientation,
-      category,
-      district,
-      hasReservation,
-    );
+  getPlaceByFilters(@Body() dto: FilterDTO) {
+    return this.placeService.getPlacesByFilter( dto.orientation,dto.category,dto.district,dto.hasReservation);
   }
 }

@@ -52,12 +52,14 @@ export class AuthService {
     //find the user by email
     const user = await this.prisma.user.findUnique({
       where: {
-        email: dto.email,
+        email: dto.email
       },
     });
     //if user does not exist throw exception
     if (!user)
       throw new ForbiddenException('No account exists with that email');
+    if(!user.valid)
+      throw new ForbiddenException('Your account is not yet authorized');
     //compare password
     const pwMatches = await argon.verify(user.hash, dto.password);
     //if password not correct throw exception

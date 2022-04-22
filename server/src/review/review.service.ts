@@ -17,6 +17,7 @@ export class ReviewService {
         const reviews = await this.prisma.review.findMany({
             where: {
                 id: placeId,
+                valid: true
             },
         });
         if (!reviews) {

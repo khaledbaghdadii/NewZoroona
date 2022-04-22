@@ -40,6 +40,7 @@ export class PlaceService {
             contains: text,
             mode: 'insensitive',
           },
+          valid:true
         },
         take: 9,
       });
@@ -55,31 +56,32 @@ export class PlaceService {
     hasReservation: number,
   ): Promise<Place[]> {
     try {
-      const orientationList = await this.prisma.orientation.findMany();
-      const orientationIds = orientationList.map((o) => {
-        return o.id;
-      });
-      const categoryList = await this.prisma.category.findMany();
-      const categoryIds = categoryList.map((c) => {
-        return c.id;
-      });
-      const districtList = await this.prisma.place.findMany();
-      const districtNames = districtList.map((d) => {
-        return d.district;
-      });
+      // const orientationList = await this.prisma.orientation.findMany();
+      // const orientationIds = orientationList.map((o) => {
+      //   return o.id;
+      // });
+      // const categoryList = await this.prisma.category.findMany();
+      // const categoryIds = categoryList.map((c) => {
+      //   return c.id;
+      // });
+      // const districtList = await this.prisma.place.findMany();
+      // const districtNames = districtList.map((d) => {
+      //   return d.district;
+      // });
       let places = [];
       if (hasReservation == 2) {
         places = await this.prisma.place.findMany({
           where: {
             orientationId: {
-              in: orientation.length != 0 ? orientation : orientationIds,
+              in: orientation,
             },
             categoryId: {
-              in: category.length != 0 ? category : categoryIds,
+              in: category,
             },
             district: {
-              in: district.length != 0 ? district : districtNames,
+              in: district,
             },
+            valid:true
           },
           take: 9,
         });
@@ -87,15 +89,16 @@ export class PlaceService {
         places = await this.prisma.place.findMany({
           where: {
             orientationId: {
-              in: orientation.length != 0 ? orientation : orientationIds,
+              in: orientation,
             },
             categoryId: {
-              in: category.length != 0 ? category : categoryIds,
+              in: category,
             },
             district: {
-              in: district.length != 0 ? district : districtNames,
+              in: district,
             },
             hasReservation: hasReservation != 0,
+            valid:true
           },
           take: 9,
         });
