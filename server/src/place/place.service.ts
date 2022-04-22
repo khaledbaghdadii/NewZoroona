@@ -136,6 +136,7 @@ export class PlaceService {
           sector: dto.sector,
           description: dto.description,
           image: dto.image,
+          averagePricePerPerson: dto.averagePricePerPerson,
         },
       });
       return place;
@@ -162,7 +163,8 @@ export class PlaceService {
           managerId: dto.managerId,
           hasReservation: dto.hasReservation,
           orientationId: dto.orientationId,
-          valid:!dto.fromRequest
+          valid: !dto.fromRequest,
+          averagePricePerPerson: dto.averagePricePerPerson,
         },
       });
       return place;

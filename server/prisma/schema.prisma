@@ -69,6 +69,8 @@ isFeatured Boolean?
 description String
 image String
 valid Boolean @default(false)
+averagePricePerPerson Int @default(0)
+rating Int @default(0)
 Category Category @relation(fields: [categoryId], references: [id])
 Manager User? @relation(fields: [managerId], references: [id])
 Orientation Orientation @relation(fields: [orientationId], references: [id])
