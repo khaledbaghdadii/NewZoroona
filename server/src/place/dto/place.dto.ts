@@ -142,7 +142,9 @@ export class FilterDTO {
   @Transform(({ value }) => parseInt(value))
   hasReservation: number;
   @IsInt()
+  @IsOptional()
   minPrice;
   @IsInt()
+  @IsOptional()
   maxPrice;
 }
