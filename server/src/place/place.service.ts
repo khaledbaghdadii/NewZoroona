@@ -40,6 +40,7 @@ export class PlaceService {
             contains: text,
             mode: 'insensitive',
           },
+          valid:true
         },
         take: 9,
       });
@@ -80,6 +81,7 @@ export class PlaceService {
             district: {
               in: district,
             },
+            valid:true
           },
           take: 9,
         });
@@ -96,6 +98,7 @@ export class PlaceService {
               in: district,
             },
             hasReservation: hasReservation != 0,
+            valid:true
           },
           take: 9,
         });
