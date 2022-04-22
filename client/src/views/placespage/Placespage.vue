@@ -1,13 +1,13 @@
 <template>
   <div class="places-page-container container">
-    <div class="d-flex  flex-column-reverse flex-lg-row pb-5">
+    <div class="d-flex flex-column-reverse flex-lg-row pb-5">
       <div class="align-self-center me-lg-5 bg-rose p-md-5 rounded-8">
         <h1 class="fs-60">
           <strong class="text-secondary">Are you ready to start </strong>
           <span class="text-primary fw-700">DISCOVERING?</span>
         </h1>
       </div>
-      <img src="@/assets/images/discover.svg" class="img-beside-text mb-5"/>
+      <img src="@/assets/images/discover.svg" class="img-beside-text mb-5" />
     </div>
 
     <section class="featured p-5 align-content-center my-5">
@@ -85,6 +85,127 @@
           >
             <span class="carousel-control-next-icon"></span>
           </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="all-places py-5 my-5">
+      <h1 class="fw-700">All Places</h1>
+      <div class="input-group">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" />
+          <label class="form-label" for="form1">Search</label>
+        </div>
+        <button type="button" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <div
+            class="post-img"
+            :style="{
+              'background-image':
+                'url(' +
+                require('@/assets/images/baaqline-waterfall.jpg') +
+                ')',
+            }"
+          >
+            <div class="text-end">
+              <span class="badge badge-background-color m-3">Natural</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <h4 class="fw-700 pt-3">Baaqline Waterfall</h4>
+            <div class="d-flex">
+              <img
+                src="@/assets/images/location.svg"
+                id="location"
+                class="me-2"
+                alt="location"
+              />
+              <span class="fw-700">Mount Lebanon</span>
+            </div>
+            <div class="d-flex py-2">
+              <span class="fa fa-users text-primary fa-lg pe-2"></span>
+              <span class="fw-700">Family</span>
+            </div>
+            <div class="d-flex">
+              <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
+              <span class="fw-700 fs-24">35</span>
+              <span class="fs-14 pt-2">/person</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <div
+            class="post-img"
+            :style="{
+              'background-image':
+                'url(' + require('@/assets/images/raouche.jpg') + ')',
+            }"
+          >
+            <div class="text-end">
+              <span class="badge badge-background-color m-3">Classical</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <h4 class="fw-700 pt-3">Raouche</h4>
+            <div class="d-flex">
+              <img
+                src="@/assets/images/location.svg"
+                id="location"
+                class="me-2"
+                alt="location"
+              />
+              <span> <strong>Beirut</strong></span>
+            </div>
+            <div class="d-flex py-2">
+              <span class="fa fa-users text-primary fa-lg pe-2"></span>
+              <span class="fw-700">Family</span>
+            </div>
+            <div class="d-flex">
+              <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
+              <span class="fw-700 fs-24">35</span>
+              <span class="fs-14 pt-2">/person</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <div
+            class="post-img"
+            :style="{
+              'background-image':
+                'url(' + require('@/assets/images/Tyre-Ruins.jpg') + ')',
+            }"
+          >
+            <div class="text-end">
+              <span class="badge badge-background-color m-3">Historical</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <h4 class="fw-700 pt-3">Tyre Ruins</h4>
+            <div class="d-flex">
+              <img
+                src="@/assets/images/location.svg"
+                id="location"
+                class="me-2"
+                alt="location"
+              />
+              <span> <strong>South Lebanon</strong></span>
+            </div>
+            <div class="d-flex py-2">
+              <span class="fa fa-users text-primary fa-lg pe-2"></span>
+              <span class="fw-700">Family</span>
+            </div>
+            <div class="d-flex">
+              <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
+              <span class="fw-700 fs-24">10</span>
+              <span class="fs-14 pt-2">/person</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
