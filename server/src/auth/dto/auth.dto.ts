@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsEmail, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import {IsBoolean, IsEmail, IsInt, IsNotEmpty, IsString} from 'class-validator';
 
 export class SignupDTO {
   @IsEmail()
@@ -23,6 +23,10 @@ export class SignupDTO {
   roleTypeId: number;
   @Transform(({ value }) => new Date(value))
   dateOfBirth: Date;
+  @IsBoolean()
+  @IsNotEmpty()
+  @Transform(({ value }) => Boolean(value))
+  fromRequest: boolean;
 }
 
 export class SigninDTO {
