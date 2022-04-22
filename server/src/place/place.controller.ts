@@ -51,10 +51,10 @@ export class PlaceController {
   @Post('feature')
   @Roles('admin')
   featurePlace(@Body() dto: FeatureDTO) {
-    return this.placeService.featurePlace(dto.placeId, dto.feature);
+    return this.placeService.featurePlace(dto);
   }
   @Get('filter')
   getPlaceByFilters(@Body() dto: FilterDTO) {
-    return this.placeService.getPlacesByFilter( dto.orientation,dto.category,dto.district,dto.hasReservation);
+    return this.placeService.getPlacesByFilter( dto);
   }
 }
