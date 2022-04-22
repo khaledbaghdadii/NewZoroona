@@ -51,18 +51,6 @@ export class PlaceService {
   }
   async getPlacesByFilter(@Body() dto: FilterDTO): Promise<Place[]> {
     try {
-      // const orientationList = await this.prisma.orientation.findMany();
-      // const orientationIds = orientationList.map((o) => {
-      //   return o.id;
-      // });
-      // const categoryList = await this.prisma.category.findMany();
-      // const categoryIds = categoryList.map((c) => {
-      //   return c.id;
-      // });
-      // const districtList = await this.prisma.place.findMany();
-      // const districtNames = districtList.map((d) => {
-      //   return d.district;
-      // });
       let places = [];
       if (dto.hasReservation == 2) {
         places = await this.prisma.place.findMany({
@@ -78,8 +66,8 @@ export class PlaceService {
             },
             valid: true,
             averagePricePerPerson: {
-              gte: minPrice ? minPrice : minPrice,
-              lte: maxPrice ? maxPrice : Number.MAX_SAFE_INTEGER,
+              gte: dto.minPrice ? dto.minPrice : Number.MIN_SAFE_INTEGER,
+              lte: dto.maxPrice ? dto.maxPrice : Number.MAX_SAFE_INTEGER,
             },
           },
           take: 9,

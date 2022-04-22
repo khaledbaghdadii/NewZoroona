@@ -2,8 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  ParseArrayPipe,
-  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query,
