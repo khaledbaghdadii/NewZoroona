@@ -1,9 +1,37 @@
 // responsive
-@media (max-width: $sm-breakpoint) {}
+@media (max-width: $sm-breakpoint) {
+    .img-beside-text {
+        width: 200px;
+    }
+}
 
 @media (max-width: $md-breakpoint) {
     .HomepageCoverPhoto {
         width: 400px;
+    }
+    .img-beside-text {
+        width: 400px;
+    }
+    .carousel {
+        width: 100%;
+    }
+}
+
+@media (max-width: $xl-breakpoint) {
+    .img-beside-text {
+        width: 400px;
+    }
+}
+
+@media (max-width: $lg-breakpoint) {
+    .img-beside-text {
+        width: 500px;
+    }
+}
+
+@media (max-width: 300px) {
+    .img-beside-text {
+        width: 200px;
     }
 }
 

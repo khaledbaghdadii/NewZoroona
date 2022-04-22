@@ -162,6 +162,7 @@ export class PlaceService {
           managerId: dto.managerId,
           hasReservation: dto.hasReservation,
           orientationId: dto.orientationId,
+          valid:!dto.fromRequest
         },
       });
       return place;

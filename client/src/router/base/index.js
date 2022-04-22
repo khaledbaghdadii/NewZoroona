@@ -7,7 +7,7 @@ const base = {
             path: '/login',
             name: 'Login',
             component: () =>
-                import ('@/views/login/Login'),
+                import ('@/views/account/Login'),
             meta: {
                 title: 'LOGIN',
                 rule: 'isPublic'
@@ -17,7 +17,7 @@ const base = {
             path: '/signup',
             name: 'Signup',
             component: () =>
-                import ('@/views/signup/Signup'),
+                import ('@/views/account/Signup'),
             meta: {
                 title: 'SIGNUP',
                 rule: 'isPublic'
@@ -39,15 +39,18 @@ const base = {
         //     title: 'Reset Password',
         //     rule: 'isPublic'
         //   }
-        // }, {
-        //   path: '/terms-and-conditions',
-        //   name: 'TermsAndConditions',
-        //   component: () => import('@/views/terms-and-conditions/TermsAndConditions'),
-        //   meta: {
-        //     title: 'Terms and Conditions',
-        //     rule: 'isPublic'
-        //   }
-        // }, {
+        // }, 
+        {
+            path: '/terms-and-conditions',
+            name: 'TermsAndConditions',
+            component: () =>
+                import ('@/views/account/TermsAndConditions'),
+            meta: {
+                title: 'Terms and Conditions',
+                rule: 'isPublic'
+            }
+        },
+        //{
         //   path: '/faq',
         //   name: 'FAQ',
         //   component: import('@/views/faq/FAQ'),
