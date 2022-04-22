@@ -318,7 +318,7 @@ export default {
   name: "Placespage",
   methods:{
       goToPlacePage(){
-          this.$router.push("/homepage");
+          this.$router.push("/detailed-placepage");
       }
   }
 };
