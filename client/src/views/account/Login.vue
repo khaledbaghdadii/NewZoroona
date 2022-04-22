@@ -48,6 +48,9 @@
                     <h3 class="mb-4 fw-700">Log In</h3>
                   </div>
                 </div>
+                <div class="bg-danger rounded-8" v-if="wrongCredentials">
+                  <h5 class="p-3 text-white">Email or Password Wrong!</h5>
+                </div>
                 <form @submit.prevent="login()">
                   <div class="form-group mb-3">
                     <label class="label" for="email">Email</label>
@@ -121,6 +124,7 @@ export default {
   data() {
     return {
       showLoader: "",
+      wrongCredentials: false,
       loginForm: {
         email: "",
         password: "",
@@ -133,16 +137,24 @@ export default {
       this.showLoader = true;
       AccountService.loginUser(this.loginForm)
         .then(function (res) {
-          self.$store.dispatch("setUser", res.data)
+          self.$store.dispatch("setUser", res.data);
           console.log("User logged!");
           self.$router.push("/homepage");
           self.showLoader = false;
         })
         .catch((error) => {
-          alert("Email or Password Wrong!");
+          self.wrongCredentials = true
+          self.timeWrongCredentials();
+          self.showLoader = false;
+          self.loginForm.email = "";
+          self.loginForm.password = "";
           self.errorMessage = error.message;
           console.log("There was an error!", error);
+          
         });
+    },
+    timeWrongCredentials() {
+      setTimeout(() => {this.wrongCredentials = false}, 3000);
     },
   },
 };

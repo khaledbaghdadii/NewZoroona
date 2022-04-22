@@ -48,22 +48,22 @@
                 class="aaaaa"
               />
               <div class="carousel-caption">
-                <h3>Los Angeles</h3>
-                <p>We had such a great time in LA!</p>
+                <h3 class="fw-700 fs-36">Raouche</h3>
+                <p class="fw-700"><i>Beirut</i></p>
               </div>
             </div>
             <div class="carousel-item">
               <img src="@/assets/images/baaqline-waterfall.jpg" alt="" />
               <div class="carousel-caption">
-                <h3>Chicago</h3>
-                <p>Thank you, Chicago!</p>
+                <h3 class="fw-700 fs-36">Baaqline Waterfall</h3>
+                <p class="fw-700"><i>Mount Lebanon </i></p>
               </div>
             </div>
             <div class="carousel-item">
               <img src="@/assets/images/Tyre-Ruins.jpg" alt="New York" />
               <div class="carousel-caption">
-                <h3>New York</h3>
-                <p>We love the Big Apple!</p>
+                <h3 class="fw-700 fs-36">Tyre Ruins</h3>
+                <p class="fw-700"><i>Tyre</i></p>
               </div>
             </div>
           </div>
@@ -91,25 +91,125 @@
 
     <section class="all-places py-5 my-5">
       <h1 class="fw-700">All Places</h1>
-      <div class="input-group">
-        <div class="form-outline">
-          <input type="search" id="form1" class="form-control" />
-          <label class="form-label" for="form1">Search</label>
+      <div class="d-flex justify-content-between my-3">
+        <div class="input-group w-40">
+          <input type="search" class="form-control" placeholder="Search" />
+          <button class="btn btn-primary text-white">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
-        <button type="button" class="btn btn-primary">
-          <i class="fas fa-search"></i>
-        </button>
+        <div class="justify-content-end">
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#myModal"
+          >
+            <span class="text-white">Filter By</span
+            ><i class="fa fa-filter ps-2 text-white"></i>
+          </button>
+          <!-- The Modal -->
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title fw-700">Filter By</h4>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                  ></button>
+                </div>
+
+                <form class="needs-validation" v-on:submit.prevent="submitForm">
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="name" class="form-label fw-700"
+                        >Category:</label
+                      >
+                      <div class="form-check cursor-pointer">
+                        <input
+                          class="form-check-input cursor-pointer"
+                          type="checkbox"
+                          id="check1"
+                          name="option1"
+                          value="something"
+                        />
+                        <label class="form-check-label">Option 1</label>
+                      </div>
+                      <div class="form-check cursor-pointer">
+                        <input
+                          class="form-check-input cursor-pointer"
+                          type="checkbox"
+                          id="check1"
+                          name="option1"
+                          value="something"
+                        />
+                        <label class="form-check-label">Option 2</label>
+                      </div>
+                    </div>
+
+                    <div class="my-3">
+                      <label for="name" class="form-label fw-700"
+                        >Orientation:</label
+                      >
+                      <select class="form-select cursor-pointer">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                    </div>
+
+                    <div class="my-3">
+                      <label for="category" class="form-label fw-700 "
+                        >Price Range:</label
+                      >
+                      <select class="form-select cursor-pointer">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-primary text-white"
+                      data-bs-dismiss="modal"
+                    >
+                      Apply Changes
+                    </button>
+                    <button
+                      type="button"
+                      class="btn close-btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4 py-3">
           <div
-            class="post-img"
+            class="post-img cursor-pointer"
             :style="{
               'background-image':
                 'url(' +
                 require('@/assets/images/baaqline-waterfall.jpg') +
                 ')',
             }"
+            @click="goToPlacePage()"
           >
             <div class="text-end">
               <span class="badge badge-background-color m-3">Natural</span>
@@ -140,11 +240,12 @@
 
         <div class="col-sm-12 col-md-6 col-lg-4 py-3">
           <div
-            class="post-img"
+            class="post-img cursor-pointer"
             :style="{
               'background-image':
                 'url(' + require('@/assets/images/raouche.jpg') + ')',
             }"
+            @click="goToPlacePage()"
           >
             <div class="text-end">
               <span class="badge badge-background-color m-3">Classical</span>
@@ -175,11 +276,12 @@
 
         <div class="col-sm-12 col-md-6 col-lg-4 py-3">
           <div
-            class="post-img"
+            class="post-img cursor-pointer"
             :style="{
               'background-image':
                 'url(' + require('@/assets/images/Tyre-Ruins.jpg') + ')',
             }"
+            @click="goToPlacePage()"
           >
             <div class="text-end">
               <span class="badge badge-background-color m-3">Historical</span>
@@ -214,5 +316,10 @@
 <script>
 export default {
   name: "Placespage",
+  methods:{
+      goToPlacePage(){
+          this.$router.push("/homepage");
+      }
+  }
 };
 </script>

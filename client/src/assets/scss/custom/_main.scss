@@ -13,7 +13,7 @@
 //Header
 .navbar-container {
     background-color: #fff5ed;
-    z-index: 1;
+    z-index: 10;
 }
 
 .navbar-brand {
@@ -81,7 +81,7 @@
 }
 
 .badge-background-color {
-    background-color: rgba(255, 255, 255, 0.15) !important;
+    background-color: rgba(0, 0, 0, 0.219) !important;
     color: white;
     padding: 7px;
     border-radius: 8px;
@@ -93,7 +93,11 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    border-radius: 5px;
+    border-radius: 8px;
+    filter: brightness(80%);
+    &:hover {
+        filter: brightness(100%);
+    }
 }
 
 #location {

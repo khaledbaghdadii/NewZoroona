@@ -1,7 +1,66 @@
 <template>
   <div>
     <section
+      class="section-intro-landing container mb-5"
+      v-if="$store.state.user.name"
+    >
+      <h1 class="fw-700">Recommended For You</h1>
+      <div class="row mb-5">
+        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <div
+            class="post-img cursor-pointer"
+            :style="{
+              'background-image':
+                'url(' +
+                require('@/assets/images/baaqline-waterfall.jpg') +
+                ')',
+            }"
+            @click="goToPlacePage()"
+          >
+            <div class="text-end">
+              <span class="badge badge-background-color m-3">Natural</span>
+            </div>
+            <h4 class="fw-700 pt-8 ps-3 text-white">Baaqline Waterfall</h4>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <div
+            class="post-img cursor-pointer"
+            :style="{
+              'background-image':
+                'url(' + require('@/assets/images/raouche.jpg') + ')',
+            }"
+            @click="goToPlacePage()"
+          >
+            <div class="text-end">
+              <span class="badge badge-background-color m-3">Classical</span>
+            </div>
+            <h4 class="fw-700 pt-8 ps-3 text-white">Raouche</h4>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <div
+            class="post-img cursor-pointer"
+            :style="{
+              'background-image':
+                'url(' + require('@/assets/images/Tyre-Ruins.jpg') + ')',
+            }"
+            @click="goToPlacePage()"
+          >
+            <div class="text-end">
+              <span class="badge badge-background-color m-3">Historical</span>
+            </div>
+            <h4 class="fw-700 pt-8 ps-3 text-white">Tyre Ruins</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
       class="d-flex flex-column-reverse flex-lg-row pb-5 mb-5 section-intro-landing container"
+      v-else
     >
       <div class="align-self-center me-lg-5">
         <h1 class="fw-700 fs-50 mt-4">
@@ -25,7 +84,7 @@
 
     <section class="section-featured-places pb-5">
       <div class="container">
-        <h1 class="pt-3 pb-4 fw-700">Discover Some of Our Featured Places!</h1>
+        <h1 class="pt-5 mt-5 pb-4 fw-700">Discover Some of Our Featured Places!</h1>
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-4 py-3">
             <div
@@ -136,9 +195,7 @@
       </div>
     </section>
 
-    <section
-      class="d-flex flex-column flex-lg-row pb-5 container my-5 py-5"
-    >
+    <section class="d-flex flex-column flex-lg-row pb-5 container my-5 py-5">
       <img src="@/assets/images/manager.svg" class="img-beside-text me-lg-5" />
       <div class="align-self-center ms-lg-5">
         <h1 class="fw-700 fs-50 mt-4">Do You Have a Place?</h1>
