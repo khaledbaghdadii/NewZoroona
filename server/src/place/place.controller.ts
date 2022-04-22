@@ -9,7 +9,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import {UpdateDTO, AddDTO, FeatureDTO, FilterDTO} from './dto';
+import { UpdateDTO, AddDTO, FeatureDTO, FilterDTO } from './dto';
 import { PlaceService } from './place.service';
 import { Roles } from '../auth/decorators/roles.decorators';
 import { RolesGuard } from '../place/guards/local.guard';
@@ -55,6 +55,13 @@ export class PlaceController {
   }
   @Get('filter')
   getPlaceByFilters(@Body() dto: FilterDTO) {
-    return this.placeService.getPlacesByFilter( dto.orientation,dto.category,dto.district,dto.hasReservation);
+    return this.placeService.getPlacesByFilter(
+      dto.orientation,
+      dto.category,
+      dto.district,
+      dto.hasReservation,
+      dto.minPrice,
+      dto.maxPrice,
+    );
   }
 }

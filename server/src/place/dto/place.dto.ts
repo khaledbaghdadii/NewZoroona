@@ -112,7 +112,7 @@ export class AddDTO {
   averagePricePerPerson: number;
 }
 
-export class FeatureDTO{
+export class FeatureDTO {
   @IsNotEmpty()
   @IsInt()
   @Transform(({ value }) => parseInt(value))
@@ -123,18 +123,26 @@ export class FeatureDTO{
   feature: boolean;
 }
 
-export class FilterDTO{
-  @Transform(({ value }) => value.split(',').map(function(item) {
-    return parseInt(item, 10);
-  }))
+export class FilterDTO {
+  @Transform(({ value }) =>
+    value.split(',').map(function (item) {
+      return parseInt(item, 10);
+    }),
+  )
   orientation: number[];
-  @Transform(({ value }) => value.split(',').map(function(item) {
-    return parseInt(item, 10);
-  }))
+  @Transform(({ value }) =>
+    value.split(',').map(function (item) {
+      return parseInt(item, 10);
+    }),
+  )
   category: number[];
   @Transform(({ value }) => value.split(','))
   district: string[];
   @IsInt()
   @Transform(({ value }) => parseInt(value))
   hasReservation: number;
+  @IsInt()
+  minPrice;
+  @IsInt()
+  maxPrice;
 }

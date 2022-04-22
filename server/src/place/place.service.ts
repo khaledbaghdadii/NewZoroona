@@ -40,7 +40,7 @@ export class PlaceService {
             contains: text,
             mode: 'insensitive',
           },
-          valid:true
+          valid: true,
         },
         take: 9,
       });
@@ -54,6 +54,8 @@ export class PlaceService {
     category: number[],
     district: string[],
     hasReservation: number,
+    minPrice: number,
+    maxPrice: number,
   ): Promise<Place[]> {
     try {
       // const orientationList = await this.prisma.orientation.findMany();
@@ -81,7 +83,11 @@ export class PlaceService {
             district: {
               in: district,
             },
-            valid:true
+            valid: true,
+            averagePricePerPerson: {
+              gte: minPrice ? minPrice : minPrice,
+              lte: maxPrice ? maxPrice : Number.MAX_SAFE_INTEGER,
+            },
           },
           take: 9,
         });
@@ -98,7 +104,7 @@ export class PlaceService {
               in: district,
             },
             hasReservation: hasReservation != 0,
-            valid:true
+            valid: true,
           },
           take: 9,
         });
