@@ -3,11 +3,11 @@ import {
   BadRequestException,
   PipeTransform,
 } from '@nestjs/common';
-import { SignupDTO } from '../dto';
+import { ChangePasswordDTO } from '../dto';
 
 export class PasswordValidation implements PipeTransform {
-  transform(value: SignupDTO, metadata: ArgumentMetadata) {
-    const password = value.password;
+  transform(value: ChangePasswordDTO, metadata: ArgumentMetadata) {
+    const password = value.newPassword;
     if (password.length < 5 || password.length > 15) {
       throw new BadRequestException(
         'password should be between 5 and 15 characters',

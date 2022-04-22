@@ -6,12 +6,14 @@ import {
   Post,
   Query,
   Req,
+  Session,
   UseGuards,
 } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorators';
-import { UpdateCurrentDTO, UpdateDTO } from './dto';
+import { ChangePasswordDTO, UpdateCurrentDTO, UpdateDTO } from './dto';
 import { RolesGuard } from './guards/role.guards';
 import { UserGuard } from './guards/user.guards';
+import { PasswordValidation } from './pipes/newPasswordValidation.pipe';
 
 import { UserService } from './user.service';
 
@@ -50,5 +52,13 @@ export class UserController {
   @Roles('admin')
   updateUser(@Body() dto: UpdateDTO) {
     return this.userService.updateUser(dto);
+  }
+  @UseGuards(UserGuard)
+  @Post('changePassword')
+  changePassword(
+    @Body(PasswordValidation) dto: ChangePasswordDTO,
+    @Session() session: Record<string, any>,
+  ) {
+    return this.userService.changePassword(dto, session);
   }
 }
