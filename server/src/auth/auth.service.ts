@@ -25,7 +25,7 @@ export class AuthService {
           phoneNumber: dto.phoneNumber,
           roleTypeId: isManager ? 2 : 3,
           dateOfBirth: dto.dateOfBirth,
-          valid: !dto.fromRequest
+          valid: isManager ? !dto.fromRequest : true,
         },
       });
       delete user.hash;

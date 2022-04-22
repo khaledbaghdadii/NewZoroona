@@ -1,5 +1,11 @@
 import { Transform } from 'class-transformer';
-import {IsBoolean, IsEmail, IsInt, IsNotEmpty, IsString} from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
 
 export class SignupDTO {
   @IsEmail()
