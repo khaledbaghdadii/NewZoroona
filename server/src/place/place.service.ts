@@ -146,15 +146,34 @@ export class PlaceService {
   }
   async featurePlace(placeId: number, feature:boolean): Promise<Place | HttpException> {
     try {
-      const place = await this.prisma.place.update({
-        where: {
-          id: placeId,
-        },
-        data: {
-          isFeatured: feature
-        },
-      });
-      return place;
+      if(feature){
+        const places = await this.prisma.place.findMany({
+          where:{
+            isFeatured: true
+          }
+        });
+        if (places.length<5){
+          const place = await this.prisma.place.update({
+            where: {
+              id: placeId,
+            },
+            data: {
+              isFeatured: feature
+            },
+          });
+       }
+      }else{
+        const place = await this.prisma.place.update({
+          where: {
+            id: placeId,
+          },
+          data: {
+            isFeatured: feature
+          },
+        });
+      }
+
+      return;
     } catch (err) {
       return new HttpException('Error Featuring Place', HttpStatus.BAD_REQUEST);
     }

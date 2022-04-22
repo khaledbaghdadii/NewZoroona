@@ -57,4 +57,6 @@ export class PlaceController {
     orientation= orientation.map(Number);
     return this.placeService.getPlacesByFilter(orientation,category,district,hasReservation);
   }
+
+
 }
