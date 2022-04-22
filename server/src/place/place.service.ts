@@ -40,7 +40,7 @@ export class PlaceService {
             contains: text,
             mode: 'insensitive',
           },
-          valid:true
+          valid: true,
         },
         take: 9,
       });
@@ -76,7 +76,11 @@ export class PlaceService {
             district: {
               in: dto.district,
             },
-            valid:true
+            valid: true,
+            averagePricePerPerson: {
+              gte: minPrice ? minPrice : minPrice,
+              lte: maxPrice ? maxPrice : Number.MAX_SAFE_INTEGER,
+            },
           },
           take: 9,
         });
@@ -203,5 +207,11 @@ export class PlaceService {
     } catch (err) {
       return new HttpException('Error Featuring Place', HttpStatus.BAD_REQUEST);
     }
+  }
+  async getAllDistricts() {
+    const districts = await this.prisma.place.groupBy({
+      by: ['district'],
+    });
+    return districts;
   }
 }

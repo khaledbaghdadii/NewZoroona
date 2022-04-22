@@ -6,10 +6,12 @@ import { ConfigModule } from '@nestjs/config';
 import { PlaceModule } from './place/place.module';
 import { ReviewModule } from './review/review.module';
 import { ReportModule } from './report/report.module';
-import {RecommenderModule} from "./recommender/recommender.module";
-import {PackageModule} from "./package/package.module";
-import {ReservationModule} from "./reservation/reservation.module";
-import {RequestModule} from "./request/request.module";
+import { RecommenderModule } from './recommender/recommender.module';
+import { PackageModule } from './package/package.module';
+import { ReservationModule } from './reservation/reservation.module';
+import { RequestModule } from './request/request.module';
+import { CategoryModule } from './category/category.module';
+import { OrientationModule } from './orientation/orientation.module';
 
 @Module({
   imports: [
@@ -23,7 +25,9 @@ import {RequestModule} from "./request/request.module";
     RecommenderModule,
     PackageModule,
     ReservationModule,
-    RequestModule
+    RequestModule,
+    CategoryModule,
+    OrientationModule,
   ],
   controllers: [],
   providers: [],

@@ -9,7 +9,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import {UpdateDTO, AddDTO, FeatureDTO, FilterDTO} from './dto';
+import { UpdateDTO, AddDTO, FeatureDTO, FilterDTO } from './dto';
 import { PlaceService } from './place.service';
 import { Roles } from '../auth/decorators/roles.decorators';
 import { RolesGuard } from '../place/guards/local.guard';
