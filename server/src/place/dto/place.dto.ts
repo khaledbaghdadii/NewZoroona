@@ -111,3 +111,30 @@ export class AddDTO {
   @Transform(({ value }) => parseInt(value))
   averagePricePerPerson: number;
 }
+
+export class FeatureDTO{
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  placeId: number;
+  @IsNotEmpty()
+  @IsBoolean()
+  @Transform(({ value }) => Boolean(value))
+  feature: boolean;
+}
+
+export class FilterDTO{
+  @Transform(({ value }) => value.split(',').map(function(item) {
+    return parseInt(item, 10);
+  }))
+  orientation: number[];
+  @Transform(({ value }) => value.split(',').map(function(item) {
+    return parseInt(item, 10);
+  }))
+  category: number[];
+  @Transform(({ value }) => value.split(','))
+  district: string[];
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  hasReservation: number;
+}
