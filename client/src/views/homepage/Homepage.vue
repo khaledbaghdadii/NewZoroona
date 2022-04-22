@@ -1,16 +1,15 @@
 <template>
   <div>
     <section
-      class="d-flex flex-column-reverse flex-lg-row justify-content-between section-intro-landing container"
+      class="d-flex flex-column-reverse flex-lg-row pb-5 mb-5 section-intro-landing container"
     >
-      <div>
-        <h1 class="fw-700 mt-4">
-          Wherever you go, go <br />
-          with all your heart
+      <div class="align-self-center me-lg-5">
+        <h1 class="fw-700 fs-50 mt-4">
+          Wherever you go, go with all your heart
         </h1>
-        <h5 class="pt-3">
-          Zorooona is the place, where you can <br />
-          discover all Lebanon's places! So, are <br />you ready to get started?
+        <h5 class="pt-3 pe-5">
+          Zorooona is the place, where you can discover all Lebanon's places!
+          So, are you ready to get started?
         </h5>
         <button
           class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn"
@@ -20,7 +19,7 @@
         </button>
       </div>
       <div>
-        <img src="@/assets/images/homepage.svg" class="HomepageCoverPhoto" />
+        <img src="@/assets/images/homepage.svg" class="img-beside-text" />
       </div>
     </section>
 
@@ -129,6 +128,7 @@
           <button
             class="btn btn-primary px-3 py-3 text-white fs-18"
             id="discover"
+            @click="goToPlacesPage()"
           >
             Discover All Places!
           </button>
@@ -137,14 +137,14 @@
     </section>
 
     <section
-      class="d-flex flex-column flex-md-row justify-content-between container my-5 py-5"
+      class="d-flex flex-column flex-lg-row pb-5 container my-5 py-5"
     >
-      <img src="@/assets/images/manager.svg" class="HomepageCoverPhoto" />
-      <div>
-        <h1 class="fw-700 mt-5 pt-3">Do You Have a Place?</h1>
-        <h5 class="pt-3">
-          If you have a place in Lebanon, and you are <br />
-          aiming to cooperate with Zoroona, click on <br />the button below!
+      <img src="@/assets/images/manager.svg" class="img-beside-text me-lg-5" />
+      <div class="align-self-center ms-lg-5">
+        <h1 class="fw-700 fs-50 mt-4">Do You Have a Place?</h1>
+        <h5 class="pt-3 pe-5">
+          If you have a place in Lebanon, and you are aiming to cooperate with
+          Zoroona, click on the button below!
         </h5>
         <button
           class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn"
@@ -159,10 +159,13 @@
 <script>
 export default {
   name: "homepage",
-  methods:{
-        goToSignUp(){
+  methods: {
+    goToSignUp() {
       this.$router.push("/signup");
-    }
-  }
+    },
+    goToPlacesPage() {
+      this.$router.push("/placesPage");
+    },
+  },
 };
 </script>

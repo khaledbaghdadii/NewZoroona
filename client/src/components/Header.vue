@@ -35,7 +35,7 @@
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'Homepage' }"
+              <router-link class="nav-link" :to="{ name: 'Placespage' }"
                 >Discover</router-link
               >
             </li>

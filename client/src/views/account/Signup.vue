@@ -33,10 +33,10 @@
     <section v-else>
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-md-12 col-lg-10">
-            <div class="wrap d-md-flex ps-5">
+          <div class="col-md-12 col-lg-10 ">
+            <div class="wrap d-md-flex ">
               <div
-                class="login-img"
+                class="login-img float-left"
                 :style="{
                   'background-image':
                     'url(' + require('@/assets/images/signup.svg') + ')',
