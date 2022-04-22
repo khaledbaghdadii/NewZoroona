@@ -1,7 +1,7 @@
 import {
   Body,
   Controller,
-  Get, ParseBoolPipe,
+  Get, ParseArrayPipe, ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query,
@@ -47,5 +47,14 @@ export class PlaceController {
   featurePlace(@Body('placeId', ParseIntPipe) placeId: number, @Body('feature',ParseBoolPipe) feature: boolean) {
     return this.placeService.featurePlace(placeId,feature);
   }
-  //add getPlaces with different filters
+  @Get('filter')
+  getPlaceByFilters(@Query('orientation',ParseArrayPipe) orientation: number[],
+                    @Query('category',ParseArrayPipe) category: number[],
+                    @Query('district',ParseArrayPipe) district: string[],
+                    @Query('hasReservation',ParseIntPipe) hasReservation: number) {
+
+    category= category.map(Number);
+    orientation= orientation.map(Number);
+    return this.placeService.getPlacesByFilter(orientation,category,district,hasReservation);
+  }
 }

@@ -34,6 +34,52 @@ export class PlaceService {
       return [];
     }
   }
+  async getPlacesByFilter(orientation:number[],category:number[],district: string[],hasReservation: number): Promise<Place[]> {
+    try {
+      let orientationList=await this.prisma.orientation.findMany();
+      let orientationIds  =orientationList.map(o=>{return o.id});
+      let categoryList=await this.prisma.category.findMany();
+      let categoryIds  =categoryList.map(c=>{return c.id});
+      let districtList=await this.prisma.place.findMany();
+      let districtNames =districtList.map(d=>{return d.district});
+      let places=[];
+      if(hasReservation==2){
+      places = await this.prisma.place.findMany({
+        where:{
+          orientationId: {
+            in: orientation.length!=0?orientation:orientationIds
+          },
+          categoryId: {
+            in: category.length!=0?category:categoryIds
+          },
+          district: {
+            in: district.length!=0?district:districtNames
+          }
+        },
+        take: 9,
+      });
+      }else{
+        places = await this.prisma.place.findMany({
+          where:{
+            orientationId: {
+              in: orientation.length!=0?orientation:orientationIds
+            },
+            categoryId: {
+              in: category.length!=0?category:categoryIds
+            },
+            district: {
+              in: district.length!=0?district:districtNames
+            },
+            hasReservation: hasReservation != 0
+          },
+          take: 9,
+        });
+      }
+      return places;
+    } catch (e) {
+      return [];
+    }
+  }
   async deletePlace(placeId: number) {
     try {
       await this.prisma.place.delete({
