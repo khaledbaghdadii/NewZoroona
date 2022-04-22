@@ -90,7 +90,8 @@
 .place-badge-background-color {
     background-color: $secondary !important;
     color: white;
-    font-size: 14px !important;
+    font-size: 16px !important;
+    height: 35px;
     border-radius: 8px;
 }
 
@@ -255,22 +256,24 @@ footer {
     box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
 }
 
-.text-secondary {
-    color: $secondary;
-}
-
-.text-black {
-    color: black;
-}
-
-.no-underline {
-    text-decoration: none;
-}
-
 .mid-point {
     &::after {
         content: "\2022";
         margin-right: 12px;
         margin-left: 12px;
     }
+}
+
+.package-box {
+    height: 300px;
+    width: 340px;
+    background-color: white;
+    border-radius: 8px;
+    -webkit-box-shadow: 2px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+}
+
+.border-bottom {
+    border-bottom: solid 3px black !important;
 }

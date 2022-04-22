@@ -18,12 +18,28 @@
     font-size: 14px;
 }
 
+.fs-16 {
+    font-size: 16px;
+}
+
 .fs-18 {
     font-size: 18px;
 }
 
+.fs-20 {
+    font-size: 20px;
+}
+
 .fs-24 {
     font-size: 24px;
+}
+
+.fs-30 {
+    font-size: 30px;
+}
+
+.fs-27 {
+    font-size: 27px;
 }
 
 .fs-36 {
@@ -103,4 +119,16 @@
 
 .bg-danger {
     background-color: rgb(211, 64, 64);
+}
+
+.text-secondary {
+    color: $secondary;
+}
+
+.text-black {
+    color: black;
+}
+
+.no-underline {
+    text-decoration: none;
 }
