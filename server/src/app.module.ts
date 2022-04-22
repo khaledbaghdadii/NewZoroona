@@ -9,6 +9,7 @@ import { ReportModule } from './report/report.module';
 import {RecommenderModule} from "./recommender/recommender.module";
 import {PackageModule} from "./package/package.module";
 import {ReservationModule} from "./reservation/reservation.module";
+import {RequestModule} from "./request/request.module";
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import {ReservationModule} from "./reservation/reservation.module";
     ReportModule,
     RecommenderModule,
     PackageModule,
-    ReservationModule
+    ReservationModule,
+    RequestModule
   ],
   controllers: [],
   providers: [],

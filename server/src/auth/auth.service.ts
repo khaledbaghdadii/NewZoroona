@@ -21,6 +21,7 @@ export class AuthService {
           phoneNumber: dto.phoneNumber,
           roleTypeId: dto.roleTypeId,
           dateOfBirth: dto.dateOfBirth,
+          valid: !dto.fromRequest
         },
       });
       delete user.hash;
@@ -54,7 +55,7 @@ export class AuthService {
       throw new ForbiddenException('No account exists with that email');
     //compare password
     const pwMatches = await argon.verify(user.hash, dto.password);
-    //if passwird not correct throw exception
+    //if password not correct throw exception
     if (!pwMatches)
       throw new ForbiddenException('Email and password do not match');
     //delete hash from returned user

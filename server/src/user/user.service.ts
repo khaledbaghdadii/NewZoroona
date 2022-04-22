@@ -105,7 +105,7 @@ export class UserService {
         },
       });
       const pwMatches = await argon.verify(user.hash, oldPassword);
-      //if passwird not correct throw exception
+      //if password not correct throw exception
       if (!pwMatches)
         return new ForbiddenException('Current password is incorrect');
       this.prisma.user.update({
