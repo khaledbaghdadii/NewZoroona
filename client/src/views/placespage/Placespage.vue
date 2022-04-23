@@ -7,15 +7,15 @@
           <span class="text-primary fw-700">DISCOVERING?</span>
         </h1>
       </div>
-      <img src="@/assets/images/discover.svg" class="img-beside-text mb-5" />
+      <img src="@/assets/images/discover.svg" class="img-beside-text spin-image mb-5" />
     </div>
 
-    <section class="featured p-5 align-content-center my-5">
-      <h2 class="fw-700 text-center mb-5">
+    <section class="bg-rose rounded-8 p-5 align-content-center my-5">
+      <h1 class="fw-700 text-center mb-5">
         <span class="fa fa-star text-primary"></span>
         <span class="fw-700 mx-2">Featured Places</span
         ><span class="fa fa-star text-primary"></span>
-      </h2>
+      </h1>
       <!-- Carousel -->
       <div class="d-flex justify-content-center">
         <div id="carousel" class="carousel slide mb-3" data-bs-ride="carousel">

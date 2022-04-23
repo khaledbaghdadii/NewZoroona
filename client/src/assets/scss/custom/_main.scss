@@ -222,6 +222,19 @@ footer {
     }
 }
 
+.spin-image {
+    animation: animate 4.5s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
 //placespage
 .places-page-container {
     margin-top: 150px;
