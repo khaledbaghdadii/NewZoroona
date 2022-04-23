@@ -264,6 +264,7 @@ footer {
     }
 }
 
+//detailed place page
 .package-box {
     height: 300px;
     width: 340px;
@@ -271,9 +272,35 @@ footer {
     border-radius: 8px;
     -webkit-box-shadow: 2px 10px 34px -15px rgba(0, 0, 0, 0.24);
     -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
-    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.493);
 }
 
 .border-bottom {
     border-bottom: solid 3px black !important;
+}
+
+.profile-img {
+    height: 70px;
+    width: 70px;
+}
+
+.reviews-section-title {
+    border-top: solid 3px black;
+}
+
+.review {
+    border: solid 2px black;
+    border-radius: 8px;
+    -webkit-box-shadow: 2px 10px 34px -15px rgba(0, 0, 0, 0.39);
+    -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.493);
+}
+
+.border-top-2 {
+    border-top: solid 1px black;
+}
+
+.review-box {
+    height: 300px;
+    border-radius: 8px;
 }

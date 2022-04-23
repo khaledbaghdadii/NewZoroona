@@ -69,6 +69,10 @@
 }
 
 //apply to all buttons
+.btn {
+    border-radius: 8px;
+}
+
 .btn:focus {
     box-shadow: none !important;
 }
@@ -131,4 +135,9 @@
 
 .no-underline {
     text-decoration: none;
+}
+
+.btn-secondary:hover {
+    color: $primary !important;
+    background-color: #f8e9dc;
 }

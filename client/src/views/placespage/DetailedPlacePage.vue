@@ -5,16 +5,18 @@
     >
       <img
         src="@/assets/images/raouche.jpg"
-        class="img-beside-text me-lg-5 rounded-8"
+        class="img-beside-text me-lg-5 rounded-8 mt-4"
       />
-      <div class="ms-lg-5">
+      <div class="ms-lg-5 mt-3">
         <h1 class="fw-700 me-3 text-primary">Raouche</h1>
         <h5 class="fw-700">
-          <span class="badge place-badge-background-color py-2 px-3 align-self-center"
+          <span
+            class="badge place-badge-background-color py-2 px-3 align-self-center"
             >Natural</span
           ><span class="mid-point"> </span><i class="fw-700">Public</i
           ><span class="mid-point"> </span>
-          <span class="badge place-badge-background-color py-2 px-3 align-self-center"
+          <span
+            class="badge place-badge-background-color py-2 px-3 align-self-center"
             ><span class="text-white fs-16 fw-700 pe-2">4</span
             ><i class="fa fa-star text-primary"></i
           ></span>
@@ -75,12 +77,14 @@
     </section>
 
     <section class="my-5 bg-rose p-5 container rounded-8">
-      <h1 class="fw-700 py-3 text-primary">
+      <h1 class="fw-700 pb-4 text-center text-primary">
         Available Packages<i class="fa fa-gift ps-2"></i>
       </h1>
-      <div class="row mb-3">
-        <div class="col-sm-12 col-md-6 col-lg-4 py-3 p-3 me-3 package-box">
-          <div class="d-flex flex-column justify-content-between">
+      <div
+        class="row mb-3 d-flex flex-lg-row justify-content-md-between align-items-center flex-column"
+      >
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 p-3 package-box">
+          <div class="d-flex flex-column justify-content-between h-100">
             <div>
               <h2 class="border-bottom pb-2 fw-700 text-secondary">
                 “ Cheesy 3azizi ”
@@ -96,8 +100,8 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-6 col-lg-4 py-3 p-3 me-3 package-box">
-          <div class="d-flex flex-column justify-content-between">
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 p-3 package-box">
+          <div class="d-flex flex-column justify-content-between h-100">
             <div>
               <h2 class="border-bottom pb-2 fw-700 text-secondary">
                 “ Cheesy 3azizi ”
@@ -113,8 +117,8 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-6 col-lg-4 py-3 p-3 me-3 package-box">
-          <div class="d-flex flex-column justify-content-between">
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 p-3 package-box">
+          <div class="d-flex flex-column justify-content-between h-100">
             <div>
               <h2 class="border-bottom pb-2 fw-700 text-secondary">
                 “ Cheesy 3azizi ”
@@ -133,29 +137,71 @@
       </div>
     </section>
 
-    <section class="mt-5 container">
-      <hr class="fw-700 mt-5"/>
-      <h1 class="text-primary comments-section-title mb-4 fw-700">Reviews</h1>
-      <div class="comment d-flex my-3">
-        <div class="my-2 ms-2 me-4">
-          <img
-            src="assets/images/profile.jfif"
-            class="rounded-circle w-100 profile-img"
-            alt="profile image"
-          />
-        </div>
-        <div class="my-2 flex-fill">
-          <div class="d-flex justify-content-between">
-            <h4 class="text-violet">Ahmad Houmany</h4>
-            <h6 class="pt-1 me-4"><i>2h ago</i></h6>
+    <section class="my-5 pt-5 container">
+      <div
+        class="d-flex reviews-section-title mt-5 pt-4 justify-content-between align-items-center"
+      >
+        <h1 class="text-primary mb-4 fw-700">Reviews</h1>
+        <button class="btn btn-secondary py-2">
+          <i class="fa fa-edit me-2"></i>Add Review
+        </button>
+      </div>
+      <div class="row d-flex justify-content-between">
+        <div class="col-sm-12 col-md-6 col-lg-4 p-3 review-box mb-5">
+          <div class="review p-3 d-flex bg-rose">
+            <div class="my-2 flex-fill">
+              <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-secondary fw-700">Ahmad Houmany</h4>
+                <button class="btn btn-secondary">
+                  <i class="fa fa-flag"></i>
+                </button>
+              </div>
+              <h5 class="mb-3 fw-700 fs-14">ahmadhoumany24@gmail.com</h5>
+              <p class="border-top-2 pt-2 fs-16">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip.
+              </p>
+            </div>
           </div>
-          <h5 class="mb-3">ahmadhoumany24@gmail.com</h5>
-          <p>I like winter more than summer becuase we can play with snow.</p>
-          <div class="d-flex">
-            <div class="comment-icon fa fa-thumbs-up fa-lg me-2"></div>
-            <h5 class="me-4">Like</h5>
-            <div class="comment-icon fa fa-lg fa-reply me-2"></div>
-            <h5>Reply</h5>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 p-3 mb-5 review-box">
+          <div class="review p-3 d-flex bg-rose">
+            <div class="my-2 flex-fill">
+              <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-secondary fw-700">Ahmad Houmany</h4>
+                <button class="btn btn-secondary">
+                  <i class="fa fa-flag"></i>
+                </button>
+              </div>
+              <h5 class="mb-3 fw-700 fs-14">ahmadhoumany24@gmail.com</h5>
+              <p class="border-top-2 pt-2 fs-16">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 p-3 mb-5 review-box">
+          <div class="review p-3 d-flex bg-rose">
+            <div class="my-2 flex-fill">
+              <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-secondary fw-700">Ahmad Houmany</h4>
+                <button class="btn btn-secondary">
+                  <i class="fa fa-flag"></i>
+                </button>
+              </div>
+              <h5 class="mb-3 fw-700 fs-14">ahmadhoumany24@gmail.com</h5>
+              <p class="border-top-2 pt-2 fs-16">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip.
+              </p>
+            </div>
           </div>
         </div>
       </div>
