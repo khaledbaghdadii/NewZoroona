@@ -70,7 +70,7 @@
 
 //apply to all buttons
 .btn {
-    border-radius: 8px;
+    border-radius: 15px;
 }
 
 .btn:focus {
@@ -110,7 +110,7 @@
 }
 
 .rounded-8 {
-    border-radius: 8px;
+    border-radius: 15px;
 }
 
 .w-40 {
@@ -144,4 +144,8 @@
 
 a:hover {
     color: $primary !important;
+}
+
+.checked {
+    color: $primary;
 }
