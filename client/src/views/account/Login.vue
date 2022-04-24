@@ -49,7 +49,7 @@
                   </div>
                 </div>
                 <div class="bg-danger rounded-8" v-if="wrongCredentials">
-                  <h5 class="p-2 text-white">Email or Password Wrong!</h5>
+                  <h5 class="p-3 text-white">Email or Password Wrong!</h5>
                 </div>
                 <form @submit.prevent="login()">
                   <div class="form-group mb-3">
