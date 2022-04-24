@@ -22,6 +22,16 @@ const internal = {
                 title: 'PLACESPAGE',
                 rule: 'isPublic'
             }
+        },
+        {
+            path: '/detailed-placepage',
+            name: 'DetailedPlacePage',
+            component: () =>
+                import ('@/views/placespage/DetailedPlacePage'),
+            meta: {
+                title: 'DETAILEDPLACEPAGE',
+                rule: 'isPublic'
+            }
         }
 
     ]

@@ -63,12 +63,12 @@
                 data-bs-toggle="dropdown"
               ></span>
               <ul class="dropdown-menu header-dropdown-menu">
-                <li><a class="dropdown-item" href="#">My Profile</a></li>
-                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa fa-user pe-2 text-secondary"></i>My Profile</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa fa-cog pe-2 text-secondary"></i>Settings</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <span class="dropdown-item" @click="logOut()"
-                    >Log Out</span
+                  <a class="dropdown-item cursor-pointer" @click="logOut()"
+                    ><i class="fa fa-sign-out pe-2 text-secondary"></i>Log Out</a
                   >
                 </li>
               </ul>
