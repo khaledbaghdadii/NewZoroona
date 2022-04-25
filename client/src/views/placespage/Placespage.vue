@@ -7,7 +7,10 @@
           <span class="text-primary fw-700">DISCOVERING?</span>
         </h1>
       </div>
-      <img src="@/assets/images/discover.svg" class="img-beside-text spin-image mb-5" />
+      <img
+        src="@/assets/images/discover.svg"
+        class="img-beside-text spin-image mb-5"
+      />
     </div>
 
     <section class="bg-rose rounded-8 p-5 align-content-center my-5">
@@ -41,18 +44,23 @@
 
           <!-- The slideshow/carousel -->
           <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div
+              v-for="(place, index) in featuredPlaces"
+              v-bind:key="place.id"
+              class="carousel-item"
+              :class="{'active': index === 0}"
+            >
               <img
                 src="@/assets/images/raouche.jpg"
                 alt="Raouche"
                 class="aaaaa"
               />
               <div class="carousel-caption">
-                <h3 class="fw-700 fs-36">Raouche</h3>
-                <p class="fw-700"><i>Beirut</i></p>
+                <h3 class="fw-700 fs-36">{{place.name}}</h3>
+                <p class="fw-700"><i>{{place.district}}</i></p>
               </div>
             </div>
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
               <img src="@/assets/images/baaqline-waterfall.jpg" alt="" />
               <div class="carousel-caption">
                 <h3 class="fw-700 fs-36">Baaqline Waterfall</h3>
@@ -65,7 +73,7 @@
                 <h3 class="fw-700 fs-36">Tyre Ruins</h3>
                 <p class="fw-700"><i>Tyre</i></p>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <!-- Left and right controls/icons -->
@@ -163,7 +171,7 @@
                     </div>
 
                     <div class="my-3">
-                      <label for="category" class="form-label fw-700 "
+                      <label for="category" class="form-label fw-700"
                         >Price Range:</label
                       >
                       <select class="form-select cursor-pointer">
@@ -314,12 +322,33 @@
   </div>
 </template>
 <script>
+import HomepageService from "@/services/HomepageService.js";
 export default {
   name: "Placespage",
-  methods:{
-      goToPlacePage(){
-          this.$router.push("/detailed-placepage");
-      }
-  }
+  data() {
+    return {
+      featuredPlaces: [],
+    };
+  },
+  methods: {
+    goToPlacePage() {
+      this.$router.push("/detailed-placepage");
+    },
+  },
+  mounted() {
+    const self = this;
+    this.showLoader = true;
+    self.activeItem = -1;
+    HomepageService.getFeaturedPlaces()
+      .then(function (res) {
+        console.log(res.data);
+        self.showLoader = false;
+        self.featuredPlaces = res.data || [];
+        console.log(self.featuredPlaces);
+      })
+      .catch(function () {
+        self.showLoader = false;
+      });
+  },
 };
 </script>
