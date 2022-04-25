@@ -10,6 +10,8 @@ import {
 import { Roles } from 'src/auth/decorators/roles.decorators';
 import { ReportService } from './report.service';
 import { RolesGuard } from './guards/role.guards';
+import {AddDTO} from "./dto";
+
 @Controller('report')
 export class ReportController {
   constructor(private reportService: ReportService) {}
@@ -32,4 +34,12 @@ export class ReportController {
   getReportsForReview(@Query('reviewId', ParseIntPipe) reviewId: number) {
     return this.reportService.getReportsForReview(reviewId);
   }
+
+  @UseGuards(RolesGuard)
+  @Roles('user')
+  @Post('report')
+  createReport(@Body() dto: AddDTO) {
+    return this.reportService.createReport(dto);
+  }
+
 }
