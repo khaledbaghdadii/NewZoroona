@@ -23,6 +23,9 @@ export class PlaceService {
       where: {
         isFeatured: true,
       },
+      include:{
+        Category: true
+      }
     });
     if (!places) {
       return new HttpException(
