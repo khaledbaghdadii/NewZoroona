@@ -210,6 +210,10 @@ export class PlaceService {
     const places = await this.prisma.place.findMany({
       where:{
         valid: true
+      },
+      include:{
+        Category: true,
+        Orientation: true
       }
     });
     return places;
