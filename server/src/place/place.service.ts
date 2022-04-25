@@ -22,6 +22,7 @@ export class PlaceService {
     const places = await this.prisma.place.findMany({
       where: {
         isFeatured: true,
+        valid:true
       },
       include:{
         Category: true
