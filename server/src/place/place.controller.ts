@@ -59,4 +59,8 @@ export class PlaceController {
   getDistricts() {
     return this.placeService.getAllDistricts();
   }
+  @Get('all')
+  getAllPlaces() {
+    return this.placeService.getAllPlaces();
+  }
 }
