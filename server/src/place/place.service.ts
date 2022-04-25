@@ -52,6 +52,7 @@ export class PlaceService {
       return [];
     }
   }
+
   async getPlacesByFilter(@Body() dto: FilterDTO): Promise<Place[]> {
     try {
       let places = [];
@@ -204,5 +205,13 @@ export class PlaceService {
       by: ['district'],
     });
     return districts;
+  }
+  async getAllPlaces() {
+    const places = await this.prisma.place.findMany({
+      where:{
+        valid: true
+      }
+    });
+    return places;
   }
 }
