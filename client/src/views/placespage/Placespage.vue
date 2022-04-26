@@ -48,7 +48,7 @@
               v-for="(place, index) in featuredPlaces"
               v-bind:key="place.id"
               class="carousel-item"
-              :class="{'active': index === 0}"
+              :class="{ active: index === 0 }"
             >
               <img
                 src="@/assets/images/raouche.jpg"
@@ -56,8 +56,10 @@
                 class="aaaaa"
               />
               <div class="carousel-caption">
-                <h3 class="fw-700 fs-36">{{place.name}}</h3>
-                <p class="fw-700"><i>{{place.district}}</i></p>
+                <h3 class="fw-700 fs-36">{{ place.name }}</h3>
+                <p class="fw-700">
+                  <i>{{ place.district }}</i>
+                </p>
               </div>
             </div>
             <!-- <div class="carousel-item">
@@ -136,25 +138,22 @@
                       <label for="name" class="form-label fw-700"
                         >Category:</label
                       >
-                      <div class="form-check cursor-pointer">
+                      <div
+                        v-for="category in allCategories"
+                        v-bind:key="category.id"
+                        class="form-check cursor-pointer"
+                      >
                         <input
                           class="form-check-input cursor-pointer"
                           type="checkbox"
-                          id="check1"
-                          name="option1"
-                          value="something"
+                          :id="category.id"
+                          :name="category.id"
+                          :value="category.id"
+                          v-model="checkedCategories"
                         />
-                        <label class="form-check-label">Option 1</label>
-                      </div>
-                      <div class="form-check cursor-pointer">
-                        <input
-                          class="form-check-input cursor-pointer"
-                          type="checkbox"
-                          id="check1"
-                          name="option1"
-                          value="something"
-                        />
-                        <label class="form-check-label">Option 2</label>
+                        <label class="form-check-label">{{
+                          category.description
+                        }}</label>
                       </div>
                     </div>
 
@@ -162,21 +161,71 @@
                       <label for="name" class="form-label fw-700"
                         >Orientation:</label
                       >
-                      <select class="form-select cursor-pointer">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                      </select>
+                      <div
+                        v-for="orientation in allOrientations"
+                        v-bind:key="orientation.id"
+                        class="form-check cursor-pointer"
+                      >
+                        <input
+                          class="form-check-input cursor-pointer"
+                          type="checkbox"
+                          :id="orientation.id"
+                          :name="orientation.id"
+                          :value="orientation.id"
+                          v-model="checkedOrientations"
+                        />
+                        <label class="form-check-label">{{
+                          orientation.description
+                        }}</label>
+                      </div>
+                    </div>
+
+                    <div class="my-3">
+                      <label for="name" class="form-label fw-700"
+                        >Reservation:</label
+                      >
+                      <div class="form-check cursor-pointer">
+                        <input
+                          class="form-check-input cursor-pointer"
+                          type="radio"
+                          id="all"
+                          name="all"
+                          value="2"
+                          v-model="checkedAvailablity"
+                        />
+                        <label class="form-check-label">All</label>
+                      </div>                      
+                      <div class="form-check cursor-pointer">
+                        <input
+                          class="form-check-input cursor-pointer"
+                          type="radio"
+                          id="available"
+                          name="available"
+                          value="1"
+                          v-model="checkedAvailablity"
+                        />
+                        <label class="form-check-label">Available</label>
+                      </div>
+                      <div class="form-check cursor-pointer">
+                        <input
+                          class="form-check-input cursor-pointer"
+                          type="radio"
+                          id="unavailable"
+                          name="unavailable"
+                          value="0"
+                          v-model="checkedAvailablity"
+                        />
+                        <label class="form-check-label">Unavailable</label>
+                      </div>
                     </div>
 
                     <div class="my-3">
                       <label for="category" class="form-label fw-700"
-                        >Price Range:</label
+                        >Price Range Per Person:</label
                       >
                       <select class="form-select cursor-pointer">
-                        <option>1</option>
-                        <option>2</option>
+                        <option>0-15</option>
+                        <option>100</option>
                         <option>3</option>
                         <option>4</option>
                       </select>
@@ -189,6 +238,7 @@
                       type="button"
                       class="btn btn-primary text-white"
                       data-bs-dismiss="modal"
+                      @click="printSelectedCategories()"
                     >
                       Apply Changes
                     </button>
@@ -208,7 +258,11 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <div
+          class="col-sm-12 col-md-6 col-lg-4 py-3"
+          v-for="place in allPlaces"
+          v-bind:key="place.id"
+        >
           <div
             class="post-img cursor-pointer"
             :style="{
@@ -220,11 +274,13 @@
             @click="goToPlacePage()"
           >
             <div class="text-end">
-              <span class="badge badge-background-color m-3">Natural</span>
+              <span class="badge badge-background-color m-3">{{
+                place.Category.description
+              }}</span>
             </div>
           </div>
           <div class="d-flex flex-column">
-            <h4 class="fw-700 pt-3">Baaqline Waterfall</h4>
+            <h4 class="fw-700 pt-3">{{ place.name }}</h4>
             <div class="d-flex">
               <img
                 src="@/assets/images/location.svg"
@@ -232,21 +288,23 @@
                 class="me-2"
                 alt="location"
               />
-              <span class="fw-700">Mount Lebanon</span>
+              <span class="fw-700">{{ place.district }}</span>
             </div>
             <div class="d-flex py-2">
               <span class="fa fa-users text-primary fa-lg pe-2"></span>
-              <span class="fw-700">Family</span>
+              <span class="fw-700">{{ place.Orientation.description }}</span>
             </div>
             <div class="d-flex">
               <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
-              <span class="fw-700 fs-24">35</span>
+              <span class="fw-700 fs-24">{{
+                place.averagePricePerPerson
+              }}</span>
               <span class="fs-14 pt-2">/person</span>
             </div>
           </div>
         </div>
 
-        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <!-- <div class="col-sm-12 col-md-6 col-lg-4 py-3">
           <div
             class="post-img cursor-pointer"
             :style="{
@@ -316,23 +374,33 @@
               <span class="fs-14 pt-2">/person</span>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
   </div>
 </template>
 <script>
 import HomepageService from "@/services/HomepageService.js";
+import PlacespageService from "@/services/PlacespageService.js";
 export default {
   name: "Placespage",
   data() {
     return {
       featuredPlaces: [],
+      allPlaces: [],
+      allCategories: [],
+      checkedCategories: [],
+      allOrientations: [],
+      checkedOrientations: [],
+      checkedAvailablity: '',
     };
   },
   methods: {
     goToPlacePage() {
       this.$router.push("/detailed-placepage");
+    },
+    printSelectedCategories() {
+      alert(this.checkedAvailablity);
     },
   },
   mounted() {
@@ -345,6 +413,39 @@ export default {
         self.showLoader = false;
         self.featuredPlaces = res.data || [];
         console.log(self.featuredPlaces);
+      })
+      .catch(function () {
+        self.showLoader = false;
+      });
+
+    PlacespageService.getAllPlaces()
+      .then(function (res) {
+        console.log(res.data);
+        self.showLoader = false;
+        self.allPlaces = res.data || [];
+        console.log(self.allPlaces);
+      })
+      .catch(function () {
+        self.showLoader = false;
+      });
+
+    PlacespageService.getAllCategories()
+      .then(function (res) {
+        console.log(res.data);
+        self.showLoader = false;
+        self.allCategories = res.data || [];
+        console.log(self.allCategories);
+      })
+      .catch(function () {
+        self.showLoader = false;
+      });
+
+    PlacespageService.getAllOrientations()
+      .then(function (res) {
+        console.log(res.data);
+        self.showLoader = false;
+        self.allOrientations = res.data || [];
+        console.log(self.allOrientations);
       })
       .catch(function () {
         self.showLoader = false;
