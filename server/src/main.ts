@@ -30,7 +30,7 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: "http://localhost:8081",
+    origin: 'http://localhost:8081',
     credentials: true,
   });
   await app.listen(3333);

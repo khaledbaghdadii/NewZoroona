@@ -22,11 +22,11 @@ export class PlaceService {
     const places = await this.prisma.place.findMany({
       where: {
         isFeatured: true,
-        valid:true
+        valid: true,
       },
-      include:{
-        Category: true
-      }
+      include: {
+        Category: true,
+      },
     });
     if (!places) {
       return new HttpException(
@@ -80,7 +80,7 @@ export class PlaceService {
       } else {
         places = await this.prisma.place.findMany({
           where: {
-            orientationId:{
+            orientationId: {
               in: dto.orientation,
             },
             categoryId: {
@@ -90,7 +90,7 @@ export class PlaceService {
               in: dto.district,
             },
             hasReservation: dto.hasReservation != 0,
-            valid:true
+            valid: true,
           },
           take: 9,
         });
@@ -209,13 +209,13 @@ export class PlaceService {
   }
   async getAllPlaces() {
     const places = await this.prisma.place.findMany({
-      where:{
-        valid: true
+      where: {
+        valid: true,
       },
-      include:{
+      include: {
         Category: true,
-        Orientation: true
-      }
+        Orientation: true,
+      },
     });
     return places;
   }
