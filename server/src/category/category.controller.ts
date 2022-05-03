@@ -3,9 +3,9 @@ import { CategoryService } from './category.service';
 
 @Controller('category')
 export class CategoryController {
-  constructor(private categortService: CategoryService) {}
+  constructor(private categoryService: CategoryService) {}
   @Get('')
   getAll() {
-    return this.categortService.getAll();
+    return this.categoryService.getAll();
   }
 }
