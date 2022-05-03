@@ -154,7 +154,7 @@ export default {
         });
     },
     timeWrongCredentials() {
-      setTimeout(() => {this.wrongCredentials = false}, 3000);
+      setTimeout(() => {this.wrongCredentials = false}, 4000);
     },
   },
 };

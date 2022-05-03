@@ -88,7 +88,7 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-4 py-3">
             <div
-              class="post-img"
+              class="post-img-featured"
               :style="{
                 'background-image':
                   'url(' +
@@ -123,7 +123,7 @@
 
           <div class="col-sm-12 col-md-6 col-lg-4 py-3">
             <div
-              class="post-img"
+              class="post-img-featured"
               :style="{
                 'background-image':
                   'url(' + require('@/assets/images/raouche.jpg') + ')',
@@ -154,7 +154,7 @@
 
           <div class="col-sm-12 col-md-6 col-lg-4 py-3">
             <div
-              class="post-img"
+              class="post-img-featured"
               :style="{
                 'background-image':
                   'url(' + require('@/assets/images/Tyre-Ruins.jpg') + ')',

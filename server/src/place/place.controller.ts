@@ -2,8 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  ParseArrayPipe,
-  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Query,
@@ -51,21 +49,18 @@ export class PlaceController {
   @Post('feature')
   @Roles('admin')
   featurePlace(@Body() dto: FeatureDTO) {
-    return this.placeService.featurePlace(dto.placeId, dto.feature);
+    return this.placeService.featurePlace(dto);
   }
   @Get('filter')
   getPlaceByFilters(@Body() dto: FilterDTO) {
-    return this.placeService.getPlacesByFilter(
-      dto.orientation,
-      dto.category,
-      dto.district,
-      dto.hasReservation,
-      dto.minPrice,
-      dto.maxPrice,
-    );
+    return this.placeService.getPlacesByFilter( dto);
   }
-  @Get('districts')
-  getAllDistricts() {
+  @Get('district')
+  getDistricts() {
     return this.placeService.getAllDistricts();
+  }
+  @Get('all')
+  getAllPlaces() {
+    return this.placeService.getAllPlaces();
   }
 }

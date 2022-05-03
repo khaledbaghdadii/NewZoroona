@@ -2,7 +2,7 @@ import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { Place } from '@prisma/client';
-import { UpdateDTO, AddDTO } from '../place/dto';
+import { UpdateDTO, AddDTO, FilterDTO, FeatureDTO } from '../place/dto';
 
 @Injectable({})
 export class PlaceService {
@@ -22,7 +22,11 @@ export class PlaceService {
     const places = await this.prisma.place.findMany({
       where: {
         isFeatured: true,
+        valid:true
       },
+      include:{
+        Category: true
+      }
     });
     if (!places) {
       return new HttpException(
@@ -49,44 +53,26 @@ export class PlaceService {
       return [];
     }
   }
-  async getPlacesByFilter(
-    orientation: number[],
-    category: number[],
-    district: string[],
-    hasReservation: number,
-    minPrice: number,
-    maxPrice: number,
-  ): Promise<Place[]> {
+
+  async getPlacesByFilter(@Body() dto: FilterDTO): Promise<Place[]> {
     try {
-      // const orientationList = await this.prisma.orientation.findMany();
-      // const orientationIds = orientationList.map((o) => {
-      //   return o.id;
-      // });
-      // const categoryList = await this.prisma.category.findMany();
-      // const categoryIds = categoryList.map((c) => {
-      //   return c.id;
-      // });
-      // const districtList = await this.prisma.place.findMany();
-      // const districtNames = districtList.map((d) => {
-      //   return d.district;
-      // });
       let places = [];
-      if (hasReservation == 2) {
+      if (dto.hasReservation == 2) {
         places = await this.prisma.place.findMany({
           where: {
             orientationId: {
-              in: orientation,
+              in: dto.orientation,
             },
             categoryId: {
-              in: category,
+              in: dto.category,
             },
             district: {
-              in: district,
+              in: dto.district,
             },
             valid: true,
             averagePricePerPerson: {
-              gte: minPrice ? minPrice : minPrice,
-              lte: maxPrice ? maxPrice : Number.MAX_SAFE_INTEGER,
+              gte: dto.minPrice ? dto.minPrice : Number.MIN_SAFE_INTEGER,
+              lte: dto.maxPrice ? dto.maxPrice : Number.MAX_SAFE_INTEGER,
             },
           },
           take: 9,
@@ -94,17 +80,17 @@ export class PlaceService {
       } else {
         places = await this.prisma.place.findMany({
           where: {
-            orientationId: {
-              in: orientation,
+            orientationId:{
+              in: dto.orientation,
             },
             categoryId: {
-              in: category,
+              in: dto.category,
             },
             district: {
-              in: district,
+              in: dto.district,
             },
-            hasReservation: hasReservation != 0,
-            valid: true,
+            hasReservation: dto.hasReservation != 0,
+            valid:true
           },
           take: 9,
         });
@@ -181,12 +167,9 @@ export class PlaceService {
       return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
     }
   }
-  async featurePlace(
-    placeId: number,
-    feature: boolean,
-  ): Promise<Place | HttpException> {
+  async featurePlace(@Body() dto: FeatureDTO): Promise<Place | HttpException> {
     try {
-      if (feature) {
+      if (dto.feature) {
         const places = await this.prisma.place.findMany({
           where: {
             isFeatured: true,
@@ -195,20 +178,20 @@ export class PlaceService {
         if (places.length < 5) {
           const place = await this.prisma.place.update({
             where: {
-              id: placeId,
+              id: dto.placeId,
             },
             data: {
-              isFeatured: feature,
+              isFeatured: dto.feature,
             },
           });
         }
       } else {
         const place = await this.prisma.place.update({
           where: {
-            id: placeId,
+            id: dto.placeId,
           },
           data: {
-            isFeatured: feature,
+            isFeatured: dto.feature,
           },
         });
       }
@@ -223,5 +206,17 @@ export class PlaceService {
       by: ['district'],
     });
     return districts;
+  }
+  async getAllPlaces() {
+    const places = await this.prisma.place.findMany({
+      where:{
+        valid: true
+      },
+      include:{
+        Category: true,
+        Orientation: true
+      }
+    });
+    return places;
   }
 }

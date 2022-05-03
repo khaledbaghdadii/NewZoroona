@@ -18,12 +18,28 @@
     font-size: 14px;
 }
 
+.fs-16 {
+    font-size: 16px;
+}
+
 .fs-18 {
     font-size: 18px;
 }
 
+.fs-20 {
+    font-size: 20px;
+}
+
 .fs-24 {
     font-size: 24px;
+}
+
+.fs-30 {
+    font-size: 30px;
+}
+
+.fs-27 {
+    font-size: 27px;
 }
 
 .fs-36 {
@@ -53,6 +69,10 @@
 }
 
 //apply to all buttons
+.btn {
+    border-radius: 15px;
+}
+
 .btn:focus {
     box-shadow: none !important;
 }
@@ -82,7 +102,7 @@
 
 .img-beside-text {
     width: 600px;
-    height: 400px;
+    height: 430px;
 }
 
 .bg-rose {
@@ -90,7 +110,7 @@
 }
 
 .rounded-8 {
-    border-radius: 8px;
+    border-radius: 15px;
 }
 
 .w-40 {
@@ -103,4 +123,29 @@
 
 .bg-danger {
     background-color: rgb(211, 64, 64);
+}
+
+.text-secondary {
+    color: $secondary;
+}
+
+.text-black {
+    color: black;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    color: $primary !important;
+    background-color: #f8e9dc;
+}
+
+a:hover {
+    color: $primary !important;
+}
+
+.checked {
+    color: $primary;
 }
