@@ -103,8 +103,8 @@
       <h1 class="fw-700">All Places</h1>
       <div class="d-flex justify-content-between my-3">
         <div class="input-group w-40">
-          <input type="search" class="form-control" placeholder="Search" />
-          <button class="btn btn-primary text-white">
+          <input type="search" class="form-control" placeholder="Search" v-model="this.searchText" />
+          <button class="btn btn-primary text-white " @click="searchPlaces()">
             <i class="fas fa-search"></i>
           </button>
         </div>
@@ -393,6 +393,7 @@ export default {
       allOrientations: [],
       checkedOrientations: [],
       checkedAvailablity: '',
+      searchText: '',
     };
   },
   methods: {
@@ -402,6 +403,14 @@ export default {
     printSelectedCategories() {
       alert(this.checkedAvailablity);
     },
+    searchPlaces(){
+      const self = this
+      //console.log(this.searchText)
+      PlacespageService.getPlacesBySearch(this.searchText).then(function(res){
+        console.log(res.data)
+        self.allPlaces = res.data
+      })
+    }
   },
   mounted() {
     const self = this;
@@ -409,10 +418,10 @@ export default {
     self.activeItem = -1;
     HomepageService.getFeaturedPlaces()
       .then(function (res) {
-        console.log(res.data);
+        //console.log(res.data);
         self.showLoader = false;
         self.featuredPlaces = res.data || [];
-        console.log(self.featuredPlaces);
+        //console.log(self.featuredPlaces);
       })
       .catch(function () {
         self.showLoader = false;
@@ -420,10 +429,10 @@ export default {
 
     PlacespageService.getAllPlaces()
       .then(function (res) {
-        console.log(res.data);
+        //console.log(res.data);
         self.showLoader = false;
         self.allPlaces = res.data || [];
-        console.log(self.allPlaces);
+        //console.log(self.allPlaces);
       })
       .catch(function () {
         self.showLoader = false;
@@ -431,10 +440,10 @@ export default {
 
     PlacespageService.getAllCategories()
       .then(function (res) {
-        console.log(res.data);
+        ///console.log(res.data);
         self.showLoader = false;
         self.allCategories = res.data || [];
-        console.log(self.allCategories);
+        //console.log(self.allCategories);
       })
       .catch(function () {
         self.showLoader = false;
@@ -442,10 +451,10 @@ export default {
 
     PlacespageService.getAllOrientations()
       .then(function (res) {
-        console.log(res.data);
+        //console.log(res.data);
         self.showLoader = false;
         self.allOrientations = res.data || [];
-        console.log(self.allOrientations);
+        //console.log(self.allOrientations);
       })
       .catch(function () {
         self.showLoader = false;

@@ -8,5 +8,8 @@ export default {
     },
     getAllOrientations() {
         return Endpoint().get(`http://localhost:3333/orientation/`)
+    },
+    getPlacesBySearch(text) {
+        return Endpoint().get(`http://localhost:3333/places/search?text=${text}`, { params: text })
     }
 }
