@@ -48,6 +48,7 @@ export class PlaceService {
         },
         include: {
           Category: true,
+          Orientation: true,
         },
         take: 9,
       });

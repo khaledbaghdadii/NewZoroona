@@ -103,7 +103,7 @@
       <h1 class="fw-700">All Places</h1>
       <div class="d-flex justify-content-between my-3">
         <div class="input-group w-40">
-          <input type="search" class="form-control" placeholder="Search" v-model="this.searchText" />
+          <input type="search" class="form-control" placeholder="Search" v-model="this.searchText" @change="searchPlaces()"/>
           <button class="btn btn-primary text-white " @click="searchPlaces()">
             <i class="fas fa-search"></i>
           </button>
@@ -459,6 +459,6 @@ export default {
       .catch(function () {
         self.showLoader = false;
       });
-  },
+  }
 };
 </script>
