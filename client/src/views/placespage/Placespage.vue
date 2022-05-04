@@ -288,15 +288,15 @@
                 class="me-2"
                 alt="location"
               />
-              <span class="fw-700">{{ place.district }}</span>
+              <span class="fw-700">{{place.address}}, {{place.city}} - {{place.district}}</span>
             </div>
             <div class="d-flex py-2">
               <span class="fa fa-users text-primary fa-lg pe-2"></span>
               <span class="fw-700">{{ place.Orientation.description }}</span>
             </div>
             <div class="d-flex">
-              <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
-              <span class="fw-700 fs-24">{{
+              <i class="fa fa-money-bill fa-lg text-primary pt-2 pe-2"></i>
+              <span class="fw-700 fs-24">${{
                 place.averagePricePerPerson
               }}</span>
               <span class="fs-14 pt-2">/person</span>

@@ -109,6 +109,7 @@
               <h4 class="fw-700 pt-3">
                 {{place.description}}
               </h4>
+              <h5 class="fw-500"><i>{{place.name}}</i></h5>
               <div class="d-flex">
                 <img
                   src="@/assets/images/location.svg"
@@ -116,11 +117,11 @@
                   class="me-2"
                   alt="location"
                 />
-                <span> <strong>{{place.name}}</strong>, {{place.district}}</span>
+                <span>{{place.address}}, {{place.city}} - {{place.district}}</span>
               </div>
               <div class="d-flex">
-                <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
-                <span class="fw-700 fs-24">{{place.avergePricePerPerson}}</span>
+                <i class="fa fa-money-bill fa-lg text-primary pt-2 pe-2"></i>
+                <span class="fw-700 fs-24">${{place.averagePricePerPerson}}</span>
                 <span class="fs-14 pt-2">/person</span>
               </div>
             </div>
