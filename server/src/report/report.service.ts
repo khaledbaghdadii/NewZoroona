@@ -1,7 +1,7 @@
-import {Body, HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {Report} from '@prisma/client';
+import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Report } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import {AddDTO} from "../report/dto";
+import { AddDTO } from '../report/dto';
 
 @Injectable({})
 export class ReportService {
@@ -50,7 +50,7 @@ export class ReportService {
         data: {
           reviewId: dto.reviewId,
           description: dto.description,
-          reporterId: dto.reporterId
+          reporterId: dto.reporterId,
         },
       });
       return report;

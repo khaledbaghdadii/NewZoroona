@@ -53,7 +53,7 @@ export class PlaceController {
   }
   @Get('filter')
   getPlaceByFilters(@Body() dto: FilterDTO) {
-    return this.placeService.getPlacesByFilter( dto);
+    return this.placeService.getPlacesByFilter(dto);
   }
   @Get('district')
   getDistricts() {
