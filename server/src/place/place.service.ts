@@ -46,6 +46,9 @@ export class PlaceService {
           },
           valid: true,
         },
+        include: {
+          Category: true,
+        },
         take: 9,
       });
       return places;
