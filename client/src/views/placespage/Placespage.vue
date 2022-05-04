@@ -131,7 +131,7 @@
                   ></button>
                 </div>
 
-                <form class="needs-validation" v-on:submit.prevent="submitForm">
+                <form class="needs-validation" v-on:submit.prevent="filterPlaces()">
                   <!-- Modal body -->
                   <div class="modal-body">
                     <div class="mb-3">
@@ -203,6 +203,7 @@
                           name="available"
                           value="1"
                           v-model="checkedAvailablity"
+                          checked
                         />
                         <label class="form-check-label">Available</label>
                       </div>
@@ -235,7 +236,7 @@
                   <!-- Modal footer -->
                   <div class="modal-footer">
                     <button
-                      type="button"
+                      type="submit"
                       class="btn btn-primary text-white"
                       data-bs-dismiss="modal"
                       @click="printSelectedCategories()"
@@ -389,10 +390,10 @@ export default {
       featuredPlaces: [],
       allPlaces: [],
       allCategories: [],
-      checkedCategories: [],
+      checkedCategories: [] ,
       allOrientations: [],
       checkedOrientations: [],
-      checkedAvailablity: '',
+      checkedAvailablity: 2,
       searchText: '',
     };
   },
@@ -401,7 +402,7 @@ export default {
       this.$router.push("/detailed-placepage");
     },
     printSelectedCategories() {
-      alert(this.checkedAvailablity);
+     // alert(this.checkedCategories);
     },
     searchPlaces(){
       const self = this
@@ -409,6 +410,30 @@ export default {
       PlacespageService.getPlacesBySearch(this.searchText).then(function(res){
         console.log(res.data)
         self.allPlaces = res.data
+      })
+    },
+    filterPlaces(){
+      console.log("chekcked categoruies: "+this.checkedCategories)
+      console.log("chekcked orientations: "+this.checkedOrientations)
+      console.log("chekcked availability: "+this.checkedAvailablity)
+      //const self = this
+      let payloadVar = {
+        orientation: this.checkedOrientations.length==0?this.allOrientations:this.checkedOrientations,
+        category: this.checkedCategories.length==0?this.allCategories: this.checkedCategories,
+        hasReservation: this.checkedAvailablity,
+        district:["test","beirut"],
+        maxPrice: 1000000,
+        minPrice:0
+      };
+
+      console.log("Payload passed ")
+      console.log(payloadVar.orientation)
+      console.log(payloadVar.category)
+      console.log(payloadVar.hasReservation)
+      console.log(payloadVar.district)
+
+      PlacespageService.getPlacesByFilter(payloadVar).then(function(res){
+        console.log(res.data)
       })
     }
   },

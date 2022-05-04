@@ -11,5 +11,8 @@ export default {
     },
     getPlacesBySearch(text) {
         return Endpoint().get(`http://localhost:3333/places/search?text=${text}`, { params: text })
+    },
+    getPlacesByFilter(payload) {
+        return Endpoint().get(`http://localhost:3333/places/filter`, { params: payload })
     }
 }
