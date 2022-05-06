@@ -138,7 +138,6 @@ export class FilterDTO {
   category: number[];
   @Transform(({ value }) => value.split(','))
   district: string[];
-  @IsInt()
   @Transform(({ value }) => parseInt(value))
   hasReservation: number;
   @IsInt()

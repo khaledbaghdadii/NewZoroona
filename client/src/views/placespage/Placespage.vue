@@ -413,6 +413,7 @@ export default {
       })
     },
     filterPlaces(){
+      const self = this
       console.log("chekcked categoruies: "+this.checkedCategories)
       console.log("chekcked orientations: "+this.checkedOrientations)
       console.log("chekcked availability: "+this.checkedAvailablity)
@@ -434,6 +435,7 @@ export default {
 
       PlacespageService.getPlacesByFilter(payloadVar).then(function(res){
         console.log(res.data)
+        self.allPlaces = res.data
       })
     }
   },
