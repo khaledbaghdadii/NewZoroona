@@ -14,5 +14,8 @@ export default {
     },
     getPlacesByFilter(payload) {
         return Endpoint().post(`http://localhost:3333/places/filter`, payload)
-    }
+    },
+    getAllDistricts() {
+        return Endpoint().get(`http://localhost:3333/places/district`)
+    },
 }

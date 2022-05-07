@@ -179,6 +179,28 @@
                         }}</label>
                       </div>
                     </div>
+                    <div class="my-3">
+                      <label for="name" class="form-label fw-700"
+                      >District:</label
+                      >
+                      <div
+                          v-for="district in allDistricts"
+                          v-bind:key="district.district"
+                          class="form-check cursor-pointer"
+                      >
+                        <input
+                            class="form-check-input cursor-pointer"
+                            type="checkbox"
+                            :id="district.district"
+                            :name="district.district"
+                            :value="district.district"
+                            v-model="checkedDistricts"
+                        />
+                        <label class="form-check-label">{{
+                            district.district
+                          }}</label>
+                      </div>
+                    </div>
 
                     <div class="my-3">
                       <label for="name" class="form-label fw-700"
@@ -203,7 +225,7 @@
                           name="available"
                           value="1"
                           v-model="checkedAvailablity"
-                          checked
+
                         />
                         <label class="form-check-label">Available</label>
                       </div>
@@ -224,12 +246,7 @@
                       <label for="category" class="form-label fw-700"
                         >Price Range Per Person:</label
                       >
-                      <select class="form-select cursor-pointer">
-                        <option>0-15</option>
-                        <option>100</option>
-                        <option>3</option>
-                        <option>4</option>
-                      </select>
+                        <Slider v-model="value" :max="200" class="mt-5 slider-primary"/>
                     </div>
                   </div>
 
@@ -239,7 +256,6 @@
                       type="submit"
                       class="btn btn-primary text-white"
                       data-bs-dismiss="modal"
-                      @click="printSelectedCategories()"
                     >
                       Apply Changes
                     </button>
@@ -305,77 +321,6 @@
           </div>
         </div>
 
-        <!-- <div class="col-sm-12 col-md-6 col-lg-4 py-3">
-          <div
-            class="post-img cursor-pointer"
-            :style="{
-              'background-image':
-                'url(' + require('@/assets/images/raouche.jpg') + ')',
-            }"
-            @click="goToPlacePage()"
-          >
-            <div class="text-end">
-              <span class="badge badge-background-color m-3">Classical</span>
-            </div>
-          </div>
-          <div class="d-flex flex-column">
-            <h4 class="fw-700 pt-3">Raouche</h4>
-            <div class="d-flex">
-              <img
-                src="@/assets/images/location.svg"
-                id="location"
-                class="me-2"
-                alt="location"
-              />
-              <span> <strong>Beirut</strong></span>
-            </div>
-            <div class="d-flex py-2">
-              <span class="fa fa-users text-primary fa-lg pe-2"></span>
-              <span class="fw-700">Family</span>
-            </div>
-            <div class="d-flex">
-              <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
-              <span class="fw-700 fs-24">35</span>
-              <span class="fs-14 pt-2">/person</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-12 col-md-6 col-lg-4 py-3">
-          <div
-            class="post-img cursor-pointer"
-            :style="{
-              'background-image':
-                'url(' + require('@/assets/images/Tyre-Ruins.jpg') + ')',
-            }"
-            @click="goToPlacePage()"
-          >
-            <div class="text-end">
-              <span class="badge badge-background-color m-3">Historical</span>
-            </div>
-          </div>
-          <div class="d-flex flex-column">
-            <h4 class="fw-700 pt-3">Tyre Ruins</h4>
-            <div class="d-flex">
-              <img
-                src="@/assets/images/location.svg"
-                id="location"
-                class="me-2"
-                alt="location"
-              />
-              <span> <strong>South Lebanon</strong></span>
-            </div>
-            <div class="d-flex py-2">
-              <span class="fa fa-users text-primary fa-lg pe-2"></span>
-              <span class="fw-700">Family</span>
-            </div>
-            <div class="d-flex">
-              <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
-              <span class="fw-700 fs-24">10</span>
-              <span class="fs-14 pt-2">/person</span>
-            </div>
-          </div>
-        </div> -->
       </div>
     </section>
   </div>
@@ -383,10 +328,10 @@
 <script>
 import HomepageService from "@/services/HomepageService.js";
 import PlacespageService from "@/services/PlacespageService.js";
+import Slider from '@vueform/slider'
 export default {
   name: "Placespage",
-  data() {
-    return {
+  data: ()=>({
       featuredPlaces: [],
       allPlaces: [],
       allCategories: [],
@@ -395,18 +340,16 @@ export default {
       checkedOrientations: [],
       checkedAvailablity: 2,
       searchText: '',
-    };
-  },
+      allDistricts:[],
+      checkedDistricts:[],
+      value: [20,100]
+    }),
   methods: {
     goToPlacePage() {
       this.$router.push("/detailed-placepage");
     },
-    printSelectedCategories() {
-     // alert(this.checkedCategories);
-    },
     searchPlaces(){
       const self = this
-      //console.log(this.searchText)
       PlacespageService.getPlacesBySearch(this.searchText).then(function(res){
         console.log(res.data)
         self.allPlaces = res.data
@@ -416,15 +359,18 @@ export default {
       const self = this
       let allOrientationsIds = this.allOrientations.map(e=> {return e.id})
       let allCategoriesIds = this.allOrientations.map(e=> {return e.id})
+      console.log("Districts from backend ")
+      console.log(self.checkedDistricts)
+      let allDistrictNames = this.allDistricts.map(e=> {return e.district})
       let payloadVar = {
         orientation: this.checkedOrientations.length===0?allOrientationsIds:this.checkedOrientations,
         category: this.checkedCategories.length===0?allCategoriesIds: this.checkedCategories,
         hasReservation: this.checkedAvailablity,
-        district:["test","Beirut","dummy"],
-        maxPrice: 1000000,
-        minPrice:0
+        district:this.checkedDistricts.length===0?allDistrictNames:this.checkedDistricts,
+        maxPrice: this.value[1],
+        minPrice:this.value[0]
       };
-
+      console.log(payloadVar)
       PlacespageService.getPlacesByFilter(payloadVar).then(function(res){
         console.log(res.data)
         self.allPlaces = res.data
@@ -432,15 +378,14 @@ export default {
     }
   },
   mounted() {
+    console.log("Value: "+this.value)
     const self = this;
     this.showLoader = true;
     self.activeItem = -1;
     HomepageService.getFeaturedPlaces()
       .then(function (res) {
-        //console.log(res.data);
         self.showLoader = false;
         self.featuredPlaces = res.data || [];
-        //console.log(self.featuredPlaces);
       })
       .catch(function () {
         self.showLoader = false;
@@ -470,14 +415,26 @@ export default {
 
     PlacespageService.getAllOrientations()
       .then(function (res) {
-        //console.log(res.data);
         self.showLoader = false;
         self.allOrientations = res.data || [];
-        // console.log("Returned all orentstionas" + self.allOrientations);
       })
       .catch(function () {
         self.showLoader = false;
       });
+    PlacespageService.getAllDistricts()
+        .then(function (res) {
+          self.showLoader = false;
+          self.allDistricts = res.data || [];
+        })
+        .catch(function () {
+          self.showLoader = false;
+        });
+  },
+  components: {
+    Slider
   }
 };
 </script>
+<style src="@vueform/slider/themes/default.css" >
+
+</style>
