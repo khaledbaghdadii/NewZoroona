@@ -414,24 +414,16 @@ export default {
     },
     filterPlaces(){
       const self = this
-      console.log("chekcked categoruies: "+this.checkedCategories)
-      console.log("chekcked orientations: "+this.checkedOrientations)
-      console.log("chekcked availability: "+this.checkedAvailablity)
-      //const self = this
+      let allOrientationsIds = this.allOrientations.map(e=> {return e.id})
+      let allCategoriesIds = this.allOrientations.map(e=> {return e.id})
       let payloadVar = {
-        orientation: this.checkedOrientations.length==0?this.allOrientations:this.checkedOrientations,
-        category: this.checkedCategories.length==0?this.allCategories: this.checkedCategories,
+        orientation: this.checkedOrientations.length===0?allOrientationsIds:this.checkedOrientations,
+        category: this.checkedCategories.length===0?allCategoriesIds: this.checkedCategories,
         hasReservation: this.checkedAvailablity,
-        district:["test","beirut"],
+        district:["test","Beirut","dummy"],
         maxPrice: 1000000,
         minPrice:0
       };
-
-      console.log("Payload passed ")
-      console.log(payloadVar.orientation)
-      console.log(payloadVar.category)
-      console.log(payloadVar.hasReservation)
-      console.log(payloadVar.district)
 
       PlacespageService.getPlacesByFilter(payloadVar).then(function(res){
         console.log(res.data)
@@ -481,7 +473,7 @@ export default {
         //console.log(res.data);
         self.showLoader = false;
         self.allOrientations = res.data || [];
-        //console.log(self.allOrientations);
+        // console.log("Returned all orentstionas" + self.allOrientations);
       })
       .catch(function () {
         self.showLoader = false;

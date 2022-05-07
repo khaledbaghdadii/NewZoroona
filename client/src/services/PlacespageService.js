@@ -13,6 +13,6 @@ export default {
         return Endpoint().get(`http://localhost:3333/places/search?text=${text}`, { params: text })
     },
     getPlacesByFilter(payload) {
-        return Endpoint().get(`http://localhost:3333/places/filter`, { params: payload })
+        return Endpoint().post(`http://localhost:3333/places/filter`, payload)
     }
 }

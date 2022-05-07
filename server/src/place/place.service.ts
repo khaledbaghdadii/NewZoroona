@@ -61,6 +61,10 @@ export class PlaceService {
   async getPlacesByFilter(@Body() dto: FilterDTO): Promise<Place[]> {
     try {
       let places = [];
+      console.log("Has res" + dto.hasReservation)
+      console.log("Categories passed: "+dto.category)
+      console.log("Orientations passed: "+dto.orientation)
+      console.log(dto)
       if (dto.hasReservation == 2) {
         places = await this.prisma.place.findMany({
           where: {
@@ -74,10 +78,10 @@ export class PlaceService {
               in: dto.district,
             },
             valid: true,
-            averagePricePerPerson: {
-              gte: dto.minPrice ? dto.minPrice : Number.MIN_SAFE_INTEGER,
-              lte: dto.maxPrice ? dto.maxPrice : Number.MAX_SAFE_INTEGER,
-            },
+            // averagePricePerPerson: {
+            //   gte: dto.minPrice ? dto.minPrice : Number.MIN_SAFE_INTEGER,
+            //   lte: dto.maxPrice ? dto.maxPrice : Number.MAX_SAFE_INTEGER,
+            // },
           },
           include: {
             Category: true,
@@ -109,6 +113,7 @@ export class PlaceService {
       }
       return places;
     } catch (e) {
+      console.log(e)
       return [];
     }
   }
