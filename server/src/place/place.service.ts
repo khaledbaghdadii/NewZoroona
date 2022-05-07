@@ -79,6 +79,10 @@ export class PlaceService {
               lte: dto.maxPrice ? dto.maxPrice : Number.MAX_SAFE_INTEGER,
             },
           },
+          include: {
+            Category: true,
+            Orientation: true,
+          },
           take: 9,
         });
       } else {
@@ -95,6 +99,10 @@ export class PlaceService {
             },
             hasReservation: dto.hasReservation != 0,
             valid: true,
+          },
+          include: {
+            Category: true,
+            Orientation: true,
           },
           take: 9,
         });
