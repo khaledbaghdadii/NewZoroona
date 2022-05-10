@@ -4,6 +4,7 @@ import { RequestService } from './request.service';
 import {Review} from "@prisma/client";
 import {RolesGuard} from "./guards/local.guard";
 import {Roles} from "../auth/decorators/roles.decorators";
+import {ManagerDTO} from "../request/dto";
 
 @Controller('requests')
 export class RequestController {
@@ -27,5 +28,10 @@ export class RequestController {
     @Post('reject')
     rejectRequest(@Body('requestId', ParseIntPipe) requestId: number) {
         return this.requestService.rejectRequest(requestId);
+    }
+    //endpoint for adding a request
+    @Post('request/manager')
+    addManagerRequest(@Body() dto: ManagerDTO) {
+        return this.requestService.addManagerRequest(dto);
     }
 }

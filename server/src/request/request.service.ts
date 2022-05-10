@@ -7,8 +7,9 @@ import {
 } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
-import {Request} from '@prisma/client';
-import { AddDTO } from './dto';
+import {Place, Request, User} from '@prisma/client';
+import { ManagerDTO } from './dto';
+import * as argon from "argon2";
 
 @Injectable({})
 export class RequestService {
@@ -100,5 +101,63 @@ export class RequestService {
             return new HttpException('Not found', HttpStatus.NOT_FOUND);
         }
         return 'Processed successfully';
+    }
+    async addManagerRequest(@Body() dto: ManagerDTO): Promise<Request | HttpException> {
+        try {
+
+            //create user
+            const hash = await argon.hash(dto.password);
+
+            //save the user in the db
+            const user = await this.prisma.user.create({
+                data: {
+                    email: dto.userEmail,
+                    hash: hash,
+                    gender: dto.gender,
+                    name: dto.userName,
+                    phoneNumber: dto.userPhoneNumber,
+                    roleTypeId: 2,
+                    dateOfBirth: dto.dateOfBirth,
+                    valid:false,
+                },
+            });
+            delete user.hash;
+            //create place
+            const place = await this.prisma.place.create({
+                data: {
+                    email: dto.placeEmail,
+                    name: dto.placeName,
+                    phoneNumber: dto.placePhoneNumber,
+                    city: dto.city,
+                    district: dto.district,
+                    address: dto.address,
+                    location: dto.location,
+                    website: dto.website,
+                    sector: dto.sector,
+                    description: dto.description,
+                    image: dto.image,
+                    categoryId: dto.categoryId,
+                    managerId: user.id,
+                    hasReservation: dto.hasReservation,
+                    orientationId: dto.orientationId,
+                    valid: false,
+                    averagePricePerPerson: dto.averagePricePerPerson,
+                },
+            });
+
+
+            //create request
+            const request = await this.prisma.request.create({
+                data: {
+                    managerId: user.id,
+                    requestTypeId: 1,
+                    placeId: place.id,
+                    processed:false
+                },
+            });
+            return request;
+        } catch (err) {
+            return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
+        }
     }
 }
