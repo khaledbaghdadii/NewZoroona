@@ -1,9 +1,16 @@
-import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  Body,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UploadedFiles,
+} from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { Place } from '@prisma/client';
 import { UpdateDTO, AddDTO, FilterDTO, FeatureDTO } from '../place/dto';
-
+const cloudinary = require('cloudinary');
+const fs = require('fs');
 @Injectable({})
 export class PlaceService {
   constructor(private prisma: PrismaService) {}
@@ -221,5 +228,51 @@ export class PlaceService {
       },
     });
     return places;
+  }
+  async uploadFile(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    placeId: number,
+  ) {
+    console.log(placeId);
+    this.base64_decode(files[0].buffer, files[0].originalname);
+    const imageName = files[0].originalname;
+    const imageMetadata = {
+      public_id: files[0].originalname.slice(
+        0,
+        files[0].originalname.indexOf('.'),
+      ),
+    };
+    const url = await this.uploadToCloudinary(imageName, imageMetadata);
+    await this.prisma.place.update({
+      where: { id: placeId },
+      data: { image: url },
+    });
+    return 'Added successfully';
+  }
+  // function to create file from base64 encoded string
+  base64_decode(base64str, file) {
+    // create buffer object from base64 encoded string,
+    // it is important to tell the constructor
+    // that the string is base64 encoded
+    const bitmap = new Buffer(base64str, 'base64');
+    // write buffer to file
+    fs.writeFileSync(file, bitmap);
+  }
+  async uploadToCloudinary(imageName, imageMetadata) {
+    return new Promise((resolve, reject) => {
+      cloudinary.config({
+        cloud_name: 'dhpaajfal',
+        api_key: '128848466179765',
+        api_secret: '8c_s3HVV6j-RvG8oQ1uYRtMlWAg',
+      });
+      cloudinary.v2.uploader.upload(
+        imageName,
+        imageMetadata,
+        (err, response) => {
+          if (err) return reject(err);
+          return resolve(response.url);
+        },
+      );
+    });
   }
 }
