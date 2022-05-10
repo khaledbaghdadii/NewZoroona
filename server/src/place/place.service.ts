@@ -95,8 +95,8 @@ export class PlaceService {
             },
             valid: true,
             averagePricePerPerson: {
-              gte: dto.minPrice ? dto.minPrice : Number.MIN_SAFE_INTEGER,
-              lte: dto.maxPrice ? dto.maxPrice : Number.MAX_SAFE_INTEGER,
+              gte: dto.minPrice!=null ? dto.minPrice : 0,
+              lte: dto.maxPrice!=null ? dto.maxPrice : 999,
             },
           },
           include: {
