@@ -9,13 +9,8 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { Place } from '@prisma/client';
 import { UpdateDTO, AddDTO, FilterDTO, FeatureDTO } from '../place/dto';
-<<<<<<< HEAD
-import { IncomingMessage } from 'http';
-
-=======
 const cloudinary = require('cloudinary');
 const fs = require('fs');
->>>>>>> 4160a8a9e3e03964282cf2b681cc4601512709fb
 @Injectable({})
 export class PlaceService {
   constructor(private prisma: PrismaService) {}
