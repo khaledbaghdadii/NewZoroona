@@ -5,12 +5,15 @@ import {
   ParseIntPipe,
   Post,
   Query,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UpdateDTO, AddDTO, FeatureDTO, FilterDTO } from './dto';
 import { PlaceService } from './place.service';
 import { Roles } from '../auth/decorators/roles.decorators';
 import { RolesGuard } from '../place/guards/local.guard';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('places')
 export class PlaceController {
@@ -62,5 +65,13 @@ export class PlaceController {
   @Get('all')
   getAllPlaces() {
     return this.placeService.getAllPlaces();
+  }
+  @Post('uploadImage')
+  @UseInterceptors(FilesInterceptor('image'))
+  uploadFile(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Body('placeId', ParseIntPipe) placeId: number,
+  ) {
+    return this.placeService.uploadFile(files, placeId);
   }
 }
