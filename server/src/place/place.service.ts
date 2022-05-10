@@ -3,6 +3,7 @@ import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Place } from '@prisma/client';
 import { UpdateDTO, AddDTO, FilterDTO, FeatureDTO } from '../place/dto';
+import { IncomingMessage } from 'http';
 
 @Injectable({})
 export class PlaceService {
@@ -12,6 +13,10 @@ export class PlaceService {
       where: {
         id: placeId,
       },
+      include:{
+        Category:true,
+        Orientation:true,
+      }
     });
     if (!place) {
       return new HttpException('Place not found', HttpStatus.NOT_FOUND);

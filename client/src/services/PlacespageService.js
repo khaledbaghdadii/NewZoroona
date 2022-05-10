@@ -18,4 +18,10 @@ export default {
     getAllDistricts() {
         return Endpoint().get(`http://localhost:3333/places/district`)
     },
+    getPlace(id) {
+        return Endpoint().get(`http://localhost:3333/places/place?placeId=${id}`)
+    },
+    getPackages(id) {
+        return Endpoint().get(`http://localhost:3333/packages/packages?placeId=${id}`)
+    }
 }

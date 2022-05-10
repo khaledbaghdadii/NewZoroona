@@ -8,21 +8,22 @@
         class="img-beside-text me-lg-5 rounded-8 mt-4"
       />
       <div class="ms-lg-5 mt-3">
-        <h1 class="fw-700 me-3 text-primary">Raouche</h1>
+        <h1 class="fw-700 me-3 text-primary">{{ place.name }}</h1>
         <h5 class="fw-700">
           <span
             class="badge place-badge-background-color py-2 px-3 align-self-center"
-            >Natural</span
-          ><span class="mid-point"> </span><i class="fw-700">Public</i
+            >{{ placeCategoryDescription }}</span
+          ><span class="mid-point"> </span
+          ><i class="fw-700">{{ place.sector }}</i
           ><span class="mid-point"> </span>
           <span
             class="badge place-badge-background-color py-2 px-3 align-self-center"
-            ><span class="text-white fs-16 fw-700 pe-2">4</span
+            ><span class="text-white fs-16 fw-700 pe-2">{{ place.rating }}</span
             ><i class="fa fa-star text-primary"></i
           ></span>
         </h5>
         <div class="d-flex flex-column">
-          <h4 class="fw-700">Enjoy the beauty of Lebanon's sunset</h4>
+          <h4 class="fw-700">{{ place.description }}</h4>
 
           <div class="d-flex pb-2">
             <img
@@ -31,15 +32,18 @@
               class="me-3"
               alt="location"
             />
-            <span> <strong>Tyre Ruins</strong>, Tyre</span>
+            <span>
+              <strong>{{ place.address }}</strong
+              >, {{ place.district }}</span
+            >
           </div>
           <div class="d-flex pb-2">
             <span class="fa fa-users text-primary fa-lg pe-2"></span>
-            <span class="fw-700 ms-2">Family</span>
+            <span class="fw-700 ms-2">{{ placeOrientationDescription }}</span>
           </div>
           <div class="d-flex pb-2">
             <div class="ps-1 fs-24 fw-700 text-primary me-4">$</div>
-            <span class="fw-700 fs-24">10</span>
+            <span class="fw-700 fs-24">{{ place.averagePricePerPerson }}</span>
             <span class="fs-14 pt-2">/person</span>
           </div>
           <div class="d-flex pb-2">
@@ -47,23 +51,23 @@
             <a
               class="fw-700 ms-3 text-black no-underline"
               href="tel: +96101552123"
-              >+961 01-552123</a
+              >{{ place.phoneNumber }}</a
             >
           </div>
           <div class="d-flex pb-2">
             <span class="fa fa-envelope text-primary fa-lg pe-2"></span>
             <span class="fw-700 ms-3 text-black"
-              ><a class="text-black" href="mailto: Raouche@gmail.com"
-                >Raouche@gmail.com</a
-              ></span
+              ><a class="text-black" href="mailto: Raouche@gmail.com">{{
+                place.email
+              }}</a></span
             >
           </div>
           <div class="d-flex pb-2">
             <span class="fa fa-globe text-primary fa-lg pe-2"></span>
             <span class="fw-700 ms-3"
-              ><a class="text-black" href="https:/google.com" target="_blanc"
-                >Raouche.com</a
-              ></span
+              ><a class="text-black" href="https:/google.com" target="_blanc">{{
+                place.website
+              }}</a></span
             >
           </div>
         </div>
@@ -229,54 +233,22 @@
       <div
         class="row mb-3 d-flex flex-lg-row justify-content-md-between align-items-center flex-column"
       >
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 p-3 package-box">
+        <div
+          v-for="packagee in packages"
+          :key="packagee.id"
+          class="col-sm-12 col-md-6 col-lg-4 mb-3 p-3 package-box"
+        >
           <div class="d-flex flex-column justify-content-between h-100">
             <div>
               <h2 class="border-bottom pb-2 fw-700 text-secondary">
-                “ Cheesy 3azizi ”
+                “ {{packagee.name}}”
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                {{packagee.description}}
               </p>
             </div>
             <div class="fs-27 fw-700 text-secondary me-4">
-              <i class="fa fa-money-bill"></i> 360,000 L.L
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 p-3 package-box">
-          <div class="d-flex flex-column justify-content-between h-100">
-            <div>
-              <h2 class="border-bottom pb-2 fw-700 text-secondary">
-                “ Cheesy 3azizi ”
-              </h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              </p>
-            </div>
-            <div class="fs-27 fw-700 text-secondary me-4">
-              <i class="fa fa-money-bill"></i> 360,000 L.L
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 p-3 package-box">
-          <div class="d-flex flex-column justify-content-between h-100">
-            <div>
-              <h2 class="border-bottom pb-2 fw-700 text-secondary">
-                “ Cheesy 3azizi ”
-              </h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              </p>
-            </div>
-            <div class="fs-27 fw-700 text-secondary me-4">
-              <i class="fa fa-money-bill"></i> 360,000 L.L
+              <i class="fa fa-money-bill"></i> $ {{packagee.cost}}
             </div>
           </div>
         </div>
@@ -310,9 +282,7 @@
                 </button>
               </div>
             </template>
-            <button
-              class="btn btn-secondary py-2"
-            >
+            <button class="btn btn-secondary py-2">
               <i class="fa fa-edit me-2"></i>Add Review
             </button>
           </Popper>
@@ -414,9 +384,7 @@
                         </button>
                       </div>
                     </template>
-                    <button
-                      class="btn btn-secondary"
-                    >
+                    <button class="btn btn-secondary">
                       <i class="fa fa-flag"></i>
                     </button>
                   </Popper>
@@ -564,10 +532,47 @@
 
 <script>
 import Popper from "vue3-popper";
+import PlacespageService from "@/services/PlacespageService.js";
 export default {
   name: "DetailedPlacePage",
+  data: () => ({
+    place: [],
+    placeOrientationDescription: "",
+    placeCategoryDescription: "",
+    packages: [],
+  }),
   components: {
     Popper,
+  },
+  methods: {},
+  mounted() {
+    let id = this.$route.params.id;
+    const self = this;
+    PlacespageService.getPlace(id)
+      .then(function (res) {
+        self.showLoader = false;
+        console.log(res.data);
+        //console.log(res.data.Category.description)
+        self.place = res.data || [];
+        self.placeOrientationDescription = self.place.Orientation.description;
+        self.placeCategoryDescription = self.place.Category.description;
+        console.log(self.place.Category.description);
+      })
+      .catch(function () {
+        self.showLoader = false;
+      });
+
+    PlacespageService.getPackages(id)
+      .then(function (res) {
+        self.showLoader = false;
+        console.log(res.data);
+        //console.log(res.data.Category.description)
+        self.packages = res.data || [];
+        console.log(self.packages);
+      })
+      .catch(function () {
+        self.showLoader = false;
+      });
   },
 };
 </script>

@@ -211,6 +211,7 @@
         </h5>
         <button
           class="btn btn-primary mt-5 py-3 px-3 text-white fs-18 homepage-btn"
+          @click="goToSignupManager()"
         >
           Become a Manager!
         </button>
@@ -235,6 +236,9 @@ export default {
     goToPlacesPage() {
       this.$router.push("/placesPage");
     },
+    goToSignupManager(){
+      this.$router.push("/signupManager");
+    }
   },
   mounted() {
     const self = this;
