@@ -1,85 +1,129 @@
 import { Transform } from 'class-transformer';
-import {IsBoolean, IsEmail, IsInt, IsNotEmpty, IsOptional, IsString} from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-export class AddDTO {
-    @IsInt()
-    @Transform(({ value }) => parseInt(value))
-    placeId: number;
-    @IsInt()
-    @Transform(({ value }) => parseInt(value))
-    managerId: number;
-    @IsNotEmpty()
-    @IsInt()
-    @Transform(({ value }) => parseInt(value))
-    requestTypeId: number;
-    @IsInt()
-    @Transform(({ value }) => parseInt(value))
-    reviewId: number;
+export class AddPlaceDTO {
+  @IsEmail()
+  @IsOptional()
+  email: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+  @IsString()
+  @IsOptional()
+  phoneNumber: string;
+  @IsString()
+  @IsNotEmpty()
+  city: string;
+  @IsString()
+  @IsNotEmpty()
+  district: string;
+  @IsString()
+  @IsNotEmpty()
+  address: string;
+  @IsString()
+  @IsOptional()
+  location: string;
+  @IsString()
+  @IsOptional()
+  website: string;
+  @IsString()
+  @IsNotEmpty()
+  sector: string;
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  categoryId: number;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  orientationId: number;
+  @IsOptional()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  managerId: number;
+  @IsBoolean()
+  @IsNotEmpty()
+  @Transform(({ value }) => Boolean(value))
+  hasReservation: boolean;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  averagePricePerPerson: number;
 }
-export class ManagerDTO{
-//those of place
-    @IsEmail()
-    @IsOptional()
-    placeEmail: string;
-    @IsString()
-    @IsNotEmpty()
-    placeName: string;
-    @IsString()
-    @IsOptional()
-    placePhoneNumber: string;
-    @IsString()
-    @IsNotEmpty()
-    city: string;
-    @IsString()
-    @IsNotEmpty()
-    district: string;
-    @IsString()
-    @IsNotEmpty()
-    address: string;
-    @IsString()
-    @IsOptional()
-    location: string;
-    @IsString()
-    @IsOptional()
-    website: string;
-    @IsString()
-    @IsNotEmpty()
-    sector: string;
-    @IsString()
-    @IsNotEmpty()
-    description: string;
-    @IsNotEmpty()
-    @IsInt()
-    @Transform(({ value }) => parseInt(value))
-    categoryId: number;
-    @IsNotEmpty()
-    @IsInt()
-    @Transform(({ value }) => parseInt(value))
-    orientationId: number;
-    @IsBoolean()
-    @IsNotEmpty()
-    @Transform(({ value }) => Boolean(value))
-    hasReservation: boolean;
-    @IsNotEmpty()
-    @IsInt()
-    @Transform(({ value }) => parseInt(value))
-    averagePricePerPerson: number;
-//those of user
-    @IsEmail()
-    @IsNotEmpty()
-    userEmail: string;
-    @IsString()
-    @IsNotEmpty()
-    password: string;
-    @IsString()
-    @IsNotEmpty()
-    userName: string;
-    @IsString()
-    @IsNotEmpty()
-    userPhoneNumber: string;
-    @IsString()
-    @IsNotEmpty()
-    gender: string;
-    @Transform(({ value }) => new Date(value))
-    dateOfBirth: Date;
+export class ManagerDTO {
+  //those of place
+  @IsEmail()
+  @IsOptional()
+  placeEmail: string;
+  @IsString()
+  @IsNotEmpty()
+  placeName: string;
+  @IsString()
+  @IsOptional()
+  placePhoneNumber: string;
+  @IsString()
+  @IsNotEmpty()
+  city: string;
+  @IsString()
+  @IsNotEmpty()
+  district: string;
+  @IsString()
+  @IsNotEmpty()
+  address: string;
+  @IsString()
+  @IsOptional()
+  location: string;
+  @IsString()
+  @IsOptional()
+  website: string;
+  @IsString()
+  @IsNotEmpty()
+  sector: string;
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  categoryId: number;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  orientationId: number;
+  @IsBoolean()
+  @IsNotEmpty()
+  @Transform(({ value }) => Boolean(value))
+  hasReservation: boolean;
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  averagePricePerPerson: number;
+  //those of user
+  @IsEmail()
+  @IsNotEmpty()
+  userEmail: string;
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+  @IsString()
+  @IsNotEmpty()
+  userName: string;
+  @IsString()
+  @IsNotEmpty()
+  userPhoneNumber: string;
+  @IsString()
+  @IsNotEmpty()
+  gender: string;
+  @Transform(({ value }) => new Date(value))
+  dateOfBirth: Date;
 }
