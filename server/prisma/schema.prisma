@@ -40,7 +40,7 @@ phoneNumber String
 dateOfBirth DateTime?
 gender String
 roleTypeId Int
-valid Boolean @default(false)
+valid Boolean @default(true)
 RoleType RoleType @relation(fields: [roleTypeId], references: [id])
 Place Place[]
 Review Review[]
