@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import {
+  IsArray,
   IsBoolean,
   IsEmail,
   IsInt,
@@ -117,21 +118,26 @@ export class FeatureDTO {
 }
 
 export class FilterDTO {
-  @Transform(({ value }) =>
-    value.split(',').map(function (item) {
-      return parseInt(item, 10);
+  @IsNotEmpty()
+  @Transform(({value} ) =>
+    value.toString().split(',').map(function (item) {
+      return parseInt(item);
     }),
   )
+  @IsArray()
   orientation: number[];
-  @Transform(({ value }) =>
-    value.split(',').map(function (item) {
-      return parseInt(item, 10);
-    }),
+  @IsNotEmpty()
+  @Transform(({value} ) =>
+      value.toString().split(',').map(function (item) {
+        return parseInt(item);
+      }),
   )
+  @IsArray()
   category: number[];
-  @Transform(({ value }) => value.split(','))
+  @Transform(({ value }) => value.toString().split(','))
+  @IsArray()
   district: string[];
-  @IsInt()
+  @IsNotEmpty()
   @Transform(({ value }) => parseInt(value))
   hasReservation: number;
   @IsInt()

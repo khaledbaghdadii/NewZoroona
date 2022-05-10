@@ -58,7 +58,7 @@ export class PlaceController {
   featurePlace(@Body() dto: FeatureDTO) {
     return this.placeService.featurePlace(dto);
   }
-  @Get('filter')
+  @Post('filter')
   getPlaceByFilters(@Body() dto: FilterDTO) {
     return this.placeService.getPlacesByFilter(dto);
   }

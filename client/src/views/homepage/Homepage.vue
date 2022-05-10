@@ -38,7 +38,6 @@
             </div>
             <h4 class="fw-700 pt-8 ps-3 text-white">Raouche</h4>
           </div>
-
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-4 py-3">
@@ -84,9 +83,15 @@
 
     <section class="section-featured-places pb-5">
       <div class="container">
-        <h1 class="pt-5 mt-5 pb-4 fw-700">Discover Some of Our Featured Places!</h1>
+        <h1 class="pt-5 mt-5 pb-4 fw-700">
+          Discover Some of Our Featured Places!
+        </h1>
         <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <div
+            v-for="place in featuredPlaces"
+            v-bind:key="place.id"
+            class="col-sm-12 col-md-6 col-lg-4 py-3"
+          >
             <div
               class="post-img-featured"
               :style="{
@@ -97,13 +102,14 @@
               }"
             >
               <div class="text-end">
-                <span class="badge badge-background-color m-3">Natural</span>
+                <span class="badge badge-background-color m-3">{{place.Category.description}}</span>
               </div>
             </div>
             <div class="d-flex flex-column">
               <h4 class="fw-700 pt-3">
-                Enjoy the beauty of Lebanon's waterfalls
+                {{place.description}}
               </h4>
+              <h5 class="fw-500"><i>{{place.name}}</i></h5>
               <div class="d-flex">
                 <img
                   src="@/assets/images/location.svg"
@@ -111,17 +117,17 @@
                   class="me-2"
                   alt="location"
                 />
-                <span> <strong>Baaqline Waterfall</strong>, Mount Lebanon</span>
+                <span>{{place.address}}, {{place.city}} - {{place.district}}</span>
               </div>
               <div class="d-flex">
-                <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
-                <span class="fw-700 fs-24">35</span>
+                <i class="fa fa-money-bill fa-lg text-primary pt-2 pe-2"></i>
+                <span class="fw-700 fs-24">${{place.averagePricePerPerson}}</span>
                 <span class="fs-14 pt-2">/person</span>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+          <!-- <div class="col-sm-12 col-md-6 col-lg-4 py-3">
             <div
               class="post-img-featured"
               :style="{
@@ -181,7 +187,7 @@
                 <span class="fs-14 pt-2">/person</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="text-center mt-5">
           <button
@@ -214,8 +220,14 @@
 </template>
 
 <script>
+import HomepageService from "@/services/HomepageService.js";
 export default {
   name: "homepage",
+  data() {
+    return {
+      featuredPlaces: [],
+    };
+  },
   methods: {
     goToSignUp() {
       this.$router.push("/signup");
@@ -223,6 +235,21 @@ export default {
     goToPlacesPage() {
       this.$router.push("/placesPage");
     },
+  },
+  mounted() {
+    const self = this;
+    this.showLoader = true;
+    self.activeItem = -1;
+    HomepageService.getFeaturedPlaces()
+      .then(function (res) {
+        console.log(res.data)
+        self.showLoader = false;
+        self.featuredPlaces = res.data || [];
+        console.log(self.featuredPlaces)
+      })
+      .catch(function () {
+        self.showLoader = false;
+      });
   },
 };
 </script>
