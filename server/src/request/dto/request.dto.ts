@@ -127,3 +127,10 @@ export class ManagerDTO {
   @Transform(({ value }) => new Date(value))
   dateOfBirth: Date;
 }
+
+export class DeleteReviewDTO {
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  reviewId: number;
+}

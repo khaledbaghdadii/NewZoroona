@@ -10,7 +10,7 @@ import {
 
 import { PrismaService } from '../prisma/prisma.service';
 import { Place, Request, User } from '@prisma/client';
-import { AddPlaceDTO, ManagerDTO } from './dto';
+import { AddPlaceDTO, DeleteReviewDTO, ManagerDTO } from './dto';
 import * as argon from 'argon2';
 
 const cloudinary = require('cloudinary');
@@ -87,12 +87,9 @@ export class RequestService {
         });
       }
       if (request.reviewId != null) {
-        const review = await this.prisma.review.update({
+        const review = await this.prisma.review.delete({
           where: {
             id: request.reviewId,
-          },
-          data: {
-            valid: false,
           },
         });
       }
@@ -140,6 +137,14 @@ export class RequestService {
         orientationId: dto.orientationId,
         valid: false,
         averagePricePerPerson: dto.averagePricePerPerson,
+      },
+    });
+    const request = await this.prisma.request.create({
+      data: {
+        managerId: id,
+        requestTypeId: 2,
+        placeId: place.id,
+        processed: false,
       },
     });
     return place;
@@ -216,6 +221,40 @@ export class RequestService {
       console.log(err.message);
       return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
     }
+  }
+  async deleteReview(dto: DeleteReviewDTO) {
+    const request = await this.prisma.request.create({
+      data: {
+        requestTypeId: 3,
+        reviewId: dto.reviewId as number,
+        processed: false,
+      },
+    });
+    return request;
+  }
+  async acceptPlaceRequest(requestId: number) {
+    const request = await this.prisma.request.findUnique({
+      where: {
+        id: requestId,
+      },
+    });
+    await this.prisma.request.update({
+      where: {
+        id: requestId,
+      },
+      data: {
+        processed: true,
+      },
+    });
+    const place = await this.prisma.place.update({
+      where: {
+        id: request.placeId,
+      },
+      data: {
+        valid: true,
+      },
+    });
+    return place;
   }
 
   // function to create file from base64 encoded string
