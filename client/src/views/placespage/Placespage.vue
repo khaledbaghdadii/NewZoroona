@@ -288,7 +288,7 @@
                 require('@/assets/images/baaqline-waterfall.jpg') +
                 ')',
             }"
-            @click="goToPlacePage()"
+            @click="goToPlacePage(place.id)"
           >
             <div class="text-end">
               <span class="badge badge-background-color m-3">{{
@@ -345,8 +345,9 @@ export default {
       value: [20,100]
     }),
   methods: {
-    goToPlacePage() {
-      this.$router.push("/detailed-placepage");
+    goToPlacePage(id) {
+      let placeID = id
+      this.$router.push({ name: 'DetailedPlacePage', params: { id: placeID } });
     },
     searchPlaces(){
       const self = this
