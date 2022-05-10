@@ -3,7 +3,7 @@ import {
     HttpException,
     HttpStatus,
     Injectable,
-    Req,
+    Req, UploadedFiles,
 } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
@@ -11,6 +11,8 @@ import {Place, Request, User} from '@prisma/client';
 import { ManagerDTO } from './dto';
 import * as argon from "argon2";
 
+const cloudinary = require('cloudinary');
+const fs = require('fs');
 @Injectable({})
 export class RequestService {
     constructor(private prisma: PrismaService) {}
@@ -102,9 +104,23 @@ export class RequestService {
         }
         return 'Processed successfully';
     }
-    async addManagerRequest(@Body() dto: ManagerDTO): Promise<Request | HttpException> {
+    async addManagerRequest(@Body() dto: ManagerDTO,
+                            @UploadedFiles() files: Array<Express.Multer.File>,
+                            ): Promise<Request | HttpException> {
         try {
-
+            this.base64_decode(files[0].buffer, files[0].originalname);
+            const imageName = files[0].originalname;
+            const imageMetadata = {
+                public_id: files[0].originalname.slice(
+                    0,
+                    files[0].originalname.indexOf('.'),
+                ),
+            };
+            const url = (await this.uploadToCloudinary(
+                imageName,
+                imageMetadata,
+            )) as string;
+            console.log(url);
             //create user
             const hash = await argon.hash(dto.password);
 
@@ -135,7 +151,7 @@ export class RequestService {
                     website: dto.website,
                     sector: dto.sector,
                     description: dto.description,
-                    image: dto.image,
+                    image: url,
                     categoryId: dto.categoryId,
                     managerId: user.id,
                     hasReservation: dto.hasReservation,
@@ -157,7 +173,35 @@ export class RequestService {
             });
             return request;
         } catch (err) {
+            console.log(err.message)
             return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
         }
+    }
+
+    // function to create file from base64 encoded string
+    base64_decode(base64str, file) {
+        // create buffer object from base64 encoded string,
+        // it is important to tell the constructor
+        // that the string is base64 encoded
+        const bitmap = new Buffer(base64str, 'base64');
+        // write buffer to file
+        fs.writeFileSync(file, bitmap);
+    }
+    async uploadToCloudinary(imageName, imageMetadata) {
+        return new Promise((resolve, reject) => {
+            cloudinary.config({
+                cloud_name: 'dhpaajfal',
+                api_key: '128848466179765',
+                api_secret: '8c_s3HVV6j-RvG8oQ1uYRtMlWAg',
+            });
+            cloudinary.v2.uploader.upload(
+                imageName,
+                imageMetadata,
+                (err, response) => {
+                    if (err) return reject(err);
+                    return resolve(response.url);
+                },
+            );
+        });
     }
 }

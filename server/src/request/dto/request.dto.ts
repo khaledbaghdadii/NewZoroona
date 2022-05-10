@@ -48,9 +48,6 @@ export class ManagerDTO{
     @IsString()
     @IsNotEmpty()
     description: string;
-    @IsString()
-    @IsNotEmpty()
-    image: string;
     @IsNotEmpty()
     @IsInt()
     @Transform(({ value }) => parseInt(value))
