@@ -248,6 +248,7 @@
                       >
                         <Slider v-model="value" :max="200" class="mt-5 slider-primary"/>
                     </div>
+                    <p>{{value}}</p>
                   </div>
 
                   <!-- Modal footer -->
