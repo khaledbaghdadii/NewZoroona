@@ -45,8 +45,12 @@ export class PlaceController {
   @UseGuards(RolesGuard)
   @Post('add')
   @Roles('admin')
-  addPlace(@Body() dto: AddDTO) {
-    return this.placeService.addPlace(dto);
+  @UseInterceptors(FilesInterceptor('image'))
+  addPlace(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Body() dto: AddDTO,
+  ) {
+    return this.placeService.addPlace(dto, files);
   }
   @UseGuards(RolesGuard)
   @Post('feature')

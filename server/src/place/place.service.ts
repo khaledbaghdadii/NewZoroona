@@ -149,8 +149,24 @@ export class PlaceService {
       return new HttpException('Place not found', HttpStatus.NOT_FOUND);
     }
   }
-  async addPlace(@Body() dto: AddDTO): Promise<Place | HttpException> {
+  async addPlace(
+    @Body() dto: AddDTO,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+  ): Promise<Place | HttpException> {
     try {
+      this.base64_decode(files[0].buffer, files[0].originalname);
+      const imageName = files[0].originalname;
+      const imageMetadata = {
+        public_id: files[0].originalname.slice(
+          0,
+          files[0].originalname.indexOf('.'),
+        ),
+      };
+      const url = (await this.uploadToCloudinary(
+        imageName,
+        imageMetadata,
+      )) as string;
+      console.log(url);
       const place = await this.prisma.place.create({
         data: {
           email: dto.email,
@@ -163,12 +179,11 @@ export class PlaceService {
           website: dto.website,
           sector: dto.sector,
           description: dto.description,
-          image: dto.image,
+          image: url,
           categoryId: dto.categoryId,
           managerId: dto.managerId,
           hasReservation: dto.hasReservation,
           orientationId: dto.orientationId,
-          valid: !dto.fromRequest,
           averagePricePerPerson: dto.averagePricePerPerson,
         },
       });
