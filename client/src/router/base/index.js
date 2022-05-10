@@ -23,6 +23,17 @@ const base = {
                 rule: 'isPublic'
             }
         },
+        {
+            path: '/signupManager',
+            name: 'SignupManager',
+            component: () =>
+                import ('@/views/account/SignupManager'),
+            meta: {
+                title: 'SIGNUPMANAGER',
+                rule: 'isPublic'
+            }
+        },
+
         // {
         //   path: '/forgot-password',
         //   name: 'ForgotPassword',

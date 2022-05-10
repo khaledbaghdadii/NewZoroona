@@ -24,7 +24,7 @@ const internal = {
             }
         },
         {
-            path: '/detailed-placepage',
+            path: '/detailed-placepage/:id',
             name: 'DetailedPlacePage',
             component: () =>
                 import ('@/views/placespage/DetailedPlacePage'),

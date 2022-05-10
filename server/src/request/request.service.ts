@@ -102,6 +102,48 @@ export class RequestService {
     }
     return 'Processed successfully';
   }
+  async addPlaceRequest(
+    @Session() session: Record<string, any>,
+    @Body() dto: AddPlaceDTO,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+  ) {
+    this.base64_decode(files[0].buffer, files[0].originalname);
+    const imageName = files[0].originalname;
+    const imageMetadata = {
+      public_id: files[0].originalname.slice(
+        0,
+        files[0].originalname.indexOf('.'),
+      ),
+    };
+    const url = (await this.uploadToCloudinary(
+      imageName,
+      imageMetadata,
+    )) as string;
+    const id = session.userId;
+    console.log('role type id:', id);
+    const place = await this.prisma.place.create({
+      data: {
+        email: dto.email,
+        name: dto.name,
+        phoneNumber: dto.phoneNumber,
+        city: dto.city,
+        district: dto.district,
+        address: dto.address,
+        location: dto.location,
+        website: dto.website,
+        sector: dto.sector,
+        description: dto.description,
+        image: url,
+        categoryId: dto.categoryId,
+        managerId: id,
+        hasReservation: dto.hasReservation,
+        orientationId: dto.orientationId,
+        valid: false,
+        averagePricePerPerson: dto.averagePricePerPerson,
+      },
+    });
+    return place;
+  }
   async addManagerRequest(
     @Body() dto: ManagerDTO,
     @UploadedFiles() files: Array<Express.Multer.File>,
@@ -174,48 +216,6 @@ export class RequestService {
       console.log(err.message);
       return new HttpException('Error Adding Place', HttpStatus.BAD_REQUEST);
     }
-  }
-  async addPlaceRequest(
-    @Session() session: Record<string, any>,
-    @Body() dto: AddPlaceDTO,
-    @UploadedFiles() files: Array<Express.Multer.File>,
-  ) {
-    this.base64_decode(files[0].buffer, files[0].originalname);
-    const imageName = files[0].originalname;
-    const imageMetadata = {
-      public_id: files[0].originalname.slice(
-        0,
-        files[0].originalname.indexOf('.'),
-      ),
-    };
-    const url = (await this.uploadToCloudinary(
-      imageName,
-      imageMetadata,
-    )) as string;
-    const id = session.userId;
-    console.log('role type id:', id);
-    const place = await this.prisma.place.create({
-      data: {
-        email: dto.email,
-        name: dto.name,
-        phoneNumber: dto.phoneNumber,
-        city: dto.city,
-        district: dto.district,
-        address: dto.address,
-        location: dto.location,
-        website: dto.website,
-        sector: dto.sector,
-        description: dto.description,
-        image: url,
-        categoryId: dto.categoryId,
-        managerId: id,
-        hasReservation: dto.hasReservation,
-        orientationId: dto.orientationId,
-        valid: false,
-        averagePricePerPerson: dto.averagePricePerPerson,
-      },
-    });
-    return place;
   }
 
   // function to create file from base64 encoded string
