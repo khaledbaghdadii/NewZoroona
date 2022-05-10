@@ -5,12 +5,15 @@ import {
   ParseIntPipe,
   Post,
   Query,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UpdateDTO, AddDTO, FeatureDTO, FilterDTO } from './dto';
 import { PlaceService } from './place.service';
 import { Roles } from '../auth/decorators/roles.decorators';
 import { RolesGuard } from '../place/guards/local.guard';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('places')
 export class PlaceController {
@@ -42,8 +45,12 @@ export class PlaceController {
   @UseGuards(RolesGuard)
   @Post('add')
   @Roles('admin')
-  addPlace(@Body() dto: AddDTO) {
-    return this.placeService.addPlace(dto);
+  @UseInterceptors(FilesInterceptor('image'))
+  addPlace(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Body() dto: AddDTO,
+  ) {
+    return this.placeService.addPlace(dto, files);
   }
   @UseGuards(RolesGuard)
   @Post('feature')
@@ -53,9 +60,7 @@ export class PlaceController {
   }
   @Post('filter')
   getPlaceByFilters(@Body() dto: FilterDTO) {
-    console.log("DTO in controller")
-    console.log(dto)
-    return this.placeService.getPlacesByFilter( dto);
+    return this.placeService.getPlacesByFilter(dto);
   }
   @Get('district')
   getDistricts() {
@@ -64,5 +69,13 @@ export class PlaceController {
   @Get('all')
   getAllPlaces() {
     return this.placeService.getAllPlaces();
+  }
+  @Post('uploadImage')
+  @UseInterceptors(FilesInterceptor('image'))
+  uploadFile(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Body('placeId', ParseIntPipe) placeId: number,
+  ) {
+    return this.placeService.uploadFile(files, placeId);
   }
 }
