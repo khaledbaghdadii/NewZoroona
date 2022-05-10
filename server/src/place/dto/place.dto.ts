@@ -84,9 +84,6 @@ export class AddDTO {
   @IsString()
   @IsNotEmpty()
   description: string;
-  @IsString()
-  @IsNotEmpty()
-  image: string;
   @IsNotEmpty()
   @IsInt()
   @Transform(({ value }) => parseInt(value))
@@ -103,10 +100,6 @@ export class AddDTO {
   @IsNotEmpty()
   @Transform(({ value }) => Boolean(value))
   hasReservation: boolean;
-  @IsBoolean()
-  @IsNotEmpty()
-  @Transform(({ value }) => Boolean(value))
-  fromRequest: boolean;
   @IsNotEmpty()
   @IsInt()
   @Transform(({ value }) => parseInt(value))
