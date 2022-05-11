@@ -23,5 +23,8 @@ export default {
     },
     getPackages(id) {
         return Endpoint().get(`http://localhost:3333/packages/packages?placeId=${id}`)
+    },
+    getReviews(id) {
+        return Endpoint().get(`http://localhost:3333/reviews/reviews?placeId=${id}`)
     }
 }
