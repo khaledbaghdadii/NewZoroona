@@ -33,6 +33,16 @@ const base = {
                 rule: 'isPublic'
             }
         },
+        {
+            path: '/ManagerPage',
+            name: 'ManagerPage',
+            component: () =>
+                import ('@/views/Manager/ManagerPage'),
+            meta: {
+                title: 'MANAGERPAGE',
+                rule: 'isPublic'
+            }
+        },
 
         // {
         //   path: '/forgot-password',
