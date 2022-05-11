@@ -24,7 +24,7 @@
                   </h2>
                 </div>
               </div>
-              <form v-on:submit.prevent="signup()">
+              <form v-on:submit.prevent="signupManager()">
                 <div class="form-group mb-3">
                   <label class="label" for="name">Full Name</label>
                   <input
@@ -33,7 +33,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Full Name"
-                    v-model="signupForm.name"
+                    v-model="signupForm.userName"
                     required
                   />
                 </div>
@@ -46,7 +46,7 @@
                     type="email"
                     class="form-control"
                     placeholder="Email"
-                    v-model="signupForm.email"
+                    v-model="signupForm.userEmail"
                     required
                   />
                 </div>
@@ -104,7 +104,7 @@
                       type="tel"
                       class="form-control"
                       placeholder="Phone Number"
-                      v-model="signupForm.phoneNumber"
+                      v-model="signupForm.userPhoneNumber"
                       required
                     />
                   </div>
@@ -134,7 +134,7 @@
                   </h2>
                 </div>
               </div>
-              <form v-on:submit.prevent="signup()">
+              <form v-on:submit.prevent="signupManager()">
                 <div class="form-group mb-3">
                   <label class="label" for="name">Place Name</label>
                   <input
@@ -143,7 +143,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Place Name"
-                    v-model="signupForm.name"
+                    v-model="signupForm.placeName"
                     required
                   />
                 </div>
@@ -156,20 +156,20 @@
                     type="email"
                     class="form-control"
                     placeholder="Place Email"
-                    v-model="signupForm.email"
+                    v-model="signupForm.placeEmail"
                     required
                   />
                 </div>
 
                 <div class="form-group mb-3">
-                  <label class="label" for="password">City</label>
+                  <label class="label" for="city">City</label>
                   <input
                     name="city"
                     id="city"
                     type="text"
                     class="form-control"
                     placeholder="City"
-                    v-model="signupForm.password"
+                    v-model="signupForm.city"
                     required
                   />
                 </div>
@@ -182,7 +182,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Address"
-                    v-model="signupForm.password"
+                    v-model="signupForm.address"
                     required
                   />
                 </div>
@@ -197,7 +197,7 @@
                       id="district"
                       class="select w-100 position-relative"
                       required
-                      v-model="signupForm.gender"
+                      v-model="signupForm.district"
                     >
                       <option disabled value="">-- District --</option>
                       <option value="Male">Beirut</option>
@@ -213,7 +213,7 @@
                       id="sector"
                       class="select w-100 position-relative"
                       required
-                      v-model="signupForm.gender"
+                      v-model="signupForm.sector"
                     >
                       <option disabled value="">-- Sector --</option>
                       <option value="Male">Private</option>
@@ -230,7 +230,7 @@
                       type="tel"
                       class="form-control"
                       placeholder="Phone Number"
-                      v-model="signupForm.phoneNumber"
+                      v-model="signupForm.placePhoneNumber"
                       required
                     />
                   </div>
@@ -241,7 +241,7 @@
                       id="website"
                       class="form-control"
                       placeholder="Website"
-                      v-model="signupForm.phoneNumber"
+                      v-model="signupForm.website"
                     />
                   </div>
                   <div class="form-group mb-3">
@@ -250,9 +250,10 @@
                       name="image"
                       id="image"
                       type="file"
+                      @change="getImage"
                       class="form-control"
                       placeholder="select Your Place Image"
-                      required
+                      
                     />
                   </div>
                   <div class="form-group mb-3">
@@ -262,12 +263,16 @@
                       rows="3"
                       id="feedback"
                       name="feedback"
+                      v-model="signupForm.description"
                       maxlength="35"
                     ></textarea>
                   </div>
                 </div>
                 <div class="text-center">
-                  <button class="btn btn-primary text-white px-5 fs-20 py-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary text-white px-5 fs-20 py-2"
+                  >
                     Submit
                   </button>
                 </div>
@@ -280,6 +285,7 @@
   </div>
 </template>
 <script>
+import AccountService from "@/services/AccountService.js";
 export default {
   name: "SignupManager",
   data() {
@@ -287,15 +293,72 @@ export default {
       showLoader: "",
       flagNext: true,
       signupForm: {
-        email: "",
-        password: "",
-        gender: "",
-        dateOfBirth: "",
-        phoneNumber: "",
-        name: "",
+        // userEmail: "",
+        // password: "",
+        // userName: "",
+        // userPhoneNumber: "",
+        // gender: "",
+        // dateOfBirth: "",
+        // image: null,
+        // averagePricePerPerson: "1",
+        // hasReservation: "",
+        // orientationId: "1",
+        // categoryId: "1",
+        // description: "",
+        // sector: "",
+        // website: "",
+        // address: "",
+        // district: "",
+        // city: "",
+        // placePhoneNumber: "",
+        // placeName: "",
+        // placeEmail: "",
+        placeEmail: "test@hotmail.com",
+        placeName: "idkplace2",
+        placePhoneNumber: "4555",
+        city: "jhdhb",
+        district: "dd",
+        address: "dd",
+        location: "test",
+        website: "test",
+        sector: "test",
+        description: "esttt",
+        categoryId: 1,
+        orientationId: 1,
+        hasReservation: 1,
+        averagePricePerPerson: 23,
+        userEmail: "ahmaddddd@gmail.com",
+        password: "password",
+        userName: "newmanager2",
+        userPhoneNumber: "23",
+        gender: "male",
+        dateOfBirth: "02/02/2000",
+        image:'http://res.cloudinary.com/dhpaajfal/image/upload/v1652223742/SVYR8027.jpg',
+        roleTypeId: 2,
       },
     };
   },
-  methods: {},
+  methods: {
+    getImage(e) {
+      console.log(e.target.files[0])
+      this.signupForm.image = e.target.files[0];
+      console.log(e);
+    },
+    signupManager() {
+      console.log("I entereddd");
+      const self = this;
+      AccountService.addManager(this.signupForm)
+        .then(function (res) {
+          self.$store.dispatch("setUser", res.data);
+          console.log("User Added!");
+          self.$router.push("/homepage");
+        })
+        .catch((error) => {
+          self.showLoader = false;
+          this.errorMessage = error.message;
+          console.log("There was an error!", error);
+        });
+    },
+  },
 };
 </script>

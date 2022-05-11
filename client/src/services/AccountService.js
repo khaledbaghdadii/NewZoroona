@@ -8,5 +8,8 @@ export default {
     },
     logoutUser() {
         return Endpoint().post(`http://localhost:3333/auth/logout`)
+    },
+    addManager(payload) {
+        return Endpoint().post(`http://localhost:3333/requests/request/manager`, payload)
     }
 }
