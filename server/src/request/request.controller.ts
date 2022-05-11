@@ -11,7 +11,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { AddPlaceDTO, DeleteReviewDTO } from './dto';
+import { AddPlaceDTO, AddReservationDTO, DeleteReviewDTO } from './dto';
 import { RequestService } from './request.service';
 import { Review } from '@prisma/client';
 import { RolesGuard } from './guards/local.guard';
@@ -67,5 +67,12 @@ export class RequestController {
   @Post('request/deleteReview')
   addDeleteReviewRequest(@Body() dto: DeleteReviewDTO) {
     return this.requestService.deleteReview(dto);
+  }
+
+  @UseGuards(RolesGuard)
+  @Roles('manager')
+  @Post('request/reservation')
+  addReservationRequest(@Body() dto: AddReservationDTO) {
+    return this.requestService.addReservationRequest(dto);
   }
 }

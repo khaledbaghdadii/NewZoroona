@@ -68,6 +68,18 @@ export class PlaceService {
       return [];
     }
   }
+  async getPlacesByManager(managerId: number) {
+    try {
+      const places = await this.prisma.place.findMany({
+        where: {
+          managerId: managerId,
+        },
+      });
+      return places;
+    } catch (e) {
+      return "Couldn't get places";
+    }
+  }
 
   async getPlacesByFilter(@Body() dto: FilterDTO): Promise<Place[]> {
     try {

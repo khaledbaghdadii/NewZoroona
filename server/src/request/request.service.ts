@@ -10,7 +10,12 @@ import {
 
 import { PrismaService } from '../prisma/prisma.service';
 import { Place, Request, User } from '@prisma/client';
-import { AddPlaceDTO, DeleteReviewDTO, ManagerDTO } from './dto';
+import {
+  AddPlaceDTO,
+  AddReservationDTO,
+  DeleteReviewDTO,
+  ManagerDTO,
+} from './dto';
 import * as argon from 'argon2';
 
 const cloudinary = require('cloudinary');
@@ -231,6 +236,10 @@ export class RequestService {
       },
     });
     return request;
+  }
+
+  addReservationRequest(dto: AddReservationDTO) {
+    return 'hi';
   }
   async acceptPlaceRequest(requestId: number) {
     const request = await this.prisma.request.findUnique({

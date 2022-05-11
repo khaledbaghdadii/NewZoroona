@@ -22,6 +22,10 @@ export class PlaceController {
   getPlace(@Query('placeId', ParseIntPipe) placeId: number) {
     return this.placeService.getPlace(placeId);
   }
+  @Get('manager')
+  getPlacesByManager(@Query('managerId', ParseIntPipe) managerId: number) {
+    return this.placeService.getPlacesByManager(managerId);
+  }
   @Get('featured')
   getFeaturedPlaces() {
     return this.placeService.getFeaturedPlaces();
@@ -70,6 +74,7 @@ export class PlaceController {
   getAllPlaces() {
     return this.placeService.getAllPlaces();
   }
+
   @Post('uploadImage')
   @UseInterceptors(FilesInterceptor('image'))
   uploadFile(
