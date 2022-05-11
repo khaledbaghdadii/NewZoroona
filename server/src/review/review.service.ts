@@ -16,9 +16,12 @@ export class ReviewService {
     async getReviewsForPlace(placeId: number): Promise<Review[] | HttpException> {
         const reviews = await this.prisma.review.findMany({
             where: {
-                id: placeId,
+                placeId: placeId,
                 valid: true
             },
+            include:{
+                User:true
+            }
         });
         if (!reviews) {
             return new HttpException('Reviews not found', HttpStatus.NOT_FOUND);
