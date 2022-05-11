@@ -124,6 +124,7 @@ export default {
   data() {
     return {
       showLoader: "",
+      roleTypeId: 3,
       wrongCredentials: false,
       loginForm: {
         email: "",
@@ -135,11 +136,16 @@ export default {
     login() {
       const self = this;
       this.showLoader = true;
+      this.roleTypeId = this.$store.state.user.roleTypeId
       AccountService.loginUser(this.loginForm)
         .then(function (res) {
           self.$store.dispatch("setUser", res.data);
           console.log("User logged!");
-          self.$router.push("/homepage");
+          if(self.roleTypeId == 3){
+            self.$router.push("/homepage");
+          }else if(self.roleTypeId == 2){
+            self.$router.push("/ManagerPage");
+          }
           self.showLoader = false;
         })
         .catch((error) => {
