@@ -107,17 +107,17 @@ model Report{
 
 model Reservation{
   id Int @id @default(autoincrement())
-  placeId Int
+
   userId Int
   numberofpeople Int
   startDate DateTime
   endDate DateTime
   cost Float
+  placeId Int
   processed Boolean @default(false)
   accepted Boolean @default(false)
-  requestId Int
-  User User @relation(fields: [userId],references: [id])
-  Place Place @relation(fields: [placeId],references: [id])
+  User User? @relation(fields: [userId],references: [id])
+  Place Place? @relation(fields: [placeId],references: [id])
   Request Request[]
   packages Package[]
   @@map("reservations")

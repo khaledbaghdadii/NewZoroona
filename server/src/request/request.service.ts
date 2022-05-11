@@ -238,8 +238,30 @@ export class RequestService {
     return request;
   }
 
-  addReservationRequest(dto: AddReservationDTO) {
-    return 'hi';
+  async addReservationRequest(
+    dto: AddReservationDTO,
+    session: Record<string, any>,
+  ) {
+    console.log(session.userId);
+    const userId = session.user;
+    const reservation = await this.prisma.reservation.create({
+      data: {
+        placeId: dto.placeId,
+        cost: dto.cost,
+        userId: userId,
+        numberofpeople: dto.numberofpeople,
+        startDate: dto.startdate,
+        endDate: dto.enddate,
+      },
+    });
+    await this.prisma.request.create({
+      data: {
+        reservationId: reservation.id,
+        requestTypeId: 4,
+        processed: false,
+      },
+    });
+    return reservation;
   }
   async acceptPlaceRequest(requestId: number) {
     const request = await this.prisma.request.findUnique({

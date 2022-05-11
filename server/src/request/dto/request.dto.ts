@@ -140,17 +140,11 @@ export class AddReservationDTO {
   @IsNotEmpty()
   @IsInt()
   @Transform(({ value }) => parseInt(value))
-  userId: number;
-  @IsNotEmpty()
-  @IsInt()
-  @Transform(({ value }) => parseInt(value))
   numberofpeople: number;
   @IsNotEmpty()
-  // @IsDate()
   @Transform(({ value }) => new Date(value))
   startdate: Date;
   @IsNotEmpty()
-  // @IsDate()
   @Transform(({ value }) => new Date(value))
   enddate: Date;
   @IsNotEmpty()

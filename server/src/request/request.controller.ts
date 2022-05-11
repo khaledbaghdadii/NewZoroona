@@ -70,9 +70,12 @@ export class RequestController {
   }
 
   @UseGuards(RolesGuard)
-  @Roles('manager')
+  @Roles('user')
   @Post('request/reservation')
-  addReservationRequest(@Body() dto: AddReservationDTO) {
-    return this.requestService.addReservationRequest(dto);
+  addReservationRequest(
+    @Body() dto: AddReservationDTO,
+    @Session() session: Record<string, any>,
+  ) {
+    return this.requestService.addReservationRequest(dto, session);
   }
 }
