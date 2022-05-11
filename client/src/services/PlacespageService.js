@@ -29,5 +29,8 @@ export default {
     },
     addReview(payload){
         return Endpoint().post(`http://localhost:3333/reviews/add`, payload)
+    },
+    reportReview(payload){
+        return Endpoint().post(`http://localhost:3333/report/report`, payload)
     }
 }
