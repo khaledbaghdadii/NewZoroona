@@ -43,6 +43,26 @@ const base = {
                 rule: 'isPublic'
             }
         },
+        {
+            path: '/DetailedManagerPage/:id',
+            name: 'DetailedManagerPage',
+            component: () =>
+                import ('@/views/Manager/DetailedManagerPage'),
+            meta: {
+                title: 'DETAILEDMANAGERPAGE',
+                rule: 'isPublic'
+            }
+        },
+        {
+            path: '/AdminDashboard',
+            name: 'AdminDashboard',
+            component: () =>
+                import ('@/views/admin/AdminDashboard'),
+            meta: {
+                title: 'ADMINDASHBOARD',
+                rule: 'isPublic'
+            }
+        },
 
         // {
         //   path: '/forgot-password',

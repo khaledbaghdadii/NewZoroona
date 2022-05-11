@@ -3257,6 +3257,21 @@
   dependencies:
     "assert-plus" "^1.0.0"
 
+"datatables.net-dt@^1.11.5":
+  "integrity" "sha512-QZ6AZv6bFyGPuJLILQ50T9IHT0foKw5XOl+pA1W8BFHTQ/CkUuU54GtgvAnq+ag0wdis4+Qq/YuN2yTogoLXdA=="
+  "resolved" "https://registry.npmjs.org/datatables.net-dt/-/datatables.net-dt-1.11.5.tgz"
+  "version" "1.11.5"
+  dependencies:
+    "datatables.net" ">=1.11.3"
+    "jquery" ">=1.7"
+
+"datatables.net@>=1.11.3":
+  "integrity" "sha512-nlFst2xfwSWaQgaOg5sXVG3cxYC0tH8E8d65289w9ROgF2TmLULOOpcdMpyxxUim/qEwVSEem42RjkTWEpr3eA=="
+  "resolved" "https://registry.npmjs.org/datatables.net/-/datatables.net-1.11.5.tgz"
+  "version" "1.11.5"
+  dependencies:
+    "jquery" ">=1.7"
+
 "debounce@^1.2.1":
   "integrity" "sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug=="
   "resolved" "https://registry.npmjs.org/debounce/-/debounce-1.2.1.tgz"
@@ -5411,6 +5426,11 @@
   "integrity" "sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg=="
   "resolved" "https://registry.npmjs.org/javascript-stringify/-/javascript-stringify-2.1.0.tgz"
   "version" "2.1.0"
+
+"jquery@^3.6.0", "jquery@>=1.7":
+  "integrity" "sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw=="
+  "resolved" "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz"
+  "version" "3.6.0"
 
 "js-base64@^2.1.8":
   "integrity" "sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ=="
