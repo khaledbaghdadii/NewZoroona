@@ -302,7 +302,7 @@
                 ></button>
               </div>
 
-              <form class="needs-validation" v-on:submit.prevent="submitForm">
+              <form class="needs-validation" v-on:submit.prevent="submitReviewForm()">
                 <!-- Modal body -->
                 <div class="modal-body">
                   <div class="mb-3">
@@ -312,8 +312,12 @@
                     <br />
                     <div class="fs-24">
 
-                      <!--<span v-for="star in {{}}" class="fa fa-star checked"></span>-->
-
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star "></span>
+                      <input type="number" v-model="reviewForm.rating"/>
                     </div>
                   </div>
                   <div class="my-3">
@@ -326,14 +330,16 @@
                       id="feedback"
                       name="feedback"
                       maxlength="200"
+                      v-model="reviewForm.feedback"
                     ></textarea>
+
                   </div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
                   <button
-                    type="button"
+                    type="submit"
                     class="btn btn-primary text-white py-2"
                     data-bs-dismiss="modal"
                   >
@@ -488,19 +494,45 @@ export default {
   name: "DetailedPlacePage",
   data: () => ({
     place: [],
+    userId :0,
+    placeId: 0,
     placeOrientationDescription: "",
     placeCategoryDescription: "",
     packages: [],
     reviews:[],
-    stars:""
+    stars:"",
+    reviewForm: {
+      rating: 0,
+      feedback:'',
+      userId: 0 ,
+      placeId: 0
+    }
   }),
   components: {
     Popper,
   },
-  methods: {},
+  methods: {
+    submitReviewForm(){
+      const self = this
+      console.log("Entered submit")
+      this.placeId = this.place.id
+      this.userId = this.$store.state.user.id
+      this.reviewForm.userId = this.userId
+      this.reviewForm.placeId = this.placeId
+      PlacespageService.addReview(this.reviewForm)
+          .then(function (res) {
+            self.showLoader = false;
+            console.log(res.data)
+          })
+          .catch(function () {
+            self.showLoader = false;
+          });
+    }
+  },
   mounted() {
     let id = this.$route.params.id;
     const self = this;
+
     PlacespageService.getPlace(id)
       .then(function (res) {
         self.showLoader = false;
@@ -510,6 +542,8 @@ export default {
         self.placeOrientationDescription = self.place.Orientation.description;
         self.placeCategoryDescription = self.place.Category.description;
         console.log(self.place.Category.description);
+
+
       })
       .catch(function () {
         self.showLoader = false;
