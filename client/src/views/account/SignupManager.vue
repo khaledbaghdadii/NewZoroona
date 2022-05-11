@@ -250,7 +250,7 @@
                       name="image"
                       id="image"
                       type="file"
-                      @change="getImage"
+                      @change="getImage($event)"
                       class="form-control"
                       placeholder="select Your Place Image"
                       
@@ -290,29 +290,7 @@ export default {
   name: "SignupManager",
   data() {
     return {
-      showLoader: "",
-      flagNext: true,
       signupForm: {
-        // userEmail: "",
-        // password: "",
-        // userName: "",
-        // userPhoneNumber: "",
-        // gender: "",
-        // dateOfBirth: "",
-        // image: null,
-        // averagePricePerPerson: "1",
-        // hasReservation: "",
-        // orientationId: "1",
-        // categoryId: "1",
-        // description: "",
-        // sector: "",
-        // website: "",
-        // address: "",
-        // district: "",
-        // city: "",
-        // placePhoneNumber: "",
-        // placeName: "",
-        // placeEmail: "",
         placeEmail: "test@hotmail.com",
         placeName: "idkplace2",
         placePhoneNumber: "4555",
@@ -333,25 +311,35 @@ export default {
         userPhoneNumber: "23",
         gender: "male",
         dateOfBirth: "02/02/2000",
-        image:'http://res.cloudinary.com/dhpaajfal/image/upload/v1652223742/SVYR8027.jpg',
         roleTypeId: 2,
       },
+      showLoader: "",
+      flagNext: true,
+      Images:[]
     };
   },
   methods: {
     getImage(e) {
-      console.log(e.target.files[0])
-      this.signupForm.image = e.target.files[0];
-      console.log(e);
+      this.Images = e.target.files[0]
+      console.log(this.Images)
     },
     signupManager() {
+      let data = new FormData();
+      for(const key in this.signupForm){
+        console.log(`${key}: ${this.signupForm[key]}`)
+        data.append(key,this.signupForm[key])
+      }
+
       console.log("I entereddd");
       const self = this;
-      AccountService.addManager(this.signupForm)
-        .then(function (res) {
-          self.$store.dispatch("setUser", res.data);
-          console.log("User Added!");
-          self.$router.push("/homepage");
+      console.log(this.Images)
+      data.append("image",this.Images)
+      // this.signupForm[0].image = this.Images
+      console.log("Payload from front end"+JSON.stringify(this.signupForm))
+      AccountService.addManager(data)
+        .then(function () {
+          console.log("signupForm")
+          self.$router.push('/homepage')
         })
         .catch((error) => {
           self.showLoader = false;
@@ -359,6 +347,7 @@ export default {
           console.log("There was an error!", error);
         });
     },
+
   },
 };
 </script>

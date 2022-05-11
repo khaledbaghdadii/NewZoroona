@@ -302,7 +302,7 @@
                 ></button>
               </div>
 
-              <form class="needs-validation" v-on:submit.prevent="submitForm">
+              <form class="needs-validation" v-on:submit.prevent="submitReviewForm()">
                 <!-- Modal body -->
                 <div class="modal-body">
                   <div class="mb-3">
@@ -311,11 +311,13 @@
                     >
                     <br />
                     <div class="fs-24">
+
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
+                      <span class="fa fa-star "></span>
+                      <span class="fa fa-star "></span>
+                      <input type="number" v-model="reviewForm.rating"/>
                     </div>
                   </div>
                   <div class="my-3">
@@ -328,14 +330,16 @@
                       id="feedback"
                       name="feedback"
                       maxlength="200"
+                      v-model="reviewForm.feedback"
                     ></textarea>
+
                   </div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
                   <button
-                    type="button"
+                    type="submit"
                     class="btn btn-primary text-white py-2"
                     data-bs-dismiss="modal"
                   >
@@ -355,11 +359,14 @@
         </div>
       </div>
       <div class="row d-flex justify-content-between">
-        <div class="col-sm-12 col-md-6 col-lg-4 p-3 mb-5">
+        <div
+            v-for="review in reviews"
+            :key="review.id"
+            class="col-sm-12 col-md-6 col-lg-4 p-3 mb-5">
           <div class="review p-3 d-flex bg-rose review-box">
             <div class="my-2 flex-fill">
               <div class="d-flex justify-content-between align-items-center">
-                <h4 class="text-secondary fw-700">Ahmad Houmany</h4>
+                <h4 class="text-secondary fw-700">{{ review.User.name }}</h4>
                 <div>
                   <button
                     class="btn btn-secondary"
@@ -459,7 +466,7 @@
                   </div>
                 </div>
               </div>
-              <h5 class="mb-3 fw-700 fs-14">ahmadhoumany24@gmail.com</h5>
+              <h5 class="mb-3 fw-700 fs-14">{{ review.User.email }}</h5>
               <h5 class="fs-18 text-secondary fw-700 pe-2">
                 Rating:
                 <i class="fa fa-star text-primary"></i>
@@ -467,64 +474,14 @@
                 <i class="fa fa-star text-primary"></i>
               </h5>
               <p class="border-top-2 pt-2 fs-16">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip.
+                {{
+                  review.feedback
+                }}
               </p>
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-6 col-lg-4 p-3 mb-5">
-          <div class="review p-3 d-flex bg-rose review-box">
-            <div class="my-2 flex-fill">
-              <div class="d-flex justify-content-between align-items-center">
-                <h4 class="text-secondary fw-700">Ahmad Houmany</h4>
-                <button class="btn btn-secondary">
-                  <i class="fa fa-flag"></i>
-                </button>
-              </div>
-              <h5 class="mb-3 fw-700 fs-14">ahmadhoumany24@gmail.com</h5>
-              <h5 class="fs-18 text-secondary fw-700 pe-2">
-                Rating:
-                <i class="fa fa-star text-primary"></i>
-                <i class="fa fa-star text-primary"></i>
-                <i class="fa fa-star text-primary"></i>
-              </h5>
-              <p class="border-top-2 pt-2 fs-16">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-4 p-3 mb-5">
-          <div class="review p-3 d-flex bg-rose review-box">
-            <div class="my-2 flex-fill">
-              <div class="d-flex justify-content-between align-items-center">
-                <h4 class="text-secondary fw-700">Ahmad Houmany</h4>
-                <button class="btn btn-secondary">
-                  <i class="fa fa-flag"></i>
-                </button>
-              </div>
-              <h5 class="mb-3 fw-700 fs-14">ahmadhoumany24@gmail.com</h5>
-              <h5 class="fs-18 text-secondary fw-700 pe-2">
-                Rating:
-                <i class="fa fa-star text-primary"></i>
-                <i class="fa fa-star text-primary"></i>
-                <i class="fa fa-star text-primary"></i>
-              </h5>
-              <p class="border-top-2 pt-2 fs-16">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip.
-              </p>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   </div>
@@ -537,17 +494,45 @@ export default {
   name: "DetailedPlacePage",
   data: () => ({
     place: [],
+    userId :0,
+    placeId: 0,
     placeOrientationDescription: "",
     placeCategoryDescription: "",
     packages: [],
+    reviews:[],
+    stars:"",
+    reviewForm: {
+      rating: 0,
+      feedback:'',
+      userId: 0 ,
+      placeId: 0
+    }
   }),
   components: {
     Popper,
   },
-  methods: {},
+  methods: {
+    submitReviewForm(){
+      const self = this
+      console.log("Entered submit")
+      this.placeId = this.place.id
+      this.userId = this.$store.state.user.id
+      this.reviewForm.userId = this.userId
+      this.reviewForm.placeId = this.placeId
+      PlacespageService.addReview(this.reviewForm)
+          .then(function (res) {
+            self.showLoader = false;
+            console.log(res.data)
+          })
+          .catch(function () {
+            self.showLoader = false;
+          });
+    }
+  },
   mounted() {
     let id = this.$route.params.id;
     const self = this;
+
     PlacespageService.getPlace(id)
       .then(function (res) {
         self.showLoader = false;
@@ -557,6 +542,8 @@ export default {
         self.placeOrientationDescription = self.place.Orientation.description;
         self.placeCategoryDescription = self.place.Category.description;
         console.log(self.place.Category.description);
+
+
       })
       .catch(function () {
         self.showLoader = false;
@@ -573,6 +560,18 @@ export default {
       .catch(function () {
         self.showLoader = false;
       });
+
+    PlacespageService.getReviews(id)
+        .then(function (res) {
+          self.showLoader = false;
+          console.log(res.data);
+          //console.log(res.data.Category.description)
+          self.reviews = res.data || [];
+          console.log(self.reviews)
+        })
+        .catch(function () {
+          self.showLoader = false;
+        });
   },
 };
 </script>
