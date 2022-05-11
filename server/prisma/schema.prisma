@@ -113,8 +113,10 @@ model Reservation{
   startDate DateTime
   endDate DateTime
   cost Float
+  requestId Int
   User User @relation(fields: [userId],references: [id])
   Place Place @relation(fields: [placeId],references: [id])
+  Request Request[]
   packages Package[]
   @@map("reservations")
 }
@@ -145,10 +147,12 @@ requestTypeId Int
 managerId Int?
 reviewId Int?
 placeId Int?
+reservationId Int?
 processed Boolean
 RequestType RequestType @relation(fields: [requestTypeId],references: [id])
 User User? @relation(fields: [managerId],references: [id])
 Review Review? @relation(fields: [reviewId],references: [id])
 Place Place? @relation(fields: [placeId],references: [id])
+Reservation Reservation? @relation(fields: [reservationId],references: [id])
 @@map("requests")
 }
