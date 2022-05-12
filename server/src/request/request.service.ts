@@ -21,6 +21,11 @@ export class RequestService {
   constructor(private prisma: PrismaService) {}
   async getAllRequests(): Promise<Request[] | HttpException> {
     const requests = await this.prisma.request.findMany({
+      where:{
+        requestTypeId:{
+          in: [1,2,3]
+        }
+      },
       include:
           {
             RequestType:true,
