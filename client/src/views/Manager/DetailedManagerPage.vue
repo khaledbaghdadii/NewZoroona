@@ -39,22 +39,22 @@
             <th>Start Date</th>
             <th>End Date</th>
             <th>Cost</th>
-            <th>Procesed</th>
-            <th>Decison</th>
+            <th>Accepted</th>
+            <th>Decision</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td class="d-flex ">
-                <button class="btn btn-primary text-white me-2">Accept</button>
-                <button class="btn btn-primary text-white">Reject</button>
+          <tr v-for="reservation in reservations" :key="reservation.id">
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.User.name }}</td>
+            <td>{{ reservation.numberofpeople }}</td>
+            <td>{{ reservation.startDate }}</td>
+            <td>{{ reservation.endDate }}</td>
+            <td>{{ reservation.cost }}</td>
+            <td>{{ reservation.accepted }}</td>
+            <td class="text-center d-flex">
+              <button class="btn btn-primary text-white me-2" @click="acceptReservation(reservation.id)">Accept</button>
+              <button class="btn btn-primary text-white" @click="rejectReservation(reservation.id)">Reject</button>
             </td>
           </tr>
         </tbody>
@@ -68,21 +68,71 @@
 //Bootstrap and jQuery libraries
 import "jquery/dist/jquery.min.js";
 //Datatable Modules
+import ManagerService from "@/services/ManagerService.js";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import Footer from "@/components/Footer";
 export default {
   name: "DetailedManagerPage",
+  data: () => ({
+    reservations: [],
+    acceptForm:{
+      reservationId: ''
+    },
+    rejectForm:{
+      reservationId: ''
+    }
+  }),
   components: {
     Footer,
+  },
+  methods:{
+    acceptReservation(id) {
+      const self = this
+      this.acceptForm.reservationId = id
+      ManagerService.acceptReservation(this.acceptForm)
+          .then(function () {
+            self.showLoader = false;
+            console.log("Accepted Request")
+          })
+          .catch(function (e) {
+            console.log(e.messageerror)
+            self.showLoader = false;
+          });
+      window.location.reload();
+    },
+    rejectReservation(id) {
+      const self = this
+      this.rejectForm.reservationId = id
+      ManagerService.acceptReservation(this.rejectForm)
+          .then(function () {
+            self.showLoader = false;
+            console.log("Rejected Request")
+          })
+          .catch(function () {
+            self.showLoader = false;
+          });
+      window.location.reload();
+    },
   },
   mounted() {
     //API Call
     setTimeout(() => {
       $("#DataTable").DataTable();
     });
-    
+    const self = this
+    ManagerService.getUnprocessedReservationsPerPlace(this.$route.params.id)
+        .then(function (res) {
+          self.showLoader = false;
+          console.log(res.data);
+          //console.log(res.data.Category.description)
+          self.reservations = res.data || [];
+          console.log(self.reservations)
+        })
+        .catch(function () {
+          self.showLoader = false;
+        });
   },
 };
 </script>
