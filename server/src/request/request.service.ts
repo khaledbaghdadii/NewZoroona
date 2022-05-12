@@ -7,9 +7,10 @@ import {
 } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
-import {Place, Request, User} from '@prisma/client';
-import { ManagerDTO } from './dto';
+import {Place, Request, Reservation, User} from '@prisma/client';
+import {ManagerDTO, ReservationDTO} from './dto';
 import * as argon from "argon2";
+import {AddDTO} from "../reservation/dto";
 
 const cloudinary = require('cloudinary');
 const fs = require('fs');
@@ -178,6 +179,46 @@ export class RequestService {
         }
     }
 
+    async addReservationRequest(@Body() dto: ReservationDTO): Promise<Request | HttpException> {
+        try {
+            const packages = await this.prisma.package.findMany({
+                where:{
+                    id: {
+                        in: dto.packagesIds
+                    }
+                }
+            })
+            const idsArray = packages.map(obj=>{
+                return {id: obj.id}
+            })
+            const reservation = await this.prisma.reservation.create({
+                data: {
+                    placeId: dto.placeId,
+                    cost:dto.cost,
+                    userId: dto.userId,
+                    endDate: dto.enddate,
+                    numberofpeople: dto.numberofpeople,
+                    startDate: dto.startdate,
+                    packages: {
+                        connect: idsArray,
+                    },
+                },
+                include: {
+                    packages: true,
+                }
+            });
+            const request = await this.prisma.request.create({
+                data:{
+                    requestTypeId: 4,
+                    reservationId: reservation.id,
+                    processed: false
+                }
+            })
+            return request;
+        } catch (err) {
+            return new HttpException('Error Adding Reservation', HttpStatus.BAD_REQUEST);
+        }
+    }
     // function to create file from base64 encoded string
     base64_decode(base64str, file) {
         // create buffer object from base64 encoded string,

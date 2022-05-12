@@ -31,11 +31,9 @@
     </h1>
     <div class="container mb-5">
       <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="bg-rose review place-box p-2 mt-5" @click="goToPlacePage(1)">
-          <h3 class="text-center mt-4 fw-700">Tyre Ruins</h3>
-        </div>
-        <div class="bg-rose review place-box p-2 mt-5">
-          <h3 class="text-center mt-4 fw-700">Tyre Ruins</h3>
+        <!--vfor on this div-->
+        <div class="bg-rose review place-box p-2 mt-5" v-for="place in places" v-bind:key="place.id" @click="goToPlacePage(place.id)">
+          <h3 class="text-center mt-4 fw-700">{{ place.name }}</h3>
         </div>
       </div>
     </div>
@@ -44,10 +42,14 @@
 </template>
 <script>
 import Footer from "@/components/Footer";
+import ManagerService from "@/services/ManagerService.js";
 export default {
   name: "ManagerPage",
   data() {
-    return {};
+    return {
+      userId: 0,
+      places:[]
+    };
   },
   methods: {
     goToPlacePage(id) {
@@ -58,5 +60,18 @@ export default {
   components: {
     Footer,
   },
+  mounted() {
+    const self = this;
+    this.showLoader = true;
+    this.userId = this.$store.state.user.id
+    ManagerService.getPlacesPerManager(this.userId)
+        .then(function (res) {
+          self.showLoader = false;
+          self.places = res.data || [];
+        })
+        .catch(function () {
+          self.showLoader = false;
+        });
+  }
 };
 </script>

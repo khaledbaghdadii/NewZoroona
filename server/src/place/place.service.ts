@@ -282,6 +282,19 @@ export class PlaceService {
     });
     return 'Added successfully';
   }
+  async getPlacesForManager(id) {
+    const places = await this.prisma.place.findMany({
+      where: {
+        valid: true,
+        managerId: id
+      },
+      include: {
+        Category: true,
+        Orientation: true,
+      },
+    });
+    return places;
+  }
   // function to create file from base64 encoded string
   base64_decode(base64str, file) {
     // create buffer object from base64 encoded string,
