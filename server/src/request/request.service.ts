@@ -8,16 +8,11 @@ import {
 } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
-<<<<<<< HEAD
-import { Place, Request, User } from '@prisma/client';
-import { ManagerDTO } from './dto';
-import * as argon from 'argon2';
-=======
+
 import {Place, Request, Reservation, User} from '@prisma/client';
 import {ManagerDTO, ReservationDTO} from './dto';
 import * as argon from "argon2";
 import {AddDTO} from "../reservation/dto";
->>>>>>> 4413a546634798258e12a22cdaf9a0c5f72a028b
 
 const cloudinary = require('cloudinary');
 const fs = require('fs');
@@ -182,7 +177,7 @@ export class RequestService {
     }
   }
 
-<<<<<<< HEAD
+
   // function to create file from base64 encoded string
   base64_decode(base64str, file) {
     // create buffer object from base64 encoded string,
@@ -209,7 +204,7 @@ export class RequestService {
       );
     });
   }
-=======
+
     async addReservationRequest(@Body() dto: ReservationDTO): Promise<Request | HttpException> {
         try {
             const packages = await this.prisma.package.findMany({
@@ -250,31 +245,5 @@ export class RequestService {
             return new HttpException('Error Adding Reservation', HttpStatus.BAD_REQUEST);
         }
     }
-    // function to create file from base64 encoded string
-    base64_decode(base64str, file) {
-        // create buffer object from base64 encoded string,
-        // it is important to tell the constructor
-        // that the string is base64 encoded
-        const bitmap = new Buffer(base64str, 'base64');
-        // write buffer to file
-        fs.writeFileSync(file, bitmap);
-    }
-    async uploadToCloudinary(imageName, imageMetadata) {
-        return new Promise((resolve, reject) => {
-            cloudinary.config({
-                cloud_name: 'dhpaajfal',
-                api_key: '128848466179765',
-                api_secret: '8c_s3HVV6j-RvG8oQ1uYRtMlWAg',
-            });
-            cloudinary.v2.uploader.upload(
-                imageName,
-                imageMetadata,
-                (err, response) => {
-                    if (err) return reject(err);
-                    return resolve(response.url);
-                },
-            );
-        });
-    }
->>>>>>> 4413a546634798258e12a22cdaf9a0c5f72a028b
+
 }
