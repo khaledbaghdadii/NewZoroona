@@ -113,6 +113,8 @@ model Reservation{
   startDate DateTime
   endDate DateTime
   cost Float
+  pending Boolean? @default(true)
+  accepted Boolean? @default(false)
   User User @relation(fields: [userId],references: [id])
   Place Place @relation(fields: [placeId],references: [id])
   packages Package[]
