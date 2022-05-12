@@ -12,16 +12,12 @@
             <h5 class="mb-3 fw-700 text-white">Explorate</h5>
             <p>About</p>
             <p>Partners</p>
-            <p>Job Opportunities</p>
-            <p>Advertise</p>
-            <p>Membership</p>
+
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12 mt-3">
             <h5 class="mb-3 fw-700 text-white">Headquraters</h5>
             <p>
-              191 Middleville Road, <br />
-              NY 1001, Sydney <br />
-              Australia
+              Lebanon
             </p>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12 my-3">
