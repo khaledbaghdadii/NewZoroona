@@ -246,6 +246,10 @@ footer {
     margin-top: 150px;
 }
 
+.manager-page-container {
+    margin-top: 130px;
+}
+
 .carousel {
     width: 70%;
     .carousel-item {
@@ -324,7 +328,18 @@ footer {
     border-radius: 15px;
 }
 
-.slider-primary{
+.place-box {
+    height: 100px;
+    border-radius: 15px;
+    width: 300px;
+    &:hover {
+        background-color: $secondary;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+.slider-primary {
     --slider-connect-bg: #F37A34;
     --slider-tooltip-bg: #F37A34;
     --slider-handle-ring-color: #F37A34;

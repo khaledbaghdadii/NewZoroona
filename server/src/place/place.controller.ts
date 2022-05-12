@@ -78,4 +78,8 @@ export class PlaceController {
   ) {
     return this.placeService.uploadFile(files, placeId);
   }
+  @Get('managerplaces')
+  getPlacesForManager(@Query('managerId', ParseIntPipe) managerId: number) {
+    return this.placeService.getPlacesForManager(managerId);
+  }
 }

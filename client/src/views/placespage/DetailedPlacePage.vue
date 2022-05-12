@@ -373,6 +373,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#reportModal"
                     v-if="$store.state.user.name"
+                    @click="getReviewId(review.id)"
                   >
                     <i class="fa fa-flag"></i>
                   </button>
@@ -413,7 +414,7 @@
 
                       <form
                         class="needs-validation"
-                        v-on:submit.prevent="submitForm"
+                        v-on:submit.prevent="submitReportForm()"
                       >
                         <!-- Modal body -->
                         <div class="modal-body">
@@ -421,33 +422,21 @@
                             <label for="name" class="form-label fw-700"
                               >I found this review:</label
                             >
-                            <div class="form-check cursor-pointer">
-                              <input
-                                class="form-check-input cursor-pointer"
-                                type="checkbox"
-                                id="check1"
-                                name="option1"
-                                value="something"
-                              />
-                              <label class="form-check-label">Option 1</label>
-                            </div>
-                            <div class="form-check cursor-pointer">
-                              <input
-                                class="form-check-input cursor-pointer"
-                                type="checkbox"
-                                id="check1"
-                                name="option1"
-                                value="something"
-                              />
-                              <label class="form-check-label">Option 2</label>
-                            </div>
+                            <textarea
+                                class="form-control"
+                                rows="5"
+                                id="reportdesc"
+                                name="reportdesc"
+                                maxlength="200"
+                                v-model="reportForm.description"
+                            ></textarea>
                           </div>
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
                           <button
-                            type="button"
+                            type="submit"
                             class="btn btn-primary text-white py-2"
                             data-bs-dismiss="modal"
                           >
@@ -494,6 +483,7 @@ export default {
   name: "DetailedPlacePage",
   data: () => ({
     place: [],
+    currentReviewId:0,
     userId :0,
     placeId: 0,
     placeOrientationDescription: "",
@@ -506,12 +496,21 @@ export default {
       feedback:'',
       userId: 0 ,
       placeId: 0
+    },
+    reportForm:{
+      reviewId: 0,
+      reporterId: 0,
+      description:''
     }
   }),
   components: {
     Popper,
   },
   methods: {
+    getReviewId(id){
+      this.currentReviewId = id;
+      console.log(this.currentReviewId)
+    },
     submitReviewForm(){
       const self = this
       console.log("Entered submit")
@@ -520,6 +519,21 @@ export default {
       this.reviewForm.userId = this.userId
       this.reviewForm.placeId = this.placeId
       PlacespageService.addReview(this.reviewForm)
+          .then(function (res) {
+            self.showLoader = false;
+            console.log(res.data)
+          })
+          .catch(function () {
+            self.showLoader = false;
+          });
+    },
+    submitReportForm(){
+      const self = this
+      console.log("Entered submit")
+      this.userId = this.$store.state.user.id
+      this.reportForm.reporterId = this.userId
+      this.reportForm.reviewId = this.currentReviewId
+      PlacespageService.reportReview(this.reportForm)
           .then(function (res) {
             self.showLoader = false;
             console.log(res.data)
