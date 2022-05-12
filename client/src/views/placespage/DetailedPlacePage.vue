@@ -122,6 +122,7 @@
                     <label for="packages" class="form-label fw-700"
                       >Package(s):</label
                     >
+                    <!--
                     <div class="form-check cursor-pointer">
                       <input
                         class="form-check-input cursor-pointer"
@@ -141,6 +142,23 @@
                         value="something"
                       />
                       <label class="form-check-label">Option 2</label>
+                    </div>-->
+                    <div
+                        v-for="packagee in packages"
+                        v-bind:key="packagee.id"
+                        class="form-check cursor-pointer"
+                    >
+                      <input
+                          class="form-check-input cursor-pointer"
+                          type="checkbox"
+                          :id="packagee.id"
+                          :name="packagee.id"
+                          :value="packagee.id"
+                          v-model="checkedPackages"
+                      />
+                      <label class="form-check-label">{{
+                         packagee.name
+                        }}</label>
                     </div>
                   </div>
                   <div
@@ -493,6 +511,7 @@ export default {
     placeCategoryDescription: "",
     packages: [],
     reviews:[],
+    checkedPackages:[],
     stars:"",
     reviewForm: {
       rating: 0,
@@ -512,7 +531,7 @@ export default {
       startdate:'',
       enddate:'',
       cost:23,
-      packageIds:[1,2,3]
+      packageIds:[]
     }
   }),
   components: {
@@ -561,6 +580,7 @@ export default {
       this.placeId = this.place.id
       this.reservationForm.userId = this.userId
       this.reservationForm.placeId = this.placeId
+      this.reservationForm.packageIds=this.checkedPackages.length===0?[]:this.checkedPackages,
       PlacespageService.requestReservation(this.reservationForm)
           .then(function (res) {
             self.showLoader = false;
