@@ -122,3 +122,10 @@ export class ReservationDTO {
   )
   packagesIds: number[];
 }
+
+export class AcceptReservationRequestDTO {
+  @IsNotEmpty()
+  @IsInt()
+  @Transform(({ value }) => parseInt(value))
+  reservationId: number;
+}
