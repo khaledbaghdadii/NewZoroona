@@ -10,6 +10,12 @@
               class="me-2"
             />
             <div id="LogoName">ZOROONA</div>
+            <div>
+              <button class="btn btn-outline-secondary me-2" @click="logout()">
+                Log Out
+              </button>
+            </div>
+
           </div>
           <button
             class="navbar-toggler"
@@ -43,6 +49,7 @@
 <script>
 import Footer from "@/components/Footer";
 import ManagerService from "@/services/ManagerService.js";
+import AccountService from "@/services/AccountService";
 export default {
   name: "ManagerPage",
   data() {
@@ -55,6 +62,19 @@ export default {
     goToPlacePage(id) {
       let placeID = id;
       this.$router.push({ name: "DetailedManagerPage", params: { id: placeID } });
+    },
+    logout() {
+      const self = this
+      AccountService.logoutUser()
+          .then(function () {
+            self.$store.dispatch("resetState");
+            console.log("User logged Out!");
+            self.$router.push("/homepage");
+          })
+          .catch((error) => {
+            self.errorMessage = error.message;
+            console.log("There was an error!", error);
+          });
     },
   },
   components: {

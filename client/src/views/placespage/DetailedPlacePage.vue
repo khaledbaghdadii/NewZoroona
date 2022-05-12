@@ -334,11 +334,9 @@
                     <div class="fs-24">
 
                       <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star "></span>
-                      <span class="fa fa-star "></span>
-                      <input type="number" v-model="reviewForm.rating"/>
+
+                      <input type="number" placeholder="Range: 0 - 5" v-model="reviewForm.rating"
+                      min="0" max="5" required/>
                     </div>
                   </div>
                   <div class="my-3">

@@ -10,6 +10,11 @@
               class="me-2"
             />
             <div id="LogoName">ZOROONA</div>
+            <div>
+              <button class="btn btn-outline-secondary me-2" @click="logout()">
+                Log Out
+              </button>
+            </div>
           </div>
           <button
             class="navbar-toggler"
@@ -66,6 +71,7 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import Footer from "@/components/Footer";
 import AdminService from "@/services/AdminService";
+import AccountService from "@/services/AccountService";
 export default {
   name: "AdminDashboard",
   data: () => ({
@@ -104,6 +110,19 @@ export default {
             self.showLoader = false;
           });
       window.location.reload();
+    },
+    logout() {
+      const self = this
+      AccountService.logoutUser()
+          .then(function () {
+            self.$store.dispatch("resetState");
+            console.log("User logged Out!");
+            self.$router.push("/homepage");
+          })
+          .catch((error) => {
+            self.errorMessage = error.message;
+            console.log("There was an error!", error);
+          });
     },
   },
   mounted() {
