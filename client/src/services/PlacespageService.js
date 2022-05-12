@@ -35,5 +35,8 @@ export default {
     },
     requestReservation(payload){
         return Endpoint().post(`http://localhost:3333/requests/request/reservation`, payload)
+    },
+    getRecommendedPerPlace(id){
+        return Endpoint().get(`http://localhost:3333/recommender/place?placeId=${id}`)
     }
 }
