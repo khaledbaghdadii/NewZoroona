@@ -24,7 +24,8 @@ export class RequestService {
       where:{
         requestTypeId:{
           in: [1,2,3]
-        }
+        },
+        processed: false
       },
       include:
           {

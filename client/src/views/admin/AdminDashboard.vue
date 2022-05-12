@@ -34,7 +34,7 @@
         <thead>
           <tr>
             <th>Request ID</th>
-            <th>Manager ID</th>
+            <th>Manager Name</th>
             <th>Request Type</th>
             <th>Processed</th>
             <th>Decision </th>
