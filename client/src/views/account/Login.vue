@@ -145,6 +145,8 @@ export default {
             self.$router.push("/homepage");
           }else if(self.roleTypeId == 2){
             self.$router.push("/ManagerPage");
+          }else if(self.roleTypeId==1){
+            self.$router.push("/AdminDashboard");
           }
           self.showLoader = false;
         })
