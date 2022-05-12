@@ -260,4 +260,15 @@ export class RequestService {
       },
     });
   }
+  async rejectReservationRequest(dto: AcceptReservationRequestDTO) {
+    await this.prisma.reservation.update({
+      where: {
+        id: dto.reservationId,
+      },
+      data: {
+        pending: false,
+        accepted: false,
+      },
+    });
+  }
 }
