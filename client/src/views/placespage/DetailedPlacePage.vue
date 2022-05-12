@@ -115,7 +115,7 @@
                 ></button>
               </div>
 
-              <form class="needs-validation" v-on:submit.prevent="submitForm">
+              <form class="needs-validation" v-on:submit.prevent="submitReservationForm()">
                 <!-- Modal body -->
                 <div class="modal-body">
                   <div class="mb-3">
@@ -160,6 +160,7 @@
                           class="form-control"
                           id="startDate"
                           placeholder="MM/DD/YYYY"
+                          v-model="reservationForm.startdate"
                           required
                         />
                       </div>
@@ -175,6 +176,7 @@
                           class="form-control"
                           id="endDate"
                           placeholder="MM/DD/YYYY"
+                          v-model="reservationForm.enddate"
                           required
                         />
                       </div>
@@ -191,6 +193,7 @@
                       class="form-control"
                       id="numberofpeople"
                       placeholder="Number of People"
+                      v-model="reservationForm.numberofpeople"
                       required
                     />
                   </div>
@@ -205,7 +208,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                   <button
-                    type="button"
+                    type="submit"
                     class="btn btn-primary text-white py-2"
                     data-bs-dismiss="modal"
                   >
@@ -501,6 +504,15 @@ export default {
       reviewId: 0,
       reporterId: 0,
       description:''
+    },
+    reservationForm:{
+      placeId:0,
+      userId:0,
+      numberofpeople:0,
+      startdate:'',
+      enddate:'',
+      cost:23,
+      packageIds:[1,2,3]
     }
   }),
   components: {
@@ -541,7 +553,24 @@ export default {
           .catch(function () {
             self.showLoader = false;
           });
+    },
+    submitReservationForm(){
+      const self = this
+      console.log("Entered submit")
+      this.userId = this.$store.state.user.id
+      this.placeId = this.place.id
+      this.reservationForm.userId = this.userId
+      this.reservationForm.placeId = this.placeId
+      PlacespageService.requestReservation(this.reservationForm)
+          .then(function (res) {
+            self.showLoader = false;
+            console.log(res.data)
+          })
+          .catch(function () {
+            self.showLoader = false;
+          });
     }
+
   },
   mounted() {
     let id = this.$route.params.id;
@@ -576,6 +605,17 @@ export default {
       });
 
     PlacespageService.getReviews(id)
+        .then(function (res) {
+          self.showLoader = false;
+          console.log(res.data);
+          //console.log(res.data.Category.description)
+          self.reviews = res.data || [];
+          console.log(self.reviews)
+        })
+        .catch(function () {
+          self.showLoader = false;
+        });
+    PlacespageService.requestReservation(this.reservationForm)
         .then(function (res) {
           self.showLoader = false;
           console.log(res.data);
