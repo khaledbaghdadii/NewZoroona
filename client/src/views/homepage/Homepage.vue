@@ -97,7 +97,7 @@
               :style="{
                 'background-image':
                   'url(' +
-                  require('@/assets/images/baaqline-waterfall.jpg') +
+                  `${place.image}` +
                   ')',
               }"
             >

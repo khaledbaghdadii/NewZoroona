@@ -136,16 +136,12 @@ export default {
     login() {
       const self = this;
       this.showLoader = true;
-      this.roleTypeId = this.$store.state.user.roleTypeId
+
       AccountService.loginUser(this.loginForm)
         .then(function (res) {
           self.$store.dispatch("setUser", res.data);
           console.log("User logged!");
-          if(self.roleTypeId == 3){
-            self.$router.push("/homepage");
-          }else if(self.roleTypeId == 2){
-            self.$router.push("/ManagerPage");
-          }
+
           self.showLoader = false;
         })
         .catch((error) => {
@@ -158,6 +154,14 @@ export default {
           console.log("There was an error!", error);
           
         });
+      this.roleTypeId = this.$store.state.user.roleTypeId
+      if(self.roleTypeId == 3){
+        self.$router.push("/homepage");
+      }else if(self.roleTypeId == 2){
+        self.$router.push("/ManagerPage");
+      }else if(self.roleTypeId==1){
+        self.$router.push("/AdminDashboard");
+      }
     },
     timeWrongCredentials() {
       setTimeout(() => {this.wrongCredentials = false}, 4000);

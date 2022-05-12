@@ -4,7 +4,7 @@
       class="section-intro-landing container mb-5 d-flex flex-column flex-lg-row pb-5 container"
     >
       <img
-        src="@/assets/images/raouche.jpg"
+        v-bind:src="place.image"
         class="img-beside-text me-lg-5 rounded-8 mt-4"
       />
       <div class="ms-lg-5 mt-3">
@@ -334,11 +334,9 @@
                     <div class="fs-24">
 
                       <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star "></span>
-                      <span class="fa fa-star "></span>
-                      <input type="number" v-model="reviewForm.rating"/>
+
+                      <input type="number" placeholder="Range: 0 - 5" v-model="reviewForm.rating"
+                      min="0" max="5" required/>
                     </div>
                   </div>
                   <div class="my-3">
@@ -494,6 +492,118 @@
 
       </div>
     </section>
+
+    <section class="section-featured-places pb-5">
+      <div class="container">
+        <h1 class="pt-5 mt-5 pb-4 fw-700">
+          Browse for Similar Places
+        </h1>
+        <div class="row">
+          <div
+              v-for="place in recommendedPlaces"
+              v-bind:key="place.id"
+              class="col-sm-12 col-md-6 col-lg-4 py-3"
+          >
+            <div
+                class="post-img-featured"
+                :style="{
+                'background-image':
+                  'url(' +
+                  `${place.image}` +
+                  ')',
+              }"
+            >
+              <div class="text-end">
+                <span class="badge badge-background-color m-3"></span>
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <h4 class="fw-700 pt-3">
+                {{place.description}}
+              </h4>
+              <h5 class="fw-500"><i>{{place.name}}</i></h5>
+              <div class="d-flex">
+                <img
+                    src="@/assets/images/location.svg"
+                    id="location"
+                    class="me-2"
+                    alt="location"
+                />
+                <span>{{place.address}}, {{place.city}} - {{place.district}}</span>
+              </div>
+              <div class="d-flex">
+                <i class="fa fa-money-bill fa-lg text-primary pt-2 pe-2"></i>
+                <span class="fw-700 fs-24">${{place.averagePricePerPerson}}</span>
+                <span class="fs-14 pt-2">/person</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+            <div
+              class="post-img-featured"
+              :style="{
+                'background-image':
+                  'url(' + require('@/assets/images/raouche.jpg') + ')',
+              }"
+            >
+              <div class="text-end">
+                <span class="badge badge-background-color m-3">Classical</span>
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <h4 class="fw-700 pt-3">Enjoy the beauty of Lebanon's sunset</h4>
+              <div class="d-flex">
+                <img
+                  src="@/assets/images/location.svg"
+                  id="location"
+                  class="me-2"
+                  alt="location"
+                />
+                <span> <strong>Raouche</strong>, Beirut</span>
+              </div>
+              <div class="d-flex">
+                <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
+                <span class="fw-700 fs-24">35</span>
+                <span class="fs-14 pt-2">/person</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+            <div
+              class="post-img-featured"
+              :style="{
+                'background-image':
+                  'url(' + require('@/assets/images/Tyre-Ruins.jpg') + ')',
+              }"
+            >
+              <div class="text-end">
+                <span class="badge badge-background-color m-3">Historical</span>
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <h4 class="fw-700 pt-3">Enjoy the beauty of Tyre's History</h4>
+              <div class="d-flex">
+                <img
+                  src="@/assets/images/location.svg"
+                  id="location"
+                  class="me-2"
+                  alt="location"
+                />
+                <span> <strong>Tyre Ruins</strong>, Tyre</span>
+              </div>
+              <div class="d-flex">
+                <div class="ps-1 fs-24 fw-700 text-primary me-3">$</div>
+                <span class="fw-700 fs-24">10</span>
+                <span class="fs-14 pt-2">/person</span>
+              </div>
+            </div>
+          </div> -->
+        </div>
+
+      </div>
+    </section>
   </div>
 </template>
 
@@ -512,6 +622,7 @@ export default {
     packages: [],
     reviews:[],
     checkedPackages:[],
+    recommendedPlaces:[],
     stars:"",
     reviewForm: {
       rating: 0,
@@ -557,6 +668,7 @@ export default {
           .catch(function () {
             self.showLoader = false;
           });
+      window.location.reload()
     },
     submitReportForm(){
       const self = this
@@ -612,6 +724,16 @@ export default {
         self.showLoader = false;
       });
 
+    PlacespageService.getRecommendedPerPlace(id)
+        .then(function (res) {
+          self.showLoader = false;
+          console.log(res.data);
+          //console.log(res.data.Category.description)
+          self.recommendedPlaces = res.data || [];
+        })
+        .catch(function () {
+          self.showLoader = false;
+        });
     PlacespageService.getPackages(id)
       .then(function (res) {
         self.showLoader = false;

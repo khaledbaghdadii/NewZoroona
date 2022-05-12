@@ -20,7 +20,19 @@ const fs = require('fs');
 export class RequestService {
   constructor(private prisma: PrismaService) {}
   async getAllRequests(): Promise<Request[] | HttpException> {
-    const requests = await this.prisma.request.findMany();
+    const requests = await this.prisma.request.findMany({
+      where:{
+        requestTypeId:{
+          in: [1,2,3]
+        },
+        processed: false
+      },
+      include:
+          {
+            RequestType:true,
+            User: true
+          }
+    });
     if (!requests) {
       return new HttpException('Reqests not found', HttpStatus.NOT_FOUND);
     }

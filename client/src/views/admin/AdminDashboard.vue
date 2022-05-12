@@ -10,6 +10,11 @@
               class="me-2"
             />
             <div id="LogoName">ZOROONA</div>
+            <div>
+              <button class="btn btn-outline-secondary me-2" @click="logout()">
+                Log Out
+              </button>
+            </div>
           </div>
           <button
             class="navbar-toggler"
@@ -34,21 +39,21 @@
         <thead>
           <tr>
             <th>Request ID</th>
-            <th>Manager ID</th>
+            <th>Manager Name</th>
             <th>Request Type</th>
             <th>Processed</th>
-            <th>Decsison</th>
+            <th>Decision </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td>hajhsaj</td>
-            <td class="d-flex justify-conetnt-center">
-              <button class="btn btn-primary text-white me-2">Accept</button>
-              <button class="btn btn-primary text-white">Reject</button>
+          <tr v-for="request in requests" :key="request.id">
+            <td>{{ request.id }}</td>
+            <td>{{ request.User==null?"":request.User.name }}</td>
+            <td>{{ request.RequestType.description }}</td>
+            <td>{{ request.processed }}</td>
+            <td class="text-center d-flex">
+              <button class="btn btn-primary text-white me-2" @click="acceptRequest(request.id)">Accept</button>
+              <button class="btn btn-primary text-white" @click="rejectRequest(request.id)">Reject</button>
             </td>
           </tr>
         </tbody>
@@ -65,13 +70,78 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import Footer from "@/components/Footer";
+import AdminService from "@/services/AdminService";
+import AccountService from "@/services/AccountService";
 export default {
   name: "AdminDashboard",
+  data: () => ({
+    requests: [],
+    acceptForm:{
+      requestId: ''
+    },
+    rejectForm:{
+      requestId: ''
+    }
+  }),
+  methods:{
+    acceptRequest(id) {
+      const self = this
+      this.acceptForm.requestId = id
+      AdminService.acceptRequest(this.acceptForm)
+          .then(function () {
+            self.showLoader = false;
+            console.log("Accepted Request")
+          })
+          .catch(function (e) {
+            console.log(e.messageerror)
+            self.showLoader = false;
+          });
+      window.location.reload();
+    },
+    rejectRequest(id) {
+      const self = this
+      this.rejectForm.requestId = id
+      AdminService.acceptRequest(this.rejectForm)
+          .then(function () {
+            self.showLoader = false;
+            console.log("Rejected Request")
+          })
+          .catch(function () {
+            self.showLoader = false;
+          });
+      window.location.reload();
+    },
+    logout() {
+      const self = this
+      AccountService.logoutUser()
+          .then(function () {
+            self.$store.dispatch("resetState");
+            console.log("User logged Out!");
+            self.$router.push("/homepage");
+          })
+          .catch((error) => {
+            self.errorMessage = error.message;
+            console.log("There was an error!", error);
+          });
+    },
+  },
   mounted() {
     //API Call
     setTimeout(() => {
       $("#DataTable").DataTable();
     });
+    const self = this
+    AdminService.getRequests()
+        .then(function (res) {
+          self.showLoader = false;
+          console.log(res.data);
+          //console.log(res.data.Category.description)
+          self.requests = res.data || [];
+          console.log(self.requests)
+        })
+        .catch(function () {
+          self.showLoader = false;
+        });
   },
   components: {
     Footer,

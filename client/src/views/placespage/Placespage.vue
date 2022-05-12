@@ -41,7 +41,6 @@
               data-bs-slide-to="2"
             ></button>
           </div>
-
           <!-- The slideshow/carousel -->
           <div class="carousel-inner">
             <div
@@ -51,7 +50,7 @@
               :class="{ active: index === 0 }"
             >
               <img
-                src="@/assets/images/raouche.jpg"
+                  v-bind:src="place.image"
                 alt="Raouche"
                 class="aaaaa"
               />
@@ -283,11 +282,11 @@
           <div
             class="post-img cursor-pointer"
             :style="{
-              'background-image':
-                'url(' +
-                require('@/assets/images/baaqline-waterfall.jpg') +
-                ')',
-            }"
+                'background-image':
+                  'url(' +
+                  `${place.image}` +
+                  ')',
+              }"
             @click="goToPlacePage(place.id)"
           >
             <div class="text-end">
