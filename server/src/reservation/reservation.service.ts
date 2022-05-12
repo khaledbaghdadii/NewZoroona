@@ -21,6 +21,9 @@ export class ReservationService {
         placeId: placeId,
         pending: true,
       },
+      include:{
+        User: true
+      }
     });
     if (!reservations) {
       console.log('Error here');
