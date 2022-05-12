@@ -15,7 +15,7 @@ import { RequestService } from './request.service';
 import {Review} from "@prisma/client";
 import {RolesGuard} from "./guards/local.guard";
 import {Roles} from "../auth/decorators/roles.decorators";
-import {ManagerDTO} from "../request/dto";
+import {ManagerDTO, ReservationDTO} from "../request/dto";
 import {FilesInterceptor} from "@nestjs/platform-express";
 
 @Controller('requests')
@@ -46,5 +46,10 @@ export class RequestController {
     @UseInterceptors(FilesInterceptor('image'))
     addManagerRequest(@UploadedFiles() files: Array<Express.Multer.File>,@Body() dto: ManagerDTO) {
         return this.requestService.addManagerRequest(dto,files);
+    }
+
+    @Post('request/reservation')
+    addReservationRequest(@Body() dto: ReservationDTO) {
+        return this.requestService.addReservationRequest(dto);
     }
 }

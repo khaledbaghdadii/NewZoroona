@@ -116,6 +116,7 @@ model Reservation{
   User User @relation(fields: [userId],references: [id])
   Place Place @relation(fields: [placeId],references: [id])
   packages Package[]
+  Request Request[]
   @@map("reservations")
 }
 
@@ -145,10 +146,12 @@ requestTypeId Int
 managerId Int?
 reviewId Int?
 placeId Int?
+reservationId Int?
 processed Boolean
 RequestType RequestType @relation(fields: [requestTypeId],references: [id])
 User User? @relation(fields: [managerId],references: [id])
 Review Review? @relation(fields: [reviewId],references: [id])
 Place Place? @relation(fields: [placeId],references: [id])
+Reservation Reservation? @relation(fields: [reservationId],references: [id])
 @@map("requests")
 }
