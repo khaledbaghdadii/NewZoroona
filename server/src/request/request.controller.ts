@@ -64,4 +64,10 @@ export class RequestController {
   acceptReservationRequest(@Body() dto: AcceptReservationRequestDTO) {
     return this.requestService.acceptReservationRequest(dto);
   }
+  @UseGuards(RolesGuard)
+  @Roles('manager')
+  @Post('request/reject/reservation')
+  rejectReservationRequest(@Body() dto: AcceptReservationRequestDTO) {
+    return this.requestService.rejectReservationRequest(dto);
+  }
 }
