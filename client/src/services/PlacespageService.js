@@ -32,5 +32,8 @@ export default {
     },
     reportReview(payload){
         return Endpoint().post(`http://localhost:3333/report/report`, payload)
+    },
+    requestReservation(payload){
+        return Endpoint().post(`http://localhost:3333/requests/request/reservation`, payload)
     }
 }
